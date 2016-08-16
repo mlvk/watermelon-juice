@@ -19,8 +19,5 @@ export default Ember.Component.extend({
   @computed('model.deliveryDate')
   date(deliveryDate) {
     return moment(deliveryDate, 'YYYY-MM-DD').format('MM/DD/YYYY');
-  },
-
-
-
+  }
 });

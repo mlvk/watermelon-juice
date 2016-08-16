@@ -19,9 +19,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "6.1.2",
     "broccoli-asset-rev": "^2.4.2",
-    "ember-ajax": "0.7.1",
-    "ember-cli": "^2.4.3",
+    "ember-ajax": "^2.0.1",
+    "ember-cli": "2.7.0",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-content-security-policy": "0.5.0",
@@ -34,15 +35,16 @@
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-moment-shim": "1.2.0",
     "ember-cli-page-object": "1.1.0",
-    "ember-cli-qunit": "^1.4.0",
-    "ember-cli-release": "0.2.8",
+    "ember-cli-qunit": "^2.0.0",
+    "ember-cli-release": "^0.2.9",
     "ember-cli-sass": "5.3.1",
     "ember-cli-sri": "^2.1.0",
+    "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-component-css": "ebryn/ember-component-css",
     "ember-composable-helpers": "0.21.1",
     "ember-computed-decorators": "0.2.2",
-    "ember-data": "github:emberjs/data#beta",
+    "ember-data": "^2.7.0",
     "ember-data-factory-guy": "2.4.4",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
@@ -50,10 +52,13 @@
     "ember-lodash": "0.0.6",
     "ember-moment": "6.1.0",
     "ember-resolver": "^2.0.3",
-    "ember-route-action-helper": "0.3.0",
-    "ember-simple-auth": "simplabs/ember-simple-auth",
+    "ember-route-action-helper": "0.3.3",
+    "ember-simple-auth": "1.1.0",
     "ember-truth-helpers": "1.2.0",
     "eslint-config-ember": "0.3.0",
     "loader.js": "^4.0.1"
+  },
+  "dependencies": {
+    "babel-eslint": "^6.1.2"
   }
 }

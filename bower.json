@@ -8,16 +8,16 @@
     "numeral": "numeraljs#~1.5.3",
     "ceibo": "1.1.0",
     "jquery-mockjax": "2.0.1",
-    "ember": "beta",
-    "ember-cli-shims": "~0.1.1",
-    "ember-cli-test-loader": "0.2.2",
-    "ember-qunit-notifications": "0.1.0",
     "rxjs": "^4.1.0",
     "hammerjs": "^2.0.6",
     "immutable": "^3.8.1",
-    "blob-polyfill": "^1.0.20150320"
+    "handlebars": "^4.0.5",
+    "ember": "^2.7.0",
+    "ember-cli-shims": "^0.1.3"
   },
   "resolutions": {
-    "ember": "beta"
+    "ember": "~2.7.0",
+    "ember-cli-shims": "0.1.1",
+    "ember-qunit-notifications": "0.1.0"
   }
 }

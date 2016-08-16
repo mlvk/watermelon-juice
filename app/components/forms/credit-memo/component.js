@@ -2,7 +2,7 @@ import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 import moment from 'moment';
 
-const { alias, gt, filterBy } = Ember.computed;
+const { gt, filterBy } = Ember.computed;
 
 export default Ember.Component.extend({
   classNames:         ['col', 'stretch', 'card-1'],

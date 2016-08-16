@@ -1,8 +1,9 @@
+import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { equal, not } = Ember.computed;
+const { equal } = Ember.computed;
 
 export default Model.extend({
   date:                 attr('date', {defaultValue: moment().format('MM-DD-YYYY')}),
