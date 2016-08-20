@@ -1,7 +1,7 @@
 {{#if signing}}
   <div class="col">
   {{ui/signature-area
-    drawingEnded=(action 'handleNewSignature')}}
+    drawingEnded=(action "handleNewSignature")}}
   <div class="row stretch nameContainer">
     <input
       type="text"
@@ -9,39 +9,39 @@
       class="name"
       placeholder="Received by..."
       value="{{name}}"
-      oninput={{action 'onNameChanged'}}
-      onchange={{action 'onNameChanged'}}>
+      oninput={{action "onNameChanged"}}
+      onchange={{action "onNameChanged"}}>
   </div>
   <div class="row stretch uiContainer">
     {{ui/icon-button
-      class='stretch cancel'
+      class="stretch cancel"
       flat=true
       size=2
       backgroundColor=colors.HOT_PINK
-      icon='clear'
-      onClick=(action 'cancel')}}
+      icon="clear"
+      onClick=(action "cancel")}}
     {{ui/icon-button
-      class='stretch submit'
+      class="stretch submit"
       flat=true
       size=2
-      icon='done'
+      icon="done"
       disabled=(not readyToSubmit)
-      onClick=(action 'submit')}}
+      onClick=(action "submit")}}
   </div>
 </div>
 
 
 {{else if hasSignature}}
-  <div class="col relative signaturePreview" {{action 'requestedSign'}}>
+  <div class="col relative signaturePreview" {{action "requestedSign"}}>
     <img src={{signature}} alt="signature" />
     <div class="receivedDataContainer col">
       <span class="title">Received</span>
       <span class="name">{{name}}</span>
-      <span class="date">{{moment-format signedAt 'ddd - MM/DD/YY - h:mm a'}}</span>
+      <span class="date">{{moment-format signedAt "ddd - MM/DD/YY - h:mm a"}}</span>
     </div>
   </div>
 {{else}}
-  <div class="row instructions" {{action 'requestedSign'}}>
+  <div class="row instructions" {{action "requestedSign"}}>
     Sign All
   </div>
 {{/if}}
