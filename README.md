@@ -1,6 +1,6 @@
 # Watermelon Juice
 
-Used by the road team to manage orders and inventory on the road.
+Used by the road team to manage orders and inventory on the road..
 
 ## Prerequisites
 
