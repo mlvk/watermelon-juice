@@ -9,6 +9,10 @@ const { equal } = Ember.computed;
 export default Model.extend({
   date:               attr('string'),
   publishedState:     attr('string'),
+  startTime:          attr('number'),
+  endTime:            attr('number'),
+  dropOffCount:       attr('number'),
+  pickUpCount:        attr('number'),
 
   routeVisits:        hasMany('route-visit'),
 
