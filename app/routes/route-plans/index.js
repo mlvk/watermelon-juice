@@ -1,5 +1,5 @@
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import Ember from 'ember';
+import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
+import Ember from "ember";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   session: Ember.inject.service(),
@@ -12,18 +12,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model () {
     const query = {
-      'page[offset]':'0',
-      'page[limit]':'3',
-      'filter[user]':this.get('session.data.authenticated.id'),
-      'filter[published-state]':'1,2'
+      "page[offset]":"0",
+      "page[limit]":"3",
+      "filter[user]":this.get("session.data.authenticated.id"),
+      "filter[published-state]":"0,1"
     };
 
-    return this.store.query('route-plan', query);
+    return this.store.query("route-plan", query);
   },
 
   actions: {
     selectRoutePlan(routePlan) {
-      this.transitionTo('route-plans.show', routePlan.get('id'));
+      this.transitionTo("route-plans.show", routePlan.get("id"));
     },
 
     didTransition() {
