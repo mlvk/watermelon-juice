@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
-import Clickable from 'roadsage/mixins/clickable';
+import Clickable from 'watermelon-juice/mixins/clickable';
 
 const {
   bool,

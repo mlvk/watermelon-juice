@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import style from 'roadsage/utils/styles';
-import colors from 'roadsage/constants/colors';
-import Clickable from 'roadsage/mixins/clickable';
+import style from 'watermelon-juice/utils/styles';
+import colors from 'watermelon-juice/constants/colors';
+import Clickable from 'watermelon-juice/mixins/clickable';
 
 const {
   computed: {

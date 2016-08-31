@@ -1,7 +1,7 @@
 {
-  "name": "roadsage",
+  "name": "watermelon-juice",
   "version": "0.0.0",
-  "description": "Small description for roadsage goes here",
+  "description": "Small description for watermelon-juice goes here",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -47,6 +47,7 @@
     "ember-data": "^2.7.0",
     "ember-data-factory-guy": "2.4.4",
     "ember-export-application-global": "^1.0.5",
+    "ember-git-version": "0.1.1",
     "ember-load-initializers": "^0.5.1",
     "ember-local-storage": "1.1.0",
     "ember-lodash": "0.0.6",

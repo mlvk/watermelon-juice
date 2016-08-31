@@ -1,4 +1,4 @@
-import { currency } from 'roadsage/helpers/currency';
+import { currency } from 'watermelon-juice/helpers/currency';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | currency');

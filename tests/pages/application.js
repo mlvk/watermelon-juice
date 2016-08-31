@@ -1,4 +1,4 @@
-import PO from 'roadsage/tests/page-object';
+import PO from 'watermelon-juice/tests/page-object';
 
 const { clickable } = PO;
 export default PO.create({

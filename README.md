@@ -1,4 +1,7 @@
 # Watermelon Juice
+[![Build Status][travis-badge-master]][travis-badge-url]
+[![Build Status][travis-badge-dev]][travis-badge-url]
+[![Code Climate](https://codeclimate.com/github/brancusi/watermelon-juice/badges/gpa.svg)](https://codeclimate.com/github/brancusi/watermelon-juice)
 
 Used by the road team to manage orders and inventory on the road..
 
@@ -49,3 +52,7 @@ Specify what it takes to deploy your app.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
+[travis-badge-master]: https://travis-ci.org/mlvk/watermelon-juice.svg?branch=master
+[travis-badge-dev]: https://travis-ci.org/mlvk/watermelon-juice.svg?branch=development
+[travis-badge-url]: https://travis-ci.org/mlvk/watermelon-juice

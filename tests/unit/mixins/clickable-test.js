@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ClickableMixin from 'roadsage/mixins/clickable';
+import ClickableMixin from 'watermelon-juice/mixins/clickable';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | clickable');

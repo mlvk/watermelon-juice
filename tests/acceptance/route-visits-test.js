@@ -1,9 +1,9 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'roadsage/tests/helpers/module-for-acceptance';
-import { authenticateSession } from 'roadsage/tests/helpers/ember-simple-auth';
-import showPage from 'roadsage/tests/pages/route-plans/show/route-visits/show';
+import moduleForAcceptance from 'watermelon-juice/tests/helpers/module-for-acceptance';
+import { authenticateSession } from 'watermelon-juice/tests/helpers/ember-simple-auth';
+import showPage from 'watermelon-juice/tests/pages/route-plans/show/route-visits/show';
 
-import applicationPage from 'roadsage/tests/pages/application';
+import applicationPage from 'watermelon-juice/tests/pages/application';
 
 import {
   make,
