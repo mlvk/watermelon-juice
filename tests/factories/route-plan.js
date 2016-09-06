@@ -1,8 +1,8 @@
-import FactoryGuy from 'ember-data-factory-guy';
+import FactoryGuy from "ember-data-factory-guy";
 
-FactoryGuy.define('route-plan', {
+FactoryGuy.define("route-plan", {
   default: {
-    date: moment().add(1, 'days').format('YYYY-MM-DD'),
-    routeVisits: FactoryGuy.hasMany('route-visit')
+    date: moment().add(1, "days").format("YYYY-MM-DD"),
+    routeVisits: FactoryGuy.hasMany("route-visit")
   }
 });
