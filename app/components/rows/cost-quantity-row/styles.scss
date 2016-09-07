@@ -3,19 +3,15 @@
   padding: 0.3em 0.5em;
 }
 
-&.emphasize {
-  font-weight: 600;
-  font-size: 1.2em;
-}
-
 &:nth-child(odd) {
   background-color: #DEF6F9;
 }
 
-.x {
-  font-size: 0.5em;
+.currency {
+  font-weight: 600;
 }
 
-.quantity {
-  font-size: 1em;
+.quantityContainer {
+  padding-left: 0.5em;
+  font-size: 0.9em;
 }
