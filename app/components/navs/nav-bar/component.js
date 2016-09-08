@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 const {
   computed: {
@@ -12,21 +12,22 @@ const {
 } = Ember;
 
 export default Ember.Component.extend({
-  classNames: ['row'],
-  classNameBindings: ['shouldDisplay::hidden'],
+  classNames: ["row"],
+  classNameBindings: ["shouldDisplay::hidden"],
 
   stateInfo: service(),
   navigator: service(),
 
-  label: alias('stateInfo.label'),
-  info: alias('stateInfo.info'),
-  hasStateInfo: bool('stateInfo.hasData'),
-  hasRoute: bool('navigator.hasRoute'),
-  shouldDisplay: or('hasRoute', 'hasStateInfo'),
+  label: alias("stateInfo.label"),
+  info: alias("stateInfo.info"),
+  hasStateInfo: bool("stateInfo.hasData"),
+  hasRoute: bool("navigator.hasRoute"),
+  shouldDisplay: or("hasRoute", "hasStateInfo"),
+  rightButtons: alias("stateInfo.rightButtons"),
 
   actions: {
     goBack() {
-      this.get('navigator').goBack();
+      this.get("navigator").goBack();
     }
   }
 });

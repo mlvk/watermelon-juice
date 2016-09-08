@@ -1,13 +1,30 @@
 {{ui/icon-button
-  class='back'
+  class="back"
   size=2
   flat=true
   color=colors.LIGHT_GREY
   backgroundColor=colors.DARK_GREY
-  icon='keyboard_arrow_left'
-  onClick=(action 'goBack')}}
+  icon="keyboard_arrow_left"
+  onClick=(action "goBack")}}
 
-<div class="content col stretch">
+<div class="content row stretch">
+  <div class="col-5">
     <span class="label">{{label}}</span>
     <span class="info">{{info}}</span>
+  </div>
+
+  {{#each rightButtons as |button|}}
+    <div class="col button">
+      {{ui/icon-button
+        size=button.size
+        padding=button.padding
+        flat=button.flat
+        color=button.color
+        backgroundColor=button.backgroundColor
+        icon=button.icon
+        href=button.href
+        disabledClick=button.disabledClick
+      }}
+    </div>
+  {{/each}}
 </div>
