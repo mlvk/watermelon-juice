@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Clickable from 'roadsage/mixins/clickable';
+import Clickable from 'watermelon-juice/mixins/clickable';
 
 export default Ember.Component.extend(Clickable, {
   classNames: ['row'],

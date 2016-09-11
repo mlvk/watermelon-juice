@@ -14,16 +14,16 @@
   </span>
 
   {{passive/label-icon
-    icon='flight_takeoff'
-    label='6:15am - 11:00am'}}
+    icon="flight_takeoff"
+    label= (concat (minutes-to-time model.startTime) " - " (minutes-to-time model.endTime)) }}
 
   {{passive/label-icon
-    icon='store'
-    label='11 Deliveries'}}
+    icon="store"
+    label=(concat model.dropOffCount " Deliveries")}}
 
   {{passive/label-icon
-    icon='swap_vertical_circle'
-    label='2 Pickups'}}
+    icon="swap_vertical_circle"
+    label=(concat model.pickUpCount " Pickups")}}
 
 </div>
 <span class="row iconContainer">

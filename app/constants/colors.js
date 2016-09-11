@@ -11,7 +11,8 @@ const colors = {
   DARK_GREEN: "#4ACE86",
   DARK_ORANGE: "#FFD400",
   HOT_PINK: "#FF646C",
-  DOPE_BLUE: "#4DA6FF"
+  DOPE_BLUE: "#4DA6FF",
+  TRANSPARENT: "transparent"
 }
 
 export default colors;

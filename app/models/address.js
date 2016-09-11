@@ -1,4 +1,4 @@
-import LocationHashable from 'roadsage/mixins/location-hashable';
+import LocationHashable from 'watermelon-juice/mixins/location-hashable';
 import computed from 'ember-computed-decorators';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';

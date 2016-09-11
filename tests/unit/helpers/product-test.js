@@ -1,4 +1,4 @@
-import { product } from 'roadsage/helpers/product';
+import { product } from 'watermelon-juice/helpers/product';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | product');

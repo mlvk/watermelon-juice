@@ -1,7 +1,7 @@
-import Ember from 'ember';
-import style from 'roadsage/utils/styles';
-import colors from 'roadsage/constants/colors';
-import Clickable from 'roadsage/mixins/clickable';
+import Ember from "ember";
+import style from "watermelon-juice/utils/styles";
+import colors from "watermelon-juice/constants/colors";
+import Clickable from "watermelon-juice/mixins/clickable";
 
 const {
   computed: {
@@ -10,25 +10,30 @@ const {
 } = Ember;
 
 export default Ember.Component.extend(Clickable, {
-  classNames: ['row'],
-  classNameBindings: ['disabled', 'flat:flat:card-1'],
-  attributeBindings:['componentStyles:style'],
+  tagName: "a",
 
-  hasLabel: notEmpty('label'),
+  classNames: ["row"],
+  classNameBindings: ["disabled", "flat:flat:card-1"],
+  attributeBindings:["componentStyles:style", "href"],
 
-  @style('size', 'color', 'backgroundColor', 'borderRadius')
+  hasLabel: notEmpty("label"),
+
+  @style("size", "padding", "color", "backgroundColor", "borderRadius")
   componentStyles(
-    size = '1',
-    color = 'white',
+    size = "1",
+    padding,
+    color = "white",
     backgroundColor = colors.SKY_BLUE,
     borderRadius = 0
   ) {
+
+    padding = padding === undefined? size: padding;
     return {
-      'padding': `${size}em`,
-      'font-size': `${size/2}em`,
-      'border-radius': `${borderRadius}px`,
-      'color': color,
-      'background-color': backgroundColor
+      "padding": `${padding}em`,
+      "font-size": `${size/2}em`,
+      "border-radius": `${borderRadius}px`,
+      "color": color,
+      "background-color": backgroundColor
     };
   }
 });

@@ -1,6 +1,6 @@
-import Ember from 'ember';
-import computed from 'ember-computed-decorators';
-import Clickable from 'roadsage/mixins/clickable';
+import Ember from "ember";
+import computed from "ember-computed-decorators";
+import Clickable from "watermelon-juice/mixins/clickable";
 
 const {
   bool,
@@ -9,30 +9,26 @@ const {
 } = Ember.computed;
 
 export default Ember.Component.extend(Clickable, {
-  classNames: ['row', 'card-1'],
-  classNameBindings: ['completed'],
+  classNames: ["row", "card-1"],
+  classNameBindings: ["completed"],
 
-  @computed('index')
+  @computed("index")
   formattedIndex(index) {
     return index + 1;
   },
 
-  fulfillments: alias('model.fulfillments'),
-  firstLocation: alias('fulfillments.firstObject.order.location'),
-  company: alias('firstLocation.company'),
+  fulfillments: alias("model.fulfillments"),
+  firstLocation: alias("fulfillments.firstObject.order.location"),
+  company: alias("firstLocation.company"),
 
-  hasMultipleFulfillments: gt('fulfillments.length', 1),
+  hasMultipleFulfillments: gt("fulfillments.length", 1),
 
-  @computed('hasMultipleFulfillments', 'company.name', 'firstLocation.name', 'firstLocation.id')
-  title(hasMultiple, companyName, locationName, locationId) {
-    return hasMultiple ? `${companyName} - Multiple orders` : `${companyName} - ${locationName} - ${locationId}`;
+  @computed("hasMultipleFulfillments", "firstLocation.code", "firstLocation.address.city")
+  locationText(hasMultiple, locationCode, city) {
+    return hasMultiple ? `Multiple - ${city}` : `${locationCode.toUpperCase()} - ${city}`;
   },
 
-  address: alias('model.address.full'),
+  address: alias("model.address.full"),
 
-  // companyName: alias('model.ful.location.company.name'),
-  // companyAddress: alias('model.visitWindow.location.address.street'),
-  // companyCity: alias('model.visitWindow.location.address.city'),
-
-  completed: bool('model.isFulfilled')
+  completed: bool("model.isFulfilled")
 });

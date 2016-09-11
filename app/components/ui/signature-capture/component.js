@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 const {
   and,
@@ -6,19 +6,19 @@ const {
 } = Ember.computed;
 
 export default Ember.Component.extend({
-  classNames:     ['card-2'],
+  classNames:     ["card-2"],
 
-  hasName:        notEmpty('tempName'),
-  hasSignature:   notEmpty('signature'),
-  readyToSubmit:  and('hasName', 'tempSignature'),
+  hasName:        notEmpty("tempName"),
+  hasSignature:   notEmpty("signature"),
+  readyToSubmit:  and("hasName", "tempSignature"),
 
   actions: {
     onNameChanged(e) {
-      this.set('tempName', e.target.value);
+      this.set("tempName", e.target.value);
     },
 
     requestedSign() {
-      this.setProperties({signing:true, tempSignature:undefined});
+      this.setProperties({signing:true, tempSignature:undefined, tempName: this.get("name")});
     },
 
     cancel() {
@@ -26,12 +26,12 @@ export default Ember.Component.extend({
     },
 
     submit() {
-      this.attrs.onSignature(this.get('tempSignature'), this.get('tempName'), moment().toDate());
-      this.setProperties({signing:false, tempSignature:undefined, tempName:''});
+      this.attrs.onSignature(this.get("tempSignature"), this.get("tempName"), moment().toDate());
+      this.setProperties({signing:false, tempSignature:undefined, tempName:""});
     },
 
     handleNewSignature(data) {
-      this.set('tempSignature', data);
+      this.set("tempSignature", data);
     }
   }
 });

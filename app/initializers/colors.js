@@ -1,4 +1,4 @@
-import colors from 'roadsage/constants/colors';
+import colors from 'watermelon-juice/constants/colors';
 
 export function initialize(application) {
   application.register('colors:main', colors, { instantiate: false });

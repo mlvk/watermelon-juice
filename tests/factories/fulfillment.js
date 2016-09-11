@@ -1,8 +1,13 @@
-import FactoryGuy from 'ember-data-factory-guy';
+import FactoryGuy from "ember-data-factory-guy";
 
-FactoryGuy.define('fulfillment', {
+FactoryGuy.define("fulfillment", {
   default: {
-    routeVisit: FactoryGuy.belongsTo('route-visit'),
-    order: FactoryGuy.belongsTo('order')
+    order: FactoryGuy.belongsTo("order")
+  },
+
+  traits: {
+    withRouteVisit: {
+      routeVisit: FactoryGuy.belongsTo("route-visit")
+    }
   }
 });

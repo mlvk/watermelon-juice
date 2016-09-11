@@ -1,7 +1,6 @@
 & {
   cursor: pointer;
   align-items: center;
-  // padding: 1em 0.5em;
   background-color: #F3FDFF;
   color: $dark-grey;
   margin: 0.5em 0.5em 0 0.5em;
@@ -42,12 +41,12 @@
 }
 
 .labelIconContainer {
-  padding-left: 0.5em;
+  padding: 0.5em;
   align-items: center;
 }
 
 .iconContainer {
-  padding: 1em 0.5em;
+  padding: 0 0.5em;
   min-height: 100%;
   align-items: center;
 }

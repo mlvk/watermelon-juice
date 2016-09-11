@@ -1,32 +1,29 @@
-<div class='header'>
-  <span class='title row stretch'>Credit Note</span>
-  <div class='col info'>
+<div class="header">
+  <span class="title row stretch">Credit Note</span>
+  <div class="col info">
     <div class="col">
-      <span class='row stretch infoRow'>
-        <span class="label">Credit Note:</span>
-        <span class="content">{{model.creditNoteNumber}}</span>
+      <span class="row stretch infoRow">
+        <span class="content noteNumber">{{model.creditNoteNumber}}</span>
       </span>
-      <span class='row stretch infoRow'>
-        <span class="label">Credit Date:</span>
+      <span class="row stretch infoRow">
         <span class="content">{{date}}</span>
       </span>
-      <span class='row stretch infoRow'>
-        <span class="label">Customer:</span>
+      <span class="row stretch infoRow">
         <span class="content">{{model.location.company.name}}</span>
       </span>
     </div>
   </div>
 </div>
 
-<div class='rowContainer'>
+<div class="rowContainer">
   {{#each validCreditNoteItems as |cni|}}
-    {{rows/credit-note-row
+    {{rows/cost-quantity-row
         name=cni.item.name
-        total=cni.total
+        unitPrice=cni.unitPrice
         quantity=cni.quantity}}
   {{/each}}
-  {{rows/credit-note-row
-      name='Total'
-      emphasize=true
-      total=totalCredit}}
+
+  {{rows/total-row
+      name="Total"
+      total=total}}
 </div>

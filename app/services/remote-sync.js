@@ -1,19 +1,19 @@
-import Ember from 'ember';
+import Ember from "ember";
 
-const fulfilledParentPredicate = x => x.get('fulfillment.fulfilled');
-const fulfilledPredicate = x => x.get('hasDirtyAttributes') && !x.get('isSaving') && x.get('fulfilled');
-const dirtyRecordPredicate = x => x.get('hasDirtyAttributes') && !x.get('isSaving');
+const fulfilledParentPredicate = x => x.get("fulfillment.fulfilled");
+const fulfilledPredicate = x => x.get("hasDirtyAttributes") && !x.get("isSaving") && x.get("fulfilled");
+const dirtyRecordPredicate = x => x.get("hasDirtyAttributes") && !x.get("isSaving");
 
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
 
   start() {
-    setInterval(::this._processQueue, 5000);
+    setInterval(::this.processQueue, 5000);
   },
 
-  async _saveAllOfType(modelType) {
-    const store = this.get('store');
+  async saveAllOfType(modelType) {
+    const store = this.get("store");
 
     const records = store.peekAll(modelType)
       .filter(fulfilledParentPredicate);
@@ -25,36 +25,39 @@ export default Ember.Service.extend({
     return records;
   },
 
-  async _saveFulfillmentRecordsOfType(modelType, childCollectionKey) {
-    const records = await this._saveAllOfType(modelType);
+  async saveFulfillmentRecordsOfType(modelType, childCollectionKey) {
+    const records = await this.saveAllOfType(modelType);
 
     records.forEach(r => r.get(childCollectionKey)
       .filter(dirtyRecordPredicate)
       .forEach(r => r.save()));
   },
 
-  async _processQueue() {
+  async processQueue() {
     if(!this.processing) {
       this.processing = true;
 
-      const store = this.get('store');
+      const store = this.get("store");
 
       await Promise.all([
-        this._saveAllOfType('pod'),
-        this._saveFulfillmentRecordsOfType('stock', 'stockLevels'),
-        this._saveFulfillmentRecordsOfType('order', 'orderItems'),
-        this._saveFulfillmentRecordsOfType('credit-note', 'creditNoteItems')
-      ]);
+        this.saveAllOfType("pod"),
+        this.saveFulfillmentRecordsOfType("stock", "stockLevels"),
+        this.saveFulfillmentRecordsOfType("order", "orderItems"),
+        this.saveFulfillmentRecordsOfType("credit-note", "creditNoteItems")
+      ])
+      .catch(() => {});
 
-      await Promise.all(store.peekAll('fulfillment')
+      await Promise.all(store.peekAll("fulfillment")
         .filter(fulfilledPredicate)
         .filter(dirtyRecordPredicate)
-        .map(r => r.save()));
+        .map(r => r.save()))
+        .catch(() => {});
 
-      await Promise.all(store.peekAll('route-visit')
+      await Promise.all(store.peekAll("route-visit")
         .filter(fulfilledPredicate)
         .filter(dirtyRecordPredicate)
-        .map(r => r.save()));
+        .map(r => r.save()))
+        .catch(() => {});
 
       this.processing = false;
     }

@@ -45,6 +45,11 @@
   align-items: center;
 }
 
+.right {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .baseline {
   align-items: baseline;
 }

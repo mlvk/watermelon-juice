@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import computed from 'ember-computed-decorators';
 import moment from 'moment';
-import Clickable from 'roadsage/mixins/clickable';
+import Clickable from 'watermelon-juice/mixins/clickable';
 
 const { equal } = Ember.computed;
 

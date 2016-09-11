@@ -2,9 +2,8 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'roadsage',
+    modulePrefix: 'watermelon-juice',
     environment: environment,
-    rootURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {

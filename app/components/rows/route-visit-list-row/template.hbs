@@ -5,10 +5,10 @@
 <div class="row stretch outerContainer">
   <div class="content col">
     <span class="companyName">
-      {{cap title}}
+      {{cap company.name}}
     </span>
     <span class="locationCode">
-      {{cap address}}
+      {{cap locationText}}
     </span>
   </div>
 
@@ -22,6 +22,6 @@
 
 <div class="arrivalContainer">
   {{passive/label-icon
-    icon='flight_land'
-    label='6:15am'}}
+    icon="flight_land"
+    label=(minutes-to-time model.arriveAt)}}
 </div>

@@ -13,13 +13,11 @@
     justify-content: space-between;
   }
 
-  .label {
-    margin-right: 1em;
-    font-size: 0.8em;
-  }
-
   .content {
     font-weight: 600;
+    &.orderNumber{
+      text-transform: uppercase;
+    }
   }
 }
 
@@ -32,5 +30,4 @@
 
 .info {
   font-size: 1.3em;
-  align-items: flex-end;
 }
