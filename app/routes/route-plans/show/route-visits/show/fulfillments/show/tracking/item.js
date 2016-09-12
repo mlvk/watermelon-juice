@@ -4,7 +4,6 @@ import Ember from 'ember';
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   async model(params) {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-    // const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
     const item = this.store.peekRecord('item', params.item_id);
 
     await this._prepCreditItem(fulfillment, item);
@@ -18,42 +17,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       stockLevel
     };
   },
-
-  // findCreditNoteItem(item) {
-  //   const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-  //
-  //   if(fulfillment.belongsTo('creditNote').value()) {
-  //     return fulfillment.get('creditNote').creditNoteItemForItem(item);
-  //   }
-  // }
-
-  // createCreditNoteItem(item) {
-  //   const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-  //
-  //   if(fulfillment.belongsTo('creditNote').value()) {
-  //     return fulfillment.get('creditNote.creditNoteItems').find(cni => cni.get('item.id') === item.get('id'));
-  //   } else {
-  //     return undefined;
-  //   }
-  // }
-
-  // findOrderCreateCreditNoteItem(item) {
-  //   const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-  //
-  //   let creditNote;
-  //
-  //   if(fulfillment.belongsTo('creditNote').value()) {
-  //     creditNote = fulfillment.get('creditNote');
-  //   } else {
-  //     creditNote = this.store.createRecord('credit-note', {fulfillment, date:moment().format('MM-DD-YYYY')});
-  //   }
-  //
-  //   let match = creditNote.get('creditNoteItems').find(cni => cni.get('item.id') === item.get('id'));
-  //
-  //   if(!match) {
-  //     match = this.store.createRecord('credit-note-item', {creditNote, item});
-  //   }
-  // },
 
   async updateCreditNoteItem(item, quantity) {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
@@ -91,13 +54,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     didTransition() {
       this.navigator.requestReverse('route-plans.show.route-visits.show.fulfillments.show.tracking');
-
-      const model = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-
-      this.stateInfo.display({
-        label:model.get('order.location.name'),
-        info:model.get('order.location.code')
-      });
     },
 
     markCompleted() {

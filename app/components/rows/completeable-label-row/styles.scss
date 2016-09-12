@@ -1,9 +1,16 @@
 & {
   cursor: pointer;
-  margin: 1em;
+  // margin: 0.25em;
+  border-bottom: 2px solid $dark-grey;
   background-color: $light-blue;
   position: relative;
   color: $dark-grey;
+}
+
+&:nth-child(odd) {
+  .index {
+    // background-color: rgba(#000, 0.5);
+  }
 }
 
 &:active {

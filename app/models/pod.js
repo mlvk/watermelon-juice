@@ -17,5 +17,5 @@ export default Model.extend({
   hasSignedAt:  notEmpty("signedAt"),
   hasName:      notEmpty("name"),
 
-  isValid:        and("hasSignature", "hasSignedAt", "hasName")
+  isValid:      and("hasSignature", "hasSignedAt", "hasName")
 });

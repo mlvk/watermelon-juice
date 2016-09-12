@@ -1,5 +1,9 @@
+{{#ember-wormhole to="navHeaderContainer"}}
+  {{headers/fulfillment-review-info model=model}}
+{{/ember-wormhole}}
+
 {{forms/route-visit-review
-  model=model
-  onNameChanged=(route-action 'onNameChanged')
-  onSignature=(route-action 'onSignature')
-  submit=(route-action 'submit')}}
+    model=model
+    onNameChanged=(route-action 'onNameChanged')
+    onSignature=(route-action 'onSignature')
+    submit=(route-action 'submit')}}

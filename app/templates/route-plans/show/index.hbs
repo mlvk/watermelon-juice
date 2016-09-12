@@ -1,4 +1,7 @@
+{{#ember-wormhole to="navHeaderContainer"}}
+  {{headers/route-plan-info model=model}}
+{{/ember-wormhole}}
+
 {{lists/route-visit-list
-  model=model.sortedRouteVisits
-  rowSelected=(route-action 'showRouteVisit')
-}}
+    model=model.sortedRouteVisits
+    rowSelected=(route-action 'showRouteVisit')}}

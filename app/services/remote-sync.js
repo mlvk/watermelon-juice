@@ -4,7 +4,6 @@ const fulfilledParentPredicate = x => x.get("fulfillment.fulfilled");
 const fulfilledPredicate = x => x.get("hasDirtyAttributes") && !x.get("isSaving") && x.get("fulfilled");
 const dirtyRecordPredicate = x => x.get("hasDirtyAttributes") && !x.get("isSaving");
 
-
 export default Ember.Service.extend({
   store: Ember.inject.service(),
 
