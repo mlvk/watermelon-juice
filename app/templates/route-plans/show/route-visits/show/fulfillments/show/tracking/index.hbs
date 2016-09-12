@@ -1,3 +1,7 @@
+{{#ember-wormhole to="navHeaderContainer"}}
+  {{headers/location-tracking-info model=model.order.location}}
+{{/ember-wormhole}}
+
 {{#each model.stock.stockLevels as |stockLevel i|}}
   {{rows/completeable-label-row
     label=stockLevel.item.name

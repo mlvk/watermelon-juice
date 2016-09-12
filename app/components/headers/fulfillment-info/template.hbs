@@ -1,0 +1,18 @@
+<div class="infoContainer col">
+  <span class="companyName">
+    {{model.order.location.company.name}}
+  </span>
+  <span class="locationCode">
+    {{model.order.location.code}} - {{model.order.location.name}}
+  </span>
+</div>
+<div class="right">
+  {{ui/icon-button
+      size=1.5
+      padding=1
+      flat=true
+      color=colors.DARK_GREY
+      backgroundColor=colors.TRANSPARENT
+      icon="directions"
+      href=directionsLink}}
+</div>

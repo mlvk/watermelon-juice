@@ -11,6 +11,12 @@ canvas {
   border-radius: 4px;
 }
 
+.ui {
+  position: absolute;
+  // width: 1em;
+  // height: 1em;
+}
+
 .sigLine {
   pointer-events: none;
   align-items: flex-end;

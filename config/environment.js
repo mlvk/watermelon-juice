@@ -18,7 +18,7 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.apiHost = 'http://localhost:3000';
+  ENV.apiHost = process.env.DEV_API_HOST;
 
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",

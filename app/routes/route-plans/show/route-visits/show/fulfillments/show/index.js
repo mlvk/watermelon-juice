@@ -1,22 +1,7 @@
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
 import Ember from "ember";
-import colors from "watermelon-juice/constants/colors";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-
-  buildButton(icon, href){
-    return {
-      size:3,
-      padding:0,
-      flat:true,
-      color:colors.DARK_GREY,
-      backgroundColor:colors.TRANSPARENT,
-      icon,
-      href,
-      disabledClick:true
-    };
-  },
-
   actions: {
     track() {
       this.transitionTo("route-plans.show.route-visits.show.fulfillments.show.tracking");
@@ -52,22 +37,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       } else {
         this.navigator.requestReverse("route-plans.show");
       }
-
-      const phoneButton = this.buildButton("phone", "tel:1111111");
-
-      // Build directions button
-      //@TODO: code for iOS
-      const address = model.get("routeVisit.address");
-      const lat = address.get("lat");
-      const lng = address.get("lng");
-      const directionHref = `geo:${lat},${lng}?q=${lat},${lng}`;
-      const directionButton = this.buildButton("directions", directionHref);
-
-      this.stateInfo.display({
-        label:model.get("order.location.company.name"),
-        info: `${model.get("order.location.code").toUpperCase()} - ${model.get("order.location.name")}`,
-        rightButtons: [phoneButton, directionButton]
-      });
     }
   }
 });

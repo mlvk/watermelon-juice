@@ -1,6 +1,9 @@
+{{#ember-wormhole to="navHeaderContainer"}}
+  {{headers/item-tracking-info model=model.stockLevel.item}}
+{{/ember-wormhole}}
+
 <div class="col">
   {{ui/item-tracker
-      label='Sunseed Chorizo'
       starting=model.stockLevel.starting
       returns=model.stockLevel.returns
       startingChanged=(route-action 'startingChanged')
@@ -9,13 +12,12 @@
   <div class="row center">
     <div class="card-1">
       {{ui/icon-button
-        icon='done_all'
-        label='Mark Tracked'
-        size='2'
-        color=white
-        backgroundColor=colors.DARK_GREY
-        onClick=(route-action 'markCompleted')
-      }}
+          icon='done_all'
+          label='Mark Tracked'
+          size='2'
+          color=white
+          backgroundColor=colors.DARK_GREY
+          onClick=(route-action 'markCompleted')}}
     </div>
   </div>
 </div>

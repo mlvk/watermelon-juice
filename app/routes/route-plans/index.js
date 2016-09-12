@@ -27,7 +27,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     didTransition() {
-      this.stateInfo.clear();
       this.navigator.clearRoute();
     }
   }

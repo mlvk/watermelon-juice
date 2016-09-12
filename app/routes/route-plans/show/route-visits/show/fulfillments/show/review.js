@@ -36,13 +36,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     didTransition() {
       this.navigator.requestReverse('route-plans.show.route-visits.show.fulfillments.show');
-
-      const model = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-
-      this.stateInfo.display({
-        label:model.get('order.location.name'),
-        info:model.get('order.location.code')
-      });
     }
   }
 });

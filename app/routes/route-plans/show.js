@@ -29,7 +29,6 @@ const INCLUDES = [
   'route-visits.fulfillments.order.location.company',
   'route-visits.fulfillments.order.location.company.price-tier',
   'route-visits.fulfillments.order.location.company.price-tier.item-prices'
-  // 'route-visits.fulfillments.order.location.company.price-tier.item-prices.item'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
@@ -40,13 +39,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
     didTransition() {
       this.navigator.requestReverse('route-plans.index');
-
-      const model = this.modelFor('route-plans.show');
-
-      this.stateInfo.display({
-        label:model.get('formattedDate'),
-        info:'Start time: 5:45am'
-      });
     }
   }
 });

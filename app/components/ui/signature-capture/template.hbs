@@ -1,6 +1,8 @@
 {{#if signing}}
   <div class="col">
   {{ui/signature-area
+    signature=stashedSignature
+    name=stashedName
     drawingEnded=(action "handleNewSignature")}}
   <div class="row stretch nameContainer">
     <input

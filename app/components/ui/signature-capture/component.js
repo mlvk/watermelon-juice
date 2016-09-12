@@ -8,30 +8,36 @@ const {
 export default Ember.Component.extend({
   classNames:     ["card-2"],
 
-  hasName:        notEmpty("tempName"),
-  hasSignature:   notEmpty("signature"),
-  readyToSubmit:  and("hasName", "tempSignature"),
+  hasName:        notEmpty("stashedName"),
+  hasSignature:   notEmpty("stashedSignature"),
+  readyToSubmit:  and("hasName", "hasSignature"),
+
+  didReceiveAttrs(data) {
+    this.set("stashedSignature", data.newAttrs.signature.value);
+    this.set("stashedName", data.newAttrs.name.value);
+  },
 
   actions: {
     onNameChanged(e) {
-      this.set("tempName", e.target.value);
+      this.set("stashedName", e.target.value);
     },
 
     requestedSign() {
-      this.setProperties({signing:true, tempSignature:undefined, tempName: this.get("name")});
+      this.set("signing", true);
     },
 
     cancel() {
-      this.setProperties({signing:false, tempSignature:undefined});
+      this.set("stashedSignature", this.get("signature"));
+      this.set("signing", false);
     },
 
     submit() {
-      this.attrs.onSignature(this.get("tempSignature"), this.get("tempName"), moment().toDate());
-      this.setProperties({signing:false, tempSignature:undefined, tempName:""});
+      this.attrs.onSignature(this.get("stashedSignature"), this.get("stashedName"), moment().toDate());
+      this.set("signing", false);
     },
 
     handleNewSignature(data) {
-      this.set("tempSignature", data);
+      this.set("stashedSignature", data);
     }
   }
 });
