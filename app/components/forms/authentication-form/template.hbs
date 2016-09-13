@@ -1,0 +1,53 @@
+<div class="formElements card-1">
+
+  {{passive/label-icon
+      class="headerLabel"
+      icon="lock"
+      label="Sign In"}}
+  <div class="col inputContainer">
+    {{input
+        class="username"
+        placeholder="Enter Login"
+        type="email"
+        pattern="[^ @]*@[^ @]*"
+        value=identification
+        enter=(action "submit")}}
+
+    {{input
+        class="password"
+        placeholder="Enter Password"
+        type="password"
+        value=password
+        enter=(action "submit")}}
+  </div>
+
+  {{#if hasErrors}}
+    <span class="errorLabel row stretch">Unable to login</span>
+    <div class="errors col">
+      {{#each-in errors as |key val|}}
+        <span class="error">
+          {{val}}
+        </span>
+      {{/each-in}}
+    </div>
+  {{/if}}
+</div>
+
+{{#if isLoading}}
+  <span class="loadingLabel">Logging in...</span>
+{{/if}}
+
+<div class="row center uiContainer">
+  <div class="card-1">
+    {{ui/icon-button
+        class="submit"
+        label="Sign In"
+        icon="chevron_right"
+        size="2"
+        color=white
+        flat=true
+        backgroundColor=colors.SKY_BLUE
+        disabled=isLoading
+        onClick=(action "submit")}}
+  </div>
+</div>
