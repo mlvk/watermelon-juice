@@ -3,21 +3,27 @@ import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
 
-const { equal, not } = Ember.computed;
+const {
+  equal,
+  not,
+  alias
+} = Ember.computed;
 
 export default Model.extend({
-  deliveryState:      attr("string"),
-  notificationState:  attr("string"),
-  submittedAt:        attr("date"),
+  deliveryState:        attr("string"),
+  notificationState:    attr("string"),
+  submittedAt:          attr("date"),
 
-  routeVisit:         belongsTo("route-visit"),
-  order:              belongsTo("order"),
-  stock:              belongsTo("stock"),
-  creditNote:         belongsTo("credit-note"),
-  pod:                belongsTo("pod"),
+  routeVisit:           belongsTo("route-visit"),
+  order:                belongsTo("order"),
+  stock:                belongsTo("stock"),
+  creditNote:           belongsTo("credit-note"),
+  pod:                  belongsTo("pod"),
 
-  pending:            equal("deliveryState", "pending"),
-  fulfilled:          not("pending"),
+  pending:              equal("deliveryState", "pending"),
+  fulfilled:            not("pending"),
+
+  belongsToSalesOrder:  alias("model.order.isSalesOrder"),
 
   prepareStock() {
     const location = this.get("order.location");

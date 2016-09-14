@@ -19,5 +19,10 @@ export default Ember.Component.extend({
   @computed("model.deliveryDate")
   date(deliveryDate) {
     return moment(deliveryDate, "YYYY-MM-DD").format("MM/DD/YYYY");
+  },
+
+  @computed("model.isSalesOrder")
+  title(isSalesOrder) {
+    return isSalesOrder? "Invoice": "Purchase Order";
   }
 });

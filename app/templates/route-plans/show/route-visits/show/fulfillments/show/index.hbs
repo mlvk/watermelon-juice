@@ -2,11 +2,13 @@
   {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
 
-{{ui/drilldown-button
-  icon="assignment_turned_in"
-  label="Track Inventory"
-  completed=trackingCompleted
-  onClick=(route-action "track")}}
+{{#if model.belongsToSalesOrder}}
+  {{ui/drilldown-button
+    icon="assignment_turned_in"
+    label="Track Inventory"
+    completed=trackingCompleted
+    onClick=(route-action "track")}}
+{{/if}}
 
 {{ui/drilldown-button
   icon="touch_app"
