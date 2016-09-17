@@ -52,7 +52,7 @@ test("can view a route plans route visits", async function(assert) {
 
 test("when clicking a route visit with a single fulfillment, should navigate to route visit dashboard", async function(assert) {
   const routePlan = make("route-plan");
-  const fulfillment = make("fulfillment");
+  const fulfillment = make("fulfillment", "withOrder");
   const routeVisit = make("route-visit", {routePlan, fulfillments: [fulfillment]});
 
   mockFind("route-plan").returns({model: routePlan});

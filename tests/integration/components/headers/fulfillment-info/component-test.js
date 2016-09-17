@@ -1,11 +1,11 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { moduleForComponent, test } from "ember-qunit";
+import hbs from "htmlbars-inline-precompile";
 import {
   make,
   manualSetup
-} from 'ember-data-factory-guy';
+} from "ember-data-factory-guy";
 
-moduleForComponent('headers/fulfillment-info', 'Integration | Component | headers/fulfillment info', {
+moduleForComponent("headers/fulfillment-info", "Integration | Component | headers/fulfillment info", {
   integration: true,
 
   beforeEach: function () {
@@ -13,8 +13,8 @@ moduleForComponent('headers/fulfillment-info', 'Integration | Component | header
   }
 });
 
-test('it renders', function(assert) {
-  const fulfillment = make("fulfillment");
+test("it renders", function(assert) {
+  const fulfillment = make("fulfillment", "withOrder");
 
   const firstLine = fulfillment.get("order.location.company.name");
   const secondLine = `${fulfillment.get("order.location.code")} - ${fulfillment.get("order.location.name")}`;

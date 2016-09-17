@@ -23,7 +23,7 @@ export default Model.extend({
   pending:              equal("deliveryState", "pending"),
   fulfilled:            not("pending"),
 
-  belongsToSalesOrder:  alias("model.order.isSalesOrder"),
+  belongsToSalesOrder:  alias("order.isSalesOrder"),
 
   prepareStock() {
     const location = this.get("order.location");
