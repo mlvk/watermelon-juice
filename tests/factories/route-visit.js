@@ -2,7 +2,7 @@ import FactoryGuy from "ember-data-factory-guy";
 
 FactoryGuy.define("route-visit", {
   default: {
-    fulfillments: FactoryGuy.hasMany("fulfillment", 1, "withOrder"),
+    fulfillments: FactoryGuy.hasMany("fulfillment", 1, "withOrderAndCreditNote"),
     visitWindow: FactoryGuy.belongsTo("visit-window")
   },
 

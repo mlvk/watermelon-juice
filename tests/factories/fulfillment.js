@@ -1,6 +1,10 @@
 import FactoryGuy from "ember-data-factory-guy";
 
 FactoryGuy.define("fulfillment", {
+  default: {
+    stock: FactoryGuy.belongsTo("stock", "withStockLevels")
+  },
+
   traits: {
     withRouteVisit: {
       routeVisit: FactoryGuy.belongsTo("route-visit")
@@ -12,6 +16,11 @@ FactoryGuy.define("fulfillment", {
 
     withPurchaseOrder: {
       order: FactoryGuy.belongsTo("order", "purchaseOrder")
+    },
+
+    withOrderAndCreditNote: {
+      order: FactoryGuy.belongsTo("order", "salesOrder"),
+      creditNote: FactoryGuy.belongsTo("credit-note")
     }
   }
 });

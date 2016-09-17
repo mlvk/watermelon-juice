@@ -8,18 +8,19 @@
     model=stockLevel.item
     completed=stockLevel.tracked
     index=i
-    onClick=(route-action 'trackItem')}}
+    onClick=(route-action "trackItem")}}
 {{/each}}
 
 <div class="row center">
   <div class="card-1">
     {{ui/icon-button
-      icon='done_all'
-      label='Mark Tracked'
-      size='2'
+      icon="done_all"
+      label="Mark Tracked"
+      class="markTracked"
+      size="2"
       color=white
       backgroundColor=colors.DARK_GREY
-      onClick=(route-action 'markAllCompleted')
+      onClick=(route-action "markAllCompleted")
     }}
   </div>
 </div>
