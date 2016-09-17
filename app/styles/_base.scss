@@ -37,3 +37,7 @@ input[type="text"] {
 input[type="text"]:focus {
   outline: none;
 }
+
+[data-ember-action], a, button, input, .link {
+  cursor: pointer;
+}

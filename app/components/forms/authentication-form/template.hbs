@@ -21,15 +21,11 @@
         enter=(action "submit")}}
   </div>
 
-  {{#if hasErrors}}
+  {{#if hasError}}
     <span class="errorLabel row stretch">Unable to login</span>
-    <div class="errors col">
-      {{#each-in errors as |key val|}}
-        <span class="error">
-          {{val}}
-        </span>
-      {{/each-in}}
-    </div>
+    <span class="error">
+      {{error}}
+    </span>
   {{/if}}
 </div>
 

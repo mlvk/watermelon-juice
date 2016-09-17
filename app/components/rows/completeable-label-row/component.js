@@ -3,6 +3,7 @@ import computed from 'ember-computed-decorators';
 import Clickable from 'watermelon-juice/mixins/clickable';
 
 export default Ember.Component.extend(Clickable, {
+  
   classNames:         ['row'],
   classNameBindings:  ['completed'],
 

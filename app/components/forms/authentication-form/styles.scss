@@ -9,7 +9,6 @@
 }
 
 .headerLabel {
-  // margin-left: 0.5em;
   font-size: 2em;
 }
 
@@ -34,14 +33,11 @@ input {
   background-color: red;
   color: white;
   padding: 0.5em;
-}
-
-.errors {
-  margin: 0;
-  padding: 0.5em;
+  margin: 0.5em 0;
 }
 
 .error {
+  padding: 0.5em;
   font-style: italic;
   font-weight: bold;
 }
