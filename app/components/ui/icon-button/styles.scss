@@ -4,10 +4,14 @@
   justify-content: center;
   padding: 1.5em;
   text-decoration: initial;
+  border: none;
+  outline:none;
 }
 
 &:active {
   opacity: 0.5;
+  border: none;
+  outline:none;
 }
 
 &.disabled {

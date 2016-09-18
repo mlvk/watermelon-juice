@@ -1,6 +1,6 @@
-{{#each model as |itemLevel index|}}
+{{#each sortedStockLevels as |stockLevel index|}}
   {{rows/item-level-list-row
-    model=itemLevel
-    index=index
-    onClick=rowSelected}}
+      model=stockLevel
+      index=index
+      onClick=rowSelected}}
 {{/each}}

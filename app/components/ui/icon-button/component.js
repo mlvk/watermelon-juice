@@ -14,7 +14,7 @@ export default Ember.Component.extend(Clickable, {
 
   classNames: ["row"],
   classNameBindings: ["disabled", "flat:flat:card-1"],
-  attributeBindings:["componentStyles:style", "href"],
+  attributeBindings:["componentStyles:style", "href", "type"],
 
   hasLabel: notEmpty("label"),
 

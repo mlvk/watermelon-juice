@@ -4,11 +4,12 @@
 
 <div class="row itemCounterContent">
   {{ui/icon-button
-    icon='remove'
+    icon="remove"
     size=1.6
-    backgroundColor='#00B3DD'
+    class="decrease"
+    backgroundColor="#00B3DD"
     disabled=cannotDecrement
-    onClick=(action 'change' -1)}}
+    onClick=(action "change" -1)}}
 
   {{input
     value=value
@@ -17,8 +18,9 @@
     inputmode="numeric"}}
 
   {{ui/icon-button
-    icon='add'
+    icon="add"
     size=1.6
-    backgroundColor='#00B3DD'
-    onClick=(action 'change' 1)}}
+    class="increase"
+    backgroundColor="#00B3DD"
+    onClick=(action "change" 1)}}
 </div>
