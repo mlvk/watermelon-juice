@@ -3,9 +3,6 @@ import Ember from 'ember';
 const { bool, notEmpty } = Ember.computed;
 
 export default Ember.Component.extend({
-  identification: 'admin@wutang.com',
-  password: 'password1',
-
   hasError: notEmpty("error"),
   isLoading: bool("loading"),
 
