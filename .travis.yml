@@ -25,6 +25,6 @@ script:
   - ember test
 
 after_success:
-  if [[ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [-n "${TRAVIS_TAG}"]]; then
+  if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ -n "${TRAVIS_TAG}" ]; then
     ember build --environment production && netlify deploy -e production -t ${PRODUCTION_NETLIFY_TOKEN} -s ${PRODUCTION_NETLIFY_SITE_ID} -p dist;
   fi
