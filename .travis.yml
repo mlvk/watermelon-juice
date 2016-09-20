@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "0.12"
+  - "6"
 
 sudo: false
 
@@ -16,6 +16,7 @@ before_install:
   - "npm install -g npm@^2"
 
 install:
+  - npm install -g ember
   - npm install -g bower
   - npm install
   - bower install
