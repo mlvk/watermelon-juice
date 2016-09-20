@@ -11,10 +11,10 @@ cache:
     - bower_components
 
 before_install:
+  - "echo ${TRAVIS_BRANCH} ${TRAVIS_PULL_REQUEST} ${TRAVIS_TAG}"
   - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
   - "npm config set spin false"
   - "npm install -g npm@^2"
-  - "echo ${TRAVIS_BRANCH} ${TRAVIS_PULL_REQUEST} ${TRAVIS_TAG}"
 
 install:
   - npm install -g ember-cli
@@ -32,4 +32,6 @@ script:
 after_success:
   if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ -n "${TRAVIS_TAG}" ]; then
     echo "Deploying" && npm install -g netlify-cli && ember build --environment production && netlify deploy -e production -t ${PRODUCTION_NETLIFY_TOKEN} -s ${PRODUCTION_NETLIFY_SITE_ID} -p dist;
+  else
+    echo "Not deploying ${TRAVIS_BRANCH} - ${TRAVIS_PULL_REQUEST} - ${TRAVIS_TAG}"
   fi
