@@ -1,5 +1,12 @@
-{{#each model as |routePlan|}}
-  {{rows/route-plan-list-row
-    model=routePlan
-    onClick=rowSelected}}
-{{/each}}
+{{#if hasRoutePlans}}
+  {{#each model as |routePlan|}}
+    {{rows/route-plan-list-row
+        model=routePlan
+        onClick=rowSelected}}
+  {{/each}}
+{{else}}
+  <div class="message card-1 col vstretch">
+    <span class="info">There are currently no routes scheduled.</span>
+    <span class="info">Please check back later.</span>
+  </div>
+{{/if}}

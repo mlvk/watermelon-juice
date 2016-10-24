@@ -50,7 +50,5 @@ test('credits credit note when there are returns and credit rate is greater than
       fulfillment_id:fulfillment.get("id")
     });
 
-  // return pauseTest();
-
   assert.equal(reviewPage.creditTotal, "$5.00");
 });
