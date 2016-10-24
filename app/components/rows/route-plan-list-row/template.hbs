@@ -13,17 +13,19 @@
     </span>
   </span>
 
-  {{passive/label-icon
+  <!-- {{passive/label-icon
     icon="flight_takeoff"
-    label= (concat (minutes-to-time model.startTime) " - " (minutes-to-time model.endTime)) }}
+    label= (concat (minutes-to-time model.startTime) " - " (minutes-to-time model.endTime)) }} -->
 
   {{passive/label-icon
     icon="store"
     label=(concat model.dropOffCount " Deliveries")}}
 
-  {{passive/label-icon
-    icon="swap_vertical_circle"
-    label=(concat model.pickUpCount " Pickups")}}
+  {{#if (gt 0 model.pickUpCount)}}
+    {{passive/label-icon
+      icon="swap_vertical_circle"
+      label=(concat model.pickUpCount " Pickups")}}
+  {{/if}}
 
 </div>
 <span class="row iconContainer">

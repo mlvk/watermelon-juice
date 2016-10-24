@@ -27,30 +27,16 @@ export default Model.extend({
   async priceForItem(item) {
     const priceTier = await this.get('company.priceTier');
     const itemPrices = await priceTier.get('itemPrices');
+    const match = itemPrices.find(ip => ip.get('item.id') === item.get('id'));
 
-    const match = itemPrices.find(async itemPrice => {
-      const itemId = await itemPrice.get('item.id');
-      return itemId === item.get('id');
-    });
-
-    if(match) {
-      return match.get('price');
-    } else {
-      return 0;
-    }
+    return Ember.isNone(match) ? 0 : match.get('price');
   },
 
-  creditRateForItem(item) {
-    const match = this.get('itemCreditRates').find(icr => icr.get('item.id') === item.get('id'));
+  async creditRateForItem(item) {
+    const price = await this.priceForItem(item);
+    const itemCreditRate = await this.get('itemCreditRates');
+    const match = itemCreditRate.find(icr => icr.get('item.id') === item.get('id'));
 
-    if(match) {
-      return match.get('rate');
-    } else {
-      return 0;
-    }
-  },
-
-  hasCreditForItem(item) {
-    return this.creditRateForItem(item) > 0;
+    return Ember.isNone(match) ? 0 : match.get('rate') * price;
   }
 });

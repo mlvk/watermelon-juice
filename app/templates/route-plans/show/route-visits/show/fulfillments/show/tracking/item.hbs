@@ -1,13 +1,13 @@
 {{#ember-wormhole to="navHeaderContainer"}}
-  {{headers/item-tracking-info model=model.stockLevel.item}}
+  {{headers/item-tracking-info model=item}}
 {{/ember-wormhole}}
 
 <div class="col">
   {{ui/item-tracker
-      starting=model.stockLevel.starting
-      returns=model.stockLevel.returns
-      startingChanged=(route-action 'startingChanged')
-      returnsChanged=(route-action 'returnsChanged')}}
+      starting=stockLevel.starting
+      returns=stockLevel.returns
+      startingChanged=(route-action 'startingChanged' stockLevel fulfillment)
+      returnsChanged=(route-action 'returnsChanged' stockLevel fulfillment)}}
 
   <div class="row center">
     <div class="card-1">
@@ -18,7 +18,7 @@
           color=white
           class="markTracked"
           backgroundColor=colors.DARK_GREY
-          onClick=(route-action 'markCompleted')}}
+          onClick=(route-action 'markCompleted' stockLevel)}}
     </div>
   </div>
 </div>

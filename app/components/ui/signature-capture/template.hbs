@@ -1,38 +1,36 @@
 {{#if signing}}
   <div class="col">
-  {{ui/signature-area
-    signature=stashedSignature
-    name=stashedName
-    drawingEnded=(action "handleNewSignature")}}
-  <div class="row stretch nameContainer">
-    <input
-      type="text"
-      name="name"
-      class="name"
-      placeholder="Received by..."
-      value="{{name}}"
-      oninput={{action "onNameChanged"}}
-      onchange={{action "onNameChanged"}}>
+    {{ui/signature-area
+        signature=stashedSignature
+        name=stashedName
+        drawingEnded=(action "handleNewSignature")}}
+    <div class="row stretch nameContainer">
+      <input
+        type="text"
+        name="name"
+        class="name"
+        placeholder="Received by..."
+        value="{{name}}"
+        oninput={{action "onNameChanged"}}
+        onchange={{action "onNameChanged"}}>
+    </div>
+    <div class="row stretch uiContainer">
+      {{ui/icon-button
+          class="stretch cancel"
+          flat=true
+          size=2
+          backgroundColor=colors.HOT_PINK
+          icon="clear"
+          onClick=(action "cancel")}}
+      {{ui/icon-button
+          class="stretch submit"
+          flat=true
+          size=2
+          icon="done"
+          disabled=(not readyToSubmit)
+          onClick=(action "submit")}}
+    </div>
   </div>
-  <div class="row stretch uiContainer">
-    {{ui/icon-button
-      class="stretch cancel"
-      flat=true
-      size=2
-      backgroundColor=colors.HOT_PINK
-      icon="clear"
-      onClick=(action "cancel")}}
-    {{ui/icon-button
-      class="stretch submit"
-      flat=true
-      size=2
-      icon="done"
-      disabled=(not readyToSubmit)
-      onClick=(action "submit")}}
-  </div>
-</div>
-
-
 {{else if hasSignature}}
   <div class="col relative signaturePreview" {{action "requestedSign"}}>
     <img src={{signature}} alt="signature" />
@@ -43,7 +41,11 @@
     </div>
   </div>
 {{else}}
-  <div class="row instructions" {{action "requestedSign"}}>
-    Sign All
-  </div>
+  {{ui/icon-button
+      icon="create"
+      label="Sign All"
+      size="2"
+      color=white
+      backgroundColor=colors.DARK_GREY
+      onClick=(action "requestedSign")}}
 {{/if}}

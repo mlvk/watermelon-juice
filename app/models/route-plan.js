@@ -8,8 +8,8 @@ export default Model.extend({
   publishedState:     attr("string"),
   startTime:          attr("number"),
   endTime:            attr("number"),
-  dropOffCount:       attr("number"),
-  pickUpCount:        attr("number"),
+  dropOffCount:       attr("number", {defaultValue: 0}),
+  pickUpCount:        attr("number", {defaultValue: 0}),
 
   routeVisits:        hasMany("route-visit"),
 

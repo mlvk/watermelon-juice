@@ -24,7 +24,7 @@ export default Ember.Component.extend(Clickable, {
   hasMultipleFulfillments: gt("fulfillments.length", 1),
 
   @computed("hasMultipleFulfillments", "firstLocation.code", "firstLocation.address.city")
-  locationText(hasMultiple, locationCode, city) {
+  locationText(hasMultiple = false, locationCode = "", city = "") {
     return hasMultiple ? `Multiple - ${city}` : `${locationCode.toUpperCase()} - ${city}`;
   },
 

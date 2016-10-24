@@ -8,7 +8,7 @@ import applicationPage from "watermelon-juice/tests/pages/application";
 import {
   make,
   makeList,
-  mockFind
+  mockFindRecord
 } from "ember-data-factory-guy";
 
 moduleForAcceptance("Acceptance | route visits", {
@@ -22,8 +22,8 @@ test("can view list of fulfillments", async function(assert) {
   const fulfillments = makeList("fulfillment", 3);
   const routeVisit = make("route-visit", {routePlan, fulfillments});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
 
   await showPage.visit({route_plan_id:routePlan.get("id"), route_visit_id:routeVisit.get("id")});
 
@@ -35,8 +35,8 @@ test("can select a fulfillment", async function(assert) {
   const fulfillment = make("fulfillment", "withOrder");
   const routeVisit = make("route-visit", {routePlan, fulfillments:[fulfillment]});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
 
   await showPage
     .visit({route_plan_id:routePlan.get("id"), route_visit_id:routeVisit.get("id")})
@@ -52,8 +52,8 @@ test("should navigate back to route visit list", async function(assert) {
   const fulfillment = make("fulfillment", "withOrder");
   const routeVisit = make("route-visit", {routePlan, fulfillments:[fulfillment]});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
 
   await showPage.visit({route_plan_id:routePlan.get("id"), route_visit_id:routeVisit.get("id")});
 

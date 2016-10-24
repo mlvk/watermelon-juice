@@ -1,23 +1,16 @@
 <div class="row">
   {{link-to 'RS' 'route-plans'}}
-  <!-- {{sync-indicator}} -->
 </div>
 
 <div class="row">
   {{#if authenticated}}
-
-    <span class="buttonContent row">
+    <span class="row vcenter">
       <span class="name">{{name}}</span>
-      <span class="pipe">|</span>
-      <a href="#" {{action (action this.attrs.logout)}}>
-        <span class="buttonContent row">
-          <span class="label">Logout</span>
-        </span>
+      <a href="#" {{action logout}}>
+        <span class="label">Logout</span>
       </a>
     </span>
-
   {{else}}
-    <a href="#" {{action (action this.attrs.login)}}>Login</a>
+    <a href="#" {{action login}}>Login</a>
   {{/if}}
-
 </div>

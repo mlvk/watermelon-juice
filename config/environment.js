@@ -5,6 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'watermelon-juice',
     environment: environment,
     locationType: 'auto',
+    rootURL: '/',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

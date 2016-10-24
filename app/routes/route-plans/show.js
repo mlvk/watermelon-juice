@@ -1,5 +1,6 @@
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Ember from 'ember';
+
 const INCLUDES = [
   'route-visits',
   'route-visits.route-plan',
@@ -28,7 +29,8 @@ const INCLUDES = [
   'route-visits.fulfillments.order.location.item-credit-rates.item',
   'route-visits.fulfillments.order.location.company',
   'route-visits.fulfillments.order.location.company.price-tier',
-  'route-visits.fulfillments.order.location.company.price-tier.item-prices'
+  'route-visits.fulfillments.order.location.company.price-tier.item-prices',
+  'route-visits.fulfillments.order.location.company.price-tier.item-prices.item'
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {

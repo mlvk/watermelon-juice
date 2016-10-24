@@ -7,8 +7,12 @@ import applicationPage from "watermelon-juice/tests/pages/application";
 import {
   make,
   makeList,
-  mockFind
+  mockFindRecord
 } from "ember-data-factory-guy";
+
+import {
+  buildRoutePlansWithSalesOrder
+} from "watermelon-juice/tests/factories/route-plan";
 
 moduleForAcceptance("Acceptance | fulfillments", {
   beforeEach() {
@@ -17,13 +21,13 @@ moduleForAcceptance("Acceptance | fulfillments", {
 });
 
 test("should navigate back to route visit list when parent route visit has single fulfillment", async function(assert) {
-  const routeVisit = make("route-visit", "withRoutePlan");
-  const routePlan = routeVisit.get("routePlan");
+  const routePlan = buildRoutePlansWithSalesOrder();
+  const routeVisit = routePlan.get("routeVisits.firstObject");
   const fulfillment = routeVisit.get("fulfillments.firstObject");
 
-  mockFind("route-plan").returns({model: routeVisit});
-  mockFind("route-visit").returns({model: routeVisit});
-  mockFind("fulfillment").returns({model: fulfillment});
+  mockFindRecord("route-plan").returns({model: routeVisit});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
 
   await showPage.visit({
     route_plan_id:routePlan.get("id"),
@@ -43,9 +47,9 @@ test("should navigate back to fulfillment list when parent route visit has multi
   const fulfillment = fulfillments[0];
   const routeVisit = make("route-visit", {routePlan, fulfillments});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
-  mockFind("fulfillment").returns({model: fulfillment});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
 
   await showPage.visit({
     route_plan_id:routePlan.get("id"),
@@ -65,9 +69,9 @@ test("displays track inventory button if fulfillment is a sales order", async fu
   const fulfillment = fulfillments[0];
   const routeVisit = make("route-visit", {routePlan, fulfillments});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
-  mockFind("fulfillment").returns({model: fulfillment});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
 
   await showPage.visit({
     route_plan_id:routePlan.get("id"),
@@ -84,9 +88,9 @@ test("hides track inventory button if fulfillment is a purchase order", async fu
   const fulfillment = fulfillments[0];
   const routeVisit = make("route-visit", {routePlan, fulfillments});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
-  mockFind("fulfillment").returns({model: fulfillment});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
 
   await showPage.visit({
     route_plan_id:routePlan.get("id"),

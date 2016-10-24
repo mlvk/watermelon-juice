@@ -11,19 +11,9 @@
   }
 }
 
-.buttonContent {
-  align-items: center;
-}
-
 .name {
   font-size: 0.8em;
-}
-
-.pipe {
-  margin: 0 1em;
-  font-size: 0.5em;
-}
-
-.label {
-  // font-size: 0.8em;
+  border-right: 1px solid white;
+  margin-right: 1em;
+  padding-right: 1em;
 }

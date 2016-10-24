@@ -6,23 +6,26 @@ import applicationPage from "watermelon-juice/tests/pages/application";
 import TrackingStates from "watermelon-juice/constants/tracking-states";
 
 import {
-  make,
-  mockFind
+  mockFindRecord
 } from "ember-data-factory-guy";
+
+import {
+  buildRoutePlansWithSalesOrder
+} from "watermelon-juice/tests/factories/route-plan";
 
 moduleForAcceptance("Acceptance | tracking inventory index", {
   async beforeEach() {
     authenticateSession(this.application);
 
-    this.routeVisit = make("route-visit", "withRoutePlan");
-    this.routePlan = this.routeVisit.get("routePlan");
+    this.routePlan = buildRoutePlansWithSalesOrder();
+    this.routeVisit = this.routePlan.get("routeVisits.firstObject");
     this.fulfillment = this.routeVisit.get("fulfillments.firstObject");
 
     this.fulfilmentUrl = `/route-plans/${this.routePlan.get("id")}/route-visits/${this.routeVisit.get("id")}/fulfillments/${this.fulfillment.id}`;
 
-    mockFind("route-plan").returns({model: this.routeVisit});
-    mockFind("route-visit").returns({model: this.routeVisit});
-    mockFind("fulfillment").returns({model: this.fulfillment});
+    mockFindRecord("route-plan").returns({model: this.routePlan});
+    mockFindRecord("route-visit").returns({model: this.routeVisit});
+    mockFindRecord("fulfillment").returns({model: this.fulfillment});
 
     await page.visit({
       route_plan_id:this.routePlan.get("id"),

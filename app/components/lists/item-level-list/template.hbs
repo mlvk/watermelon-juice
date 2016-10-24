@@ -1,6 +1,8 @@
 {{#each sortedStockLevels as |stockLevel index|}}
-  {{rows/item-level-list-row
-      model=stockLevel
+  {{rows/completeable-label-row
+      label=stockLevel.item.name
+      model=stockLevel.item
+      completed=stockLevel.tracked
       index=index
-      onClick=rowSelected}}
+      onClick=onClick}}
 {{/each}}

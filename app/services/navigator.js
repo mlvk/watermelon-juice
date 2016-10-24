@@ -5,58 +5,63 @@ const {
 } = Ember.computed;
 
 export default Ember.Service.extend({
-  //@TODO Just register the last route, no need for all this.
-  _routing: Ember.inject.service('-routing'),
-  // _routeHistory: [],
-  _scrollMap: {},
-  // _backRoute: new Immutable.OrderedSet(),
-
-  hasRoute: notEmpty('_backRoute'),
+  routing: Ember.inject.service('-routing'),
+  scrollQueue: [],
+  scrollYMap: {},
+  hasRoute: notEmpty('scrollQueue'),
 
   init() {
     this._super();
-    this._addListener();
+    this.addListener();
   },
 
   clearRoute() {
-    this.set('_backRoute', undefined);
+    this.set("scrollQueue", []);
   },
 
   requestReverse(route) {
-    // const newSet =
-    //   this.get('_routeStack').add(route)
-    //   .takeUntil(x => )
-
-    this.set('_backRoute', route);
-    // this.set('_routeHistory', newSet.toJS());
+    const queue = this.get("scrollQueue");
+    this.set("scrollQueue", queue.concat(route));
   },
 
-  // pop() {
-  //   const prev = this.get('_routeStack').last();
-  //   const newSet = this.get('_routeStack').butLast();
-  //   this.set('_routeStack', newSet);
-  //   this.set('_routeHistory', newSet.toJS());
-  //   return prev;
-  // },
+  hasStashedRoute(key) {
+    const queue = this.get("scrollQueue");
+    return queue.indexOf(key) > -1;
+  },
 
-  goBack() {
-    if(this.get('hasRoute')){
-      this.get('_routing').transitionTo(this.get('_backRoute'));
+  clearRight(key) {
+    const queue = this.get("scrollQueue");
+    const index = queue.indexOf(key);
+
+    if(index > -1) {
+      this.set("scrollQueue", queue.slice(index + 1));
     }
   },
 
-  _addListener() {
-    this.get('_routing.router').on('willTransition', ::this._handleWillTransition);
-    this.get('_routing.router').on('didTransition', ::this._handleDidTransition);
+  goBack() {
+    const last = this.get("scrollQueue.lastObject");
+    if(!Ember.isNone(last)){
+      this.get('routing').transitionTo(last);
+    }
   },
 
-  _handleWillTransition() {
-    this._scrollMap[this.get('_routing.currentRouteName')] = window.scrollY;
+  addListener() {
+    this.get('routing.router').on('willTransition', ::this.handleWillTransition);
+    this.get('routing.router').on('didTransition', ::this.handleDidTransition);
   },
 
-  _handleDidTransition() {
-    const scrollY = this._scrollMap[this.get('_routing.currentRouteName')];
-    Ember.run.later('afterRender', () => window.scrollTo(0, scrollY));
-    this._scrollMap[this.get('_routing.currentRouteName')] = 0;
+  handleWillTransition() {
+    const key = this.get('routing.currentRouteName');
+    this.scrollYMap[key] = window.scrollY;
+  },
+
+  handleDidTransition() {
+    const key = this.get('routing.currentRouteName');
+    const shouldScrollTo = this.hasStashedRoute(key);
+
+    if(shouldScrollTo){
+      Ember.run.later('afterRender', () => window.scrollTo(0, this.scrollYMap[key]));
+      this.clearRight(key);
+    }
   }
 });

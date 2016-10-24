@@ -8,9 +8,13 @@ import applicationPage from "watermelon-juice/tests/pages/application";
 import {
   make,
   makeList,
-  mockFind,
+  mockFindRecord,
   mockFindAll
 } from "ember-data-factory-guy";
+
+import {
+  buildRoutePlansWithSalesOrder
+} from "watermelon-juice/tests/factories/route-plan";
 
 moduleForAcceptance("Acceptance | route plans", {
   beforeEach() {
@@ -29,7 +33,7 @@ test("can view recent route plans", async function(assert) {
 test("can select a route plan", async function(assert) {
   const routePlan = make("route-plan");
 
-  mockFind("route-plan").returns({model: routePlan});
+  mockFindRecord("route-plan").returns({model: routePlan});
   mockFindAll("route-plan").returns({models: [routePlan]});
 
   await indexPage
@@ -41,13 +45,13 @@ test("can select a route plan", async function(assert) {
 });
 
 test("can view a route plans route visits", async function(assert) {
-  const routePlan = make("route-plan");
-  const routeVisits = makeList("route-visit", 3, {routePlan});
-  mockFind("route-plan").returns({model: routePlan});
+  const routePlan = buildRoutePlansWithSalesOrder({routeVisitCount:3});
+
+  mockFindRecord("route-plan").returns({model: routePlan});
 
   await showPage.visit({route_plan_id:routePlan.get("id")});
 
-  assert.equal(showPage.routeVisits().count, routeVisits.length);
+  assert.equal(showPage.routeVisits().count, 3);
 });
 
 test("when clicking a route visit with a single fulfillment, should navigate to route visit dashboard", async function(assert) {
@@ -55,9 +59,9 @@ test("when clicking a route visit with a single fulfillment, should navigate to 
   const fulfillment = make("fulfillment", "withOrder");
   const routeVisit = make("route-visit", {routePlan, fulfillments: [fulfillment]});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
-  mockFind("fulfillment").returns({model: routeVisit});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: routeVisit});
 
   await showPage.visit({route_plan_id:routePlan.get("id")})
 
@@ -72,8 +76,8 @@ test("when clicking a route visit with a multiple fulfillments, should navigate 
   const fulfillments = makeList("fulfillment", 3);
   const routeVisit = make("route-visit", {routePlan, fulfillments});
 
-  mockFind("route-plan").returns({model: routePlan});
-  mockFind("route-visit").returns({model: routeVisit});
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
 
   await showPage.visit({route_plan_id:routePlan.get("id")});
 
@@ -85,7 +89,7 @@ test("when clicking a route visit with a multiple fulfillments, should navigate 
 
 test("can navigate back to route plan list", async function(assert) {
   mockFindAll("route-plan");
-  mockFind("route-plan")
+  mockFindRecord("route-plan")
 
   await showPage.visit({route_plan_id:1});
 

@@ -2,14 +2,9 @@
   {{headers/location-tracking-info model=model.order.location}}
 {{/ember-wormhole}}
 
-{{#each model.stock.stockLevels as |stockLevel i|}}
-  {{rows/completeable-label-row
-    label=stockLevel.item.name
-    model=stockLevel.item
-    completed=stockLevel.tracked
-    index=i
+{{lists/item-level-list
+    model=model.stock.stockLevels
     onClick=(route-action "trackItem")}}
-{{/each}}
 
 <div class="row center">
   <div class="card-1">

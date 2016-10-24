@@ -35,7 +35,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       if(model.get("routeVisit.hasMultipleFulfillments")) {
         this.navigator.requestReverse("route-plans.show.route-visits.show");
       } else {
-        this.navigator.requestReverse("route-plans.show");
+        this.navigator.requestReverse("route-plans.show.index");
       }
 
       // Prepare stock

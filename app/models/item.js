@@ -9,6 +9,7 @@ export default Model.extend({
 
   itemDesires:      hasMany('item-desire'),
   itemPrices:       hasMany('item-price'),
+  itemCreditRates:  hasMany('item-credit-rate'),
   orderItems:       hasMany('order-item'),
   stockLevels:      hasMany('stock-level'),
   creditNoteItems:  hasMany('credit-note-item')
