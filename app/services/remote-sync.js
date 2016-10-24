@@ -6,6 +6,7 @@ const dirtyRecordPredicate = x => x.get("hasDirtyAttributes") && !x.get("isSavin
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
+  allSynced: true,
 
   start() {
     setInterval(::this.processQueue, 5000);
@@ -33,10 +34,12 @@ export default Ember.Service.extend({
   },
 
   async processQueue() {
-    if(!this.processing) {
-      this.processing = true;
+    if(!this.get("processing")) {
+      this.set("allSynced", false);
+      this.set("processing", true);
 
       const store = this.get("store");
+      let hadError = false;
 
       await Promise.all([
         this.saveAllOfType("pod"),
@@ -44,21 +47,28 @@ export default Ember.Service.extend({
         this.saveFulfillmentRecordsOfType("order", "orderItems"),
         this.saveFulfillmentRecordsOfType("credit-note", "creditNoteItems")
       ])
-      .catch(() => {});
+      .catch(() => {
+        hadError = true;
+      });
 
       await Promise.all(store.peekAll("fulfillment")
         .filter(fulfilledPredicate)
         .filter(dirtyRecordPredicate)
         .map(r => r.save()))
-        .catch(() => {});
+        .catch(() => {
+          hadError = true;
+        });
 
       await Promise.all(store.peekAll("route-visit")
         .filter(fulfilledPredicate)
         .filter(dirtyRecordPredicate)
         .map(r => r.save()))
-        .catch(() => {});
+        .catch(() => {
+          hadError = true;
+        });
 
-      this.processing = false;
+      this.set("allSynced", !hadError);
+      this.set("processing", false);
     }
   }
 });

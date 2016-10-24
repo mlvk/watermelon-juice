@@ -1,6 +1,12 @@
-<span class="quote">
-  Never do tomorrow what can be done today
-</span>
+<div class="syncInfo row center">
+  {{#if allSyncing}}
+    <i class="material-icons icon">check</i>
+    <span>Synced</span>
+  {{else}}
+    <i class="material-icons icon spinLeft">loop</i>
+    <span>Syncing data...</span>
+  {{/if}}
+</div>
 
 <span class="versionInfo">
   {{gitVersion}}

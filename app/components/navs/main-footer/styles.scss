@@ -3,13 +3,25 @@
   padding: 0.5em;
   color: $off-white;
   justify-content: space-between;
+  transition: background-color 0.25s ease;
 }
 
-.quote {
-  font-size: 0.5em;
+.syncInfo {
+  font-size: 0.6em;
+  font-weight: 600;
 }
 
 .versionInfo {
   text-align: right;
-  font-size: 0.5em;
+  font-size: 0.6em;
+}
+
+&.syncing {
+  background-color: $hot-pink;
+  color: $slate;
+}
+
+.icon {
+  margin-right: 0.5em;
+  font-size: 1.1em;
 }
