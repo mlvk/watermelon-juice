@@ -16,12 +16,19 @@
     {{#if model.fulfilled}}
       <i class="material-icons">done</i>
     {{/if}}
+
+    {{#if model.hasPickups}}
+      <i class="material-icons">local_shipping</i>
+    {{/if}}
+
     <i class="material-icons">keyboard_arrow_right</i>
   </span>
 </div>
 
-<div class="arrivalContainer">
+{{log model}}
+
+<!-- <div class="arrivalContainer">
   {{passive/label-icon
     icon="flight_land"
     label=(minutes-to-time model.arriveAt)}}
-</div>
+</div> -->

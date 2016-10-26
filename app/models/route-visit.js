@@ -4,7 +4,12 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { alias, gt, equal, not } = Ember.computed;
+const {
+  alias,
+  gt,
+  equal,
+  not
+} = Ember.computed;
 
 export default Model.extend({
   position:         attr('number'),
@@ -27,6 +32,11 @@ export default Model.extend({
   hasMultipleFulfillments: gt('fulfillments.length', 1),
 
   defaultFulfillment: alias('fulfillments.firstObject'),
+
+  @computed('fulfillments.@each.{belongsToPurchaseOrder}')
+  hasPickups(fulfillments) {
+    return fulfillments.any(f => f.get("belongsToPurchaseOrder"));
+  },
 
   @computed('position')
   positionFormatted(position) {

@@ -19,12 +19,12 @@
 
   {{passive/label-icon
     icon="store"
-    label=(concat model.dropOffCount " Deliveries")}}
+    label=(pluralize model.dropOffCount "Delivery")}}
 
-  {{#if (gt 0 model.pickUpCount)}}
+  {{#if model.hasPickups}}
     {{passive/label-icon
       icon="swap_vertical_circle"
-      label=(concat model.pickUpCount " Pickups")}}
+      label=(pluralize model.pickUpCount "Pickup")}}
   {{/if}}
 
 </div>
