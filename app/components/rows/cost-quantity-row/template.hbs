@@ -5,14 +5,16 @@
       <div class="row baseline editUnitPriceContainer">
         $
         {{one-way-input unitPrice
-          update=(action (mut unitPrice))}}
+          update=(action (mut unitPrice))
+          onblur=(action "cleanNumericField" "unitPrice")}}
       </div>
       <div class="row baseline editQuantityContainer">
         <div class="x">x</div>
         {{one-way-input quantity
           pattern="[0-9]*"
           inputmode="numeric"
-          update=(action (mut quantity))}}
+          update=(action (mut quantity))
+          onblur=(action "cleanNumericField" "quantity")}}
       </div>
     </div>
   </div>
