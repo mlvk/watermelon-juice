@@ -1,29 +1,58 @@
-<div class="header">
-  <span class="title row stretch">{{title}}</span>
-  <div class="col info">
-    <div class="col">
-      <span class="row stretch infoRow">
-        <span class="content orderNumber">{{model.orderNumber}}</span>
-      </span>
-      <span class="row stretch infoRow">
-        <span class="content">{{date}}</span>
-      </span>
-      <span class="row stretch infoRow">
-        <span class="content">{{model.location.company.name}}</span>
-      </span>
-    </div>
+<div class="header row space-between">
+  <div class="col infoContainer">
+    <span class="row baseline">
+      <span class="title">{{title}}:</span>
+      <span class="number">{{model.orderNumber}}</span>
+    </span>
+
+    <span class="date">{{date}}</span>
+    <span class="col">
+      <span class="company">{{model.location.company.name}}</span>
+      <span class="location">{{model.location.code}} - {{model.location.name}}</span>
+    </span>
+  </div>
+  <div>
+    {{ui/icon-button
+      class="edit"
+      icon="edit"
+      size="1.5"
+      color=white
+      flat=true
+      backgroundColor=colors.HOT_PINK
+      disabled=isEditing
+      onClick=(toggle "isEditing" this)}}
   </div>
 </div>
 
 <div class="rowContainer">
   {{#each validOrderitems as |orderItem|}}
     {{rows/cost-quantity-row
+        isEditing=isEditing
         name=orderItem.item.name
         unitPrice=orderItem.unitPrice
         quantity=orderItem.quantity}}
   {{/each}}
 
-  {{rows/total-row
-      name="Total"
-      total=total}}
+  {{#if hasShipping}}
+    {{rows/cost-quantity-row
+        name="Freight"
+        unitPrice=model.shipping
+        quantity=1}}
+  {{/if}}
 </div>
+
+{{rows/total-row
+    name="Total"
+    total=total}}
+
+{{#if isEditing}}
+  {{ui/icon-button
+    class="check"
+    icon="check"
+    label="Save Changes"
+    size="1.5"
+    color=white
+    flat=true
+    backgroundColor=colors.SKY_BLUE
+    onClick=(toggle "isEditing" this)}}
+{{/if}}

@@ -1,13 +1,30 @@
 <div class="col-4 name">{{name}}</div>
-
-<div class="col-2">
-  <div class="row">
-    <div class="unitPrice currency">{{currency unitPrice}}</div>
-    <div class="row quantityContainer center">
-      <div class="x">x</div>
-      <div class="quantity">{{quantity}}</div>
+{{#if isEditing}}
+  <div class="col-2">
+    <div class="row">
+      <div class="row baseline editUnitPriceContainer">
+        $
+        {{one-way-input unitPrice
+          update=(action (mut unitPrice))}}
+      </div>
+      <div class="row baseline editQuantityContainer">
+        <div class="x">x</div>
+        {{one-way-input quantity
+          pattern="[0-9]*"
+          inputmode="numeric"
+          update=(action (mut quantity))}}
+      </div>
     </div>
   </div>
-</div>
-
+{{else}}
+  <div class="col-2">
+    <div class="row baseline">
+      <div class="unitPriceContainer currency">{{currency unitPrice}}</div>
+      <div class="row quantityContainer center baseline">
+        <div class="x">x</div>
+        <div class="quantity">{{quantity}}</div>
+      </div>
+    </div>
+  </div>
+{{/if}}
 <div class="total col-2 right currency">{{currency total}}</div>

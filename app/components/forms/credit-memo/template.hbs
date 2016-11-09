@@ -1,17 +1,15 @@
-<div class="header">
-  <span class="title row stretch">Credit Note</span>
-  <div class="col info">
-    <div class="col">
-      <span class="row stretch infoRow">
-        <span class="content noteNumber">{{model.creditNoteNumber}}</span>
-      </span>
-      <span class="row stretch infoRow">
-        <span class="content">{{date}}</span>
-      </span>
-      <span class="row stretch infoRow">
-        <span class="content">{{model.location.company.name}}</span>
-      </span>
-    </div>
+<div class="header row">
+  <div class="col infoContainer">
+    <span class="row baseline">
+      <span class="title">Credit Note:</span>
+      <span class="number">{{model.creditNoteNumber}}</span>
+    </span>
+
+    <span class="date">{{date}}</span>
+    <span class="col">
+      <span class="company">{{model.location.company.name}}</span>
+      <span class="location">{{model.location.code}} - {{model.location.name}}</span>
+    </span>
   </div>
 </div>
 
@@ -22,8 +20,8 @@
         unitPrice=cni.unitPrice
         quantity=cni.quantity}}
   {{/each}}
-
-  {{rows/total-row
-      name="Total"
-      total=total}}
 </div>
+
+{{rows/total-row
+    name="Total"
+    total=total}}

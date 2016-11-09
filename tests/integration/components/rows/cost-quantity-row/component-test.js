@@ -22,7 +22,7 @@ test("it shows information when present", function(assert) {
                     unitPrice=unitPrice}}`);
 
   assert.equal($(".name").text(), name);
-  assert.equal($(".unitPrice").text(), currency([unitPrice]));
+  assert.equal($(".unitPriceContainer").text(), currency([unitPrice]));
   assert.equal($(".quantity").text(), quantity);
   assert.equal($(".total").text(), currency([total]));
 });

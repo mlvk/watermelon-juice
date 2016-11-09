@@ -16,6 +16,7 @@ export default Model.extend({
 
   // TODO: Should this be type date?
   deliveryDate:       attr('string'),
+  shipping:           attr('number'),
 
   location:           belongsTo('location'),
   orderItems:         hasMany('order-item'),

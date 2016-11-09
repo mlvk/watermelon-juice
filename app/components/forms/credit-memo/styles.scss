@@ -1,38 +1,41 @@
 & {
   margin: 0.5em;
+  padding-bottom: 0.5em;
   background-color: $light-blue;
 }
 
-&.hidden {
-  display: none;
-}
-
 .header {
-  padding: 0.25em 0.5em 1em 0.5em;
   background-color: #FAFCFC;
   color: $dark-grey;
+  padding-bottom: 1em;
+  padding-left: 0.5em;
 
-  .infoRow {
-    align-items: baseline;
-    justify-content: space-between;
+  .title {
+    font-weight: bold;
+    justify-content: center;
+    font-size: 1.4em;
+    margin-right: 0.25em;
   }
 
-  .content {
-    font-weight: 600;
+  .number {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.0em;
+  }
 
-    &.noteNumber{
-      text-transform: uppercase;
-    }
+  .date {
+    font-style: italic;
+  }
+
+  .location {
+    font-size: 1em;
   }
 }
 
-.title {
-  font-weight: 600;
-  justify-content: center;
-  font-size: 1.4em;
-  margin: 1em 0;
+.infoContainer {
+  margin-top: 0.5em;
 }
 
-.info {
-  font-size: 1.3em;
+.rowContainer {
+  padding-bottom: 0.5em;
 }
