@@ -32,6 +32,7 @@ module.exports = function(defaults) {
   app.import('bower_components/immutable/dist/immutable.min.js');
   app.import('bower_components/lodash/dist/lodash.min.js');
   app.import('bower_components/ramda/dist/ramda.min.js');
+  app.import('bower_components/localforage/dist/localforage.min.js');
 
   return app.toTree();
 };

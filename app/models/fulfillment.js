@@ -11,7 +11,6 @@ const {
 
 export default Model.extend({
   deliveryState:          attr("string"),
-  notificationState:      attr("string"),
   submittedAt:            attr("date"),
 
   routeVisit:             belongsTo("route-visit"),
@@ -25,6 +24,8 @@ export default Model.extend({
 
   belongsToSalesOrder:    alias("order.isSalesOrder"),
   belongsToPurchaseOrder: not("belongsToSalesOrder"),
+
+  hasSignature:           alias("pod.isValid"),
 
   prepareStock() {
     const location = this.get("order.location");

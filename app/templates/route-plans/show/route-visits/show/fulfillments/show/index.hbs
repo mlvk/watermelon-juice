@@ -17,16 +17,3 @@
   label="Review & Sign"
   indicateCompleted=signed
   onClick=(route-action "review")}}
-
-<div class="row center toolbarContainer">
-  <div class="card-1">
-    {{ui/icon-button
-      icon="check"
-      label="Submit"
-      size="2"
-      color=white
-      backgroundColor=colors.SKY_BLUE
-      onClick=(route-action "submitFulfillment")
-      disabled=(not model.pod.isValid)}}
-  </div>
-</div>

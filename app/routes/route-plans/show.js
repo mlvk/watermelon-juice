@@ -34,8 +34,13 @@ const INCLUDES = [
 ];
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  remoteSync: Ember.inject.service(),
   model(params) {
     return this.store.findRecord('route-plan', params.route_plan_id, {include:INCLUDES.join(','), reload: true});
+  },
+
+  afterModel() {
+    this.get("remoteSync").loadFromLS();
   },
 
   actions: {

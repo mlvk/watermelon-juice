@@ -2,6 +2,8 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import Ember from 'ember';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  remoteSync: Ember.inject.service(),
+
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
 
@@ -65,17 +67,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       fulfillment.set('routeVisit.routeVisitState', 'pending');
     },
 
-    submit() {
-      const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
+    submit(fulfillment) {
+      const routeVisit = fulfillment.get("routeVisit");
 
-      if(fulfillment.belongsTo('creditNote').value()){
-        fulfillment.set('creditNote.date', moment().toDate());
+      fulfillment.set("deliveryState", "fulfilled");
+
+      if(routeVisit.get("hasMultipleFulfillments")) {
+        this.transitionTo("route-plans.show.route-visits.show");
+      } else {
+        routeVisit.set("routeVisitState", "fulfilled");
+        routeVisit.set("completedAt", moment().toDate());
+
+        this.get("remoteSync").enqueue(routeVisit);
+        this.transitionTo("route-plans.show");
       }
-
-      fulfillment.set('deliveryState', 'pending');
-      fulfillment.set('routeVisit.routeVisitState', 'pending');
-
-      this.transitionTo('route-plans.show.route-visits.show.fulfillments.show');
     },
 
     didTransition() {

@@ -9,7 +9,6 @@ export default Model.extend({
   date:                 attr('date', {defaultValue: moment().format('MM-DD-YYYY')}),
   submittedAt:          attr('date'),
   creditNoteNumber:     attr('string'),
-  xeroState:            attr('string'),
 
   location:             belongsTo('location'),
   fulfillment:          belongsTo('fulfillment'),

@@ -41,6 +41,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-uuid": "0.4.1",
     "ember-component-css": "ebryn/ember-component-css",
     "ember-composable-helpers": "0.21.1",
     "ember-computed-decorators": "0.2.2",

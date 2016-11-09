@@ -1,23 +1,16 @@
 {{lists/fulfillment-list
   model=model.fulfillments
-  rowSelected=(route-action 'showFulfillment')
-}}
-
-{{ui/signature-capture
-    name=tempReceiverName
-    signature=tempSignature
-    signedAt=tempSignedAt
-    onSignature=(action 'onSignature')}}
+  rowSelected=(route-action 'showFulfillment')}}
 
 <div class="row center toolbarContainer">
   <div class="card-1">
     {{ui/icon-button
       icon='check'
-      label='Submit'
+      label=(if model.fulfilled "Resubmit Visit" "Complete Visit")
       size='2'
       color=white
       backgroundColor=colors.SKY_BLUE
       disabled=(not canSubmit)
-      onClick=(route-action 'submitRouteVisit')}}
+      onClick=(route-action 'submitRouteVisit' model)}}
   </div>
 </div>

@@ -11,7 +11,6 @@ const PURCHASE_ORDER = 'purchase-order';
 
 export default Model.extend({
   orderNumber:        attr('string'),
-  xeroState:          attr('string'),
   submittedAt:        attr('date'),
   orderType:          attr('string'),
 
