@@ -16,5 +16,8 @@ export default Model.extend({
     return records.every(r => r.get('tracked'));
   },
 
-  valid: true
+  @computed("stockLevels.@each.{itemPosition}")
+  sortedStockLevels(stockLevels) {
+    return stockLevels.sortBy("itemPosition");
+  }
 });

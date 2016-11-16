@@ -13,7 +13,19 @@
 
 {{ui/drilldown-button
   icon="touch_app"
-  disabled=(not trackingCompleted)
   label="Review & Sign"
-  indicateCompleted=signed
+  completed=model.pod.isValid
   onClick=(route-action "review")}}
+
+<div class="row center">
+  <div class="card-1">
+    {{ui/icon-button
+      icon="done"
+      label=(if model.routeVisit.hasMultipleFulfillments "Submit Order" "Complete Visit")
+      size="2"
+      color=white
+      backgroundColor=colors.DARK_GREY
+      disabled=(or (not model.stock.tracked) (not model.pod.isValid))
+      onClick=(route-action 'submit' model)}}
+  </div>
+</div>

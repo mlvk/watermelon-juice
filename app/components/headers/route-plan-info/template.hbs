@@ -1,6 +1,9 @@
-<span class="date">
-  {{moment-format model.date "ddd - MM-DD-YY"}}
-</span>
-<span class="routeVisitCount">
-  Total stops: {{model.routeVisits.length}}
-</span>
+<div class="col">
+  <span class="date">
+    {{moment-format model.date "ddd - MM-DD-YY"}}
+  </span>
+  <span class="col routeVisitCount">
+    <span>Total stops: {{model.routeVisits.length}}</span>
+    <span>Pending stops: {{model.pendingRouteVisits.length}}</span>
+  </span>
+</div>

@@ -5,6 +5,7 @@ import { hasMany } from "ember-data/relationships";
 import computed from "ember-computed-decorators";
 
 const {
+  lt,
   gt
 } = Ember.computed;
 
@@ -20,6 +21,7 @@ export default Model.extend({
 
   hasPickups:         gt("pickUpCount", 0),
   hasDeliveries:      gt("dropOffCount", 0),
+  isComplete:         lt("pendingRouteVisits.length", 1),
 
   @computed("date")
   formattedDate(date) {
@@ -29,5 +31,10 @@ export default Model.extend({
   @computed("routeVisits.@each.{position}")
   sortedRouteVisits(routeVisits) {
     return routeVisits.sortBy("position");
+  },
+
+  @computed("routeVisits.@each.{fulfilled}")
+  pendingRouteVisits(routeVisits) {
+    return routeVisits.filter(rv => rv.get("pending"));
   }
 });

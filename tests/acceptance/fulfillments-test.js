@@ -11,7 +11,7 @@ import {
 } from "ember-data-factory-guy";
 
 import {
-  buildRoutePlansWithSalesOrder
+  buildRoutePlanWithSalesOrder
 } from "watermelon-juice/tests/factories/route-plan";
 
 moduleForAcceptance("Acceptance | fulfillments", {
@@ -21,7 +21,7 @@ moduleForAcceptance("Acceptance | fulfillments", {
 });
 
 test("should navigate back to route visit list when parent route visit has single fulfillment", async function(assert) {
-  const routePlan = buildRoutePlansWithSalesOrder();
+  const routePlan = buildRoutePlanWithSalesOrder();
   const routeVisit = routePlan.get("routeVisits.firstObject");
   const fulfillment = routeVisit.get("fulfillments.firstObject");
 

@@ -15,9 +15,7 @@ Router.map(function() {
           this.route('fulfillments', function() {
             this.route('show', {path:':fulfillment_id'}, function() {
               this.route('review');
-              this.route('tracking', function() {
-                this.route('item', {path:':item_id'});
-              });
+              this.route('tracking');
             });
           });
         });

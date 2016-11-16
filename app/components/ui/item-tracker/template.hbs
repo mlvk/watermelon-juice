@@ -1,13 +1,20 @@
-<div class="col itemTrackerContainer stretch">
-  {{ui/item-counter
-    label="Total Starting"
-    value=starting
-    class="starting"
-    valueChanged=startingChanged}}
+<div class="row baseline">
+  <span class="index">{{index}}.</span>
+  <span class="itemCode">{{stockLevel.item.code}}</span>
+  <span class="itemName">{{stockLevel.item.name}}</span>
+</div>
+<div class="row fields">
+  {{one-way-input stockLevel.starting
+    class="startingInput"
+    pattern="[0-9]*"
+    inputmode="numeric"
+    update=(action (mut stockLevel.starting))
+    onblur=(action "cleanNumericField" "stockLevel.starting")}}
 
-  {{ui/item-counter
-    label="Returns"
-    value=returns
-    class="returns"
-    valueChanged=returnsChanged}}
+  {{one-way-input stockLevel.returns
+    class="returnsInput"
+    pattern="[0-9]*"
+    inputmode="numeric"
+    update=(action (mut stockLevel.returns))
+    onblur=(action "cleanNumericField" "stockLevel.returns")}}
 </div>

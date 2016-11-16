@@ -1,6 +1,6 @@
 & {
   cursor: pointer;
-  margin: 1em;
+  margin: 0.5em 1em;
   background-color: $light-blue;
   position: relative;
   color: $dark-grey;
@@ -14,7 +14,12 @@
 }
 
 &.completed {
-  opacity: 0.5;
+  background-color: $light-green;
+
+  .index {
+    background-color: $dark-green;
+    color: $off-white;
+  }
 }
 
 .outerContainer {

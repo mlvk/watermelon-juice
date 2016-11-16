@@ -1,0 +1,16 @@
+<header class="row space-between">
+  <span class="titleLabel">
+    Item Name
+  </span>
+  <div>
+    <span class="startingLabel">
+      Starting
+    </span>
+    <span class="returnsLabel">
+      Returns
+    </span>
+  </div>
+</header>
+{{#each model as |stockLevel index|}}
+  {{ui/item-tracker stockLevel index=(inc index)}}
+{{/each}}

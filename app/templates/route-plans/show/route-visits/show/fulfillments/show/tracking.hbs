@@ -1,10 +1,8 @@
 {{#ember-wormhole to="navHeaderContainer"}}
-  {{headers/location-tracking-info model=model.order.location}}
+  {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
 
-{{lists/item-level-list
-    model=model.stock.stockLevels
-    onClick=(route-action "trackItem")}}
+{{lists/stock-levels model.stock.sortedStockLevels}}
 
 <div class="row center">
   <div class="card-1">
@@ -15,7 +13,6 @@
       size="2"
       color=white
       backgroundColor=colors.DARK_GREY
-      onClick=(route-action "markAllCompleted")
-    }}
+      onClick=(route-action "markAllCompleted")}}
   </div>
 </div>

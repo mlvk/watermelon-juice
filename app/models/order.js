@@ -28,7 +28,5 @@ export default Model.extend({
   @computed('orderItems.@each.{quantity}')
   empty(orderItems) {
     return orderItems.every(so => so.get('empty'));
-  },
-
-  valid: true
+  }
 });

@@ -1,3 +1,7 @@
+{{#ember-wormhole to="navHeaderContainer"}}
+  {{headers/route-plan-info model=model}}
+{{/ember-wormhole}}
+
 {{lists/fulfillment-list
   model=model.fulfillments
   rowSelected=(route-action 'showFulfillment')}}

@@ -1,6 +1,9 @@
+<span class="alert">
+  This visit has multiple orders. Please track and sign each then submit.
+</span>
 {{#each model as |fulfillment index|}}
   {{rows/fulfillment-list-row
     model=fulfillment
     onClick=rowSelected
-    index=index}}
+    index=(inc index)}}
 {{/each}}

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['row']
+  classNameBindings:  ["remoteSync.allSynced::syncing"],
+  remoteSync: Ember.inject.service()
 });

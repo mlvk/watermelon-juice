@@ -1,8 +1,20 @@
 {{#ember-wormhole to="navHeaderContainer"}}
-  {{headers/fulfillment-review-info model=model}}
+  {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
 
 {{forms/route-visit-review
     model=model
-    onSignature=(route-action 'onSignature')
-    submit=(route-action 'submit' model)}}
+    onSignature=(route-action 'onSignature')}}
+
+<div class="row center uiContainer">
+  <div class="card-1">
+    {{ui/icon-button
+      icon="done"
+      label="Complete review"
+      size="2"
+      color=white
+      backgroundColor=colors.DARK_GREY
+      disabled=(not model.pod.isValid)
+      onClick=(route-action 'goBack')}}
+  </div>
+</div>

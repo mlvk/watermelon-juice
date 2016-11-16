@@ -2,8 +2,6 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import Ember from 'ember';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  remoteSync: Ember.inject.service(),
-
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
 
@@ -36,22 +34,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       const match = creditNoteItems.find(cni => sl.get("item.id") === cni.get("item.id"));
 
       if(match) {
-        const currentQuantity = sl.get("quantity"),
-              stockLevelQuantity = sl.get("returns");
-
-        if(currentQuantity !== stockLevelQuantity) {
-          match.set("quantity", sl.get("returns"));
-        }
+        match.set("quantity", sl.get("returns"));
       } else {
-        const item = sl.get("item"),
-              rate = await location.creditRateForItem(item),
+        const item = await sl.get("item"),
+              creditRate = await location.creditRateForItem(item),
               quantity = sl.get("returns");
 
         await Ember.run(async () => {
           await this.store.createRecord('credit-note-item', {
             creditNote,
             item,
-            unitPrice:rate,
+            unitPrice: creditRate,
             quantity
           });
         });
@@ -67,20 +60,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       fulfillment.set('routeVisit.routeVisitState', 'pending');
     },
 
-    submit(fulfillment) {
-      const routeVisit = fulfillment.get("routeVisit");
-
-      fulfillment.set("deliveryState", "fulfilled");
-
-      if(routeVisit.get("hasMultipleFulfillments")) {
-        this.transitionTo("route-plans.show.route-visits.show");
-      } else {
-        routeVisit.set("routeVisitState", "fulfilled");
-        routeVisit.set("completedAt", moment().toDate());
-
-        this.get("remoteSync").enqueue(routeVisit);
-        this.transitionTo("route-plans.show");
-      }
+    goBack() {
+      this.transitionTo('route-plans.show.route-visits.show.fulfillments.show');
     },
 
     didTransition() {

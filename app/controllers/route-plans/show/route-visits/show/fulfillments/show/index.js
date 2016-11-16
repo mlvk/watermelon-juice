@@ -1,7 +1,9 @@
-import Ember from 'ember';
-
-const { and } = Ember.computed;
+import Ember from "ember";
+import computed from "ember-computed-decorators";
 
 export default Ember.Controller.extend({
-  trackingCompleted: and('model.stock.tracked')
+  @computed("model.stock.stockLevels.@each.{tracked}")
+  trackingCompleted(stockLevels) {
+    return stockLevels.every(sl => sl.get("tracked"));
+  }
 });

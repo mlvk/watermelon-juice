@@ -1,6 +1,13 @@
-{{#each model as |routeVisit index|}}
+{{#if model.isComplete}}
+  <span class="row center alert">
+    <span class="completeMessage">This route has been completed.</span>
+    <i class="material-icons">done_all</i>
+  </span>
+{{/if}}
+
+{{#each model.sortedRouteVisits as |routeVisit index|}}
   {{rows/route-visit-list-row
     model=routeVisit
     onClick=rowSelected
-    index=index}}
+    index=(inc index)}}
 {{/each}}

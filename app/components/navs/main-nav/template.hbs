@@ -1,8 +1,20 @@
-<div class="row">
-  {{link-to 'RS' 'route-plans'}}
-</div>
+<div class="row space-between">
+  <div class="row baseline stretch">
+    <div class="home">
+      {{link-to 'RS' 'route-plans'}}
+    </div>
 
-<div class="row">
+    <div class="syncInfo row center">
+      {{#if remoteSync.allSynced}}
+        <span>Synced</span>
+        <i class="material-icons icon syncIcon">check</i>
+      {{else}}
+        <span>Syncing data...</span>
+        <i class="material-icons icon syncIcon spinLeft">loop</i>
+      {{/if}}
+    </div>
+  </div>
+
   {{#if authenticated}}
     <span class="row vcenter">
       <span class="name">{{name}}</span>

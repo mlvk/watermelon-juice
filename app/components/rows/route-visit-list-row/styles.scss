@@ -1,6 +1,6 @@
 & {
   cursor: pointer;
-  margin: 1em;
+  margin: 0em 1em 1em 1em;
   background-color: $light-blue;
   position: relative;
   color: $dark-grey;
@@ -14,7 +14,12 @@
 }
 
 &.completed {
-  opacity: 0.5;
+  background-color: $light-green;
+
+  .index {
+    background-color: $dark-green;
+    color: $off-white;
+  }
 }
 
 .outerContainer {
@@ -22,6 +27,7 @@
   align-items: center;
   padding: 1em;
 }
+
 
 .index {
   font-size: 2em;

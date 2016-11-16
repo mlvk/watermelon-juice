@@ -19,7 +19,7 @@ FactoryGuy.define("route-plan", {
   }
 });
 
-const buildRoutePlansWithSalesOrder = ({ routeVisitCount = 1 } = {}) => {
+const buildRoutePlanWithSalesOrder = ({ routeVisitCount = 1 } = {}) => {
   const items = makeList("item", 10),
         priceTier = buildPriceTier(items, {price:10}),
         company = make("company", {priceTier}),
@@ -29,11 +29,12 @@ const buildRoutePlansWithSalesOrder = ({ routeVisitCount = 1 } = {}) => {
         routeVisits = makeList("route-visit", routeVisitCount, {routePlan}),
         order = buildOrderFromPriceTier(location);
 
+  items.forEach(item => make("item-desire", {item, location, enabled:true}));
   routeVisits.forEach(routeVisit => make("fulfillment", {order, routeVisit}));
 
   return routePlan;
 }
 
 export {
-  buildRoutePlansWithSalesOrder
+  buildRoutePlanWithSalesOrder
 }

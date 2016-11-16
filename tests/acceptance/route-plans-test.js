@@ -13,7 +13,7 @@ import {
 } from "ember-data-factory-guy";
 
 import {
-  buildRoutePlansWithSalesOrder
+  buildRoutePlanWithSalesOrder
 } from "watermelon-juice/tests/factories/route-plan";
 
 moduleForAcceptance("Acceptance | route plans", {
@@ -45,7 +45,7 @@ test("can select a route plan", async function(assert) {
 });
 
 test("can view a route plans route visits", async function(assert) {
-  const routePlan = buildRoutePlansWithSalesOrder({routeVisitCount:3});
+  const routePlan = buildRoutePlanWithSalesOrder({routeVisitCount:3});
 
   mockFindRecord("route-plan").returns({model: routePlan});
 

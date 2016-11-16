@@ -6,16 +6,3 @@
     name=model.pod.name
     signedAt=model.pod.signedAt
     onSignature=onSignature}}
-
-<div class="row center uiContainer">
-  <div class="card-1">
-    {{ui/icon-button
-      icon="done"
-      label="Submit"
-      size="2"
-      color=white
-      backgroundColor=colors.DARK_GREY
-      disabled=(not model.pod.isValid)
-      onClick=submit}}
-  </div>
-</div>

@@ -1,5 +1,5 @@
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import Ember from 'ember';
+import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
+import Ember from "ember";
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model() {
@@ -10,10 +10,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
-    trackItem(item) {
-      this.transitionTo('route-plans.show.route-visits.show.fulfillments.show.tracking.item', item.get('id'));
-    },
-
     markAllCompleted() {
       const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
       fulfillment.get('stock.stockLevels')

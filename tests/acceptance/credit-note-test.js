@@ -1,17 +1,16 @@
 import { test } from "qunit";
 import moduleForAcceptance from "watermelon-juice/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "watermelon-juice/tests/helpers/ember-simple-auth";
-import trackingPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/tracking/item";
+import trackingPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/tracking";
 import reviewPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/review";
 
 import {
   make,
-  mockFindRecord,
-  mockCreate
+  mockFindRecord
 } from "ember-data-factory-guy";
 
 import {
-  buildRoutePlansWithSalesOrder
+  buildRoutePlanWithSalesOrder
 } from "watermelon-juice/tests/factories/route-plan";
 
 moduleForAcceptance("Acceptance | credit-note", {
@@ -21,7 +20,7 @@ moduleForAcceptance("Acceptance | credit-note", {
 });
 
 test('credits credit note when there are returns and credit rate is greater than 0', async function(assert) {
-  const routePlan = buildRoutePlansWithSalesOrder();
+  const routePlan = buildRoutePlanWithSalesOrder();
   const routeVisit = await routePlan.get("routeVisits.firstObject");
   const fulfillment = await routeVisit.get("fulfillments.firstObject");
   const order = await fulfillment.get("order");
@@ -32,16 +31,16 @@ test('credits credit note when there are returns and credit rate is greater than
   items.forEach(item => make("item-credit-rate", {location, item, rate:0.5}));
 
   mockFindRecord("route-plan").returns({model: routePlan});
-  mockCreate("stock-level");
 
   await trackingPage
     .visit({
       route_plan_id:routePlan.get("id"),
       route_visit_id:routeVisit.get("id"),
-      fulfillment_id:fulfillment.get("id"),
-      item_id: order.get("orderItems.firstObject.item.id")
+      fulfillment_id:fulfillment.get("id")
     })
-    .incrementReturns();
+    .stockLevels(0)
+    .setStarting(1)
+    .setReturns(1);
 
   await reviewPage
     .visit({
