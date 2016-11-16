@@ -27,10 +27,11 @@ const buildRoutePlanWithSalesOrder = ({ routeVisitCount = 1 } = {}) => {
         location = make("location", {company, address}),
         routePlan = make("route-plan"),
         routeVisits = makeList("route-visit", routeVisitCount, {routePlan}),
-        order = buildOrderFromPriceTier(location);
+        order = buildOrderFromPriceTier(location),
+        creditNote = make("credit-note", {location});
 
   items.forEach(item => make("item-desire", {item, location, enabled:true}));
-  routeVisits.forEach(routeVisit => make("fulfillment", {order, routeVisit}));
+  routeVisits.forEach(routeVisit => make("fulfillment", {order, creditNote, routeVisit}));
 
   return routePlan;
 }

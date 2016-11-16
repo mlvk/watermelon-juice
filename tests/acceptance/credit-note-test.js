@@ -19,7 +19,7 @@ moduleForAcceptance("Acceptance | credit-note", {
   }
 });
 
-test('credits credit note when there are returns and credit rate is greater than 0', async function(assert) {
+test('shows credit note when there are returns and credit rate is greater than 0', async function(assert) {
   const routePlan = buildRoutePlanWithSalesOrder();
   const routeVisit = await routePlan.get("routeVisits.firstObject");
   const fulfillment = await routeVisit.get("fulfillments.firstObject");

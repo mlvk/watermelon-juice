@@ -13,7 +13,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.transitionTo("route-plans.show.route-visits.show.fulfillments.show.review");
     },
 
-    submit(fulfillment) {
+    async submit(fulfillment) {
+      await fulfillment.syncDependencies();
       const routeVisit = fulfillment.get("routeVisit");
 
       fulfillment.set("deliveryState", "fulfilled");

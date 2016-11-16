@@ -4,6 +4,10 @@ import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
 
 const {
+  get
+} = Ember;
+
+const {
   equal,
   not,
   alias
@@ -18,6 +22,8 @@ export default Model.extend({
   stock:                  belongsTo("stock"),
   creditNote:             belongsTo("credit-note"),
   pod:                    belongsTo("pod"),
+
+  location:               alias("order.location"),
 
   pending:                equal("deliveryState", "pending"),
   fulfilled:              not("pending"),
@@ -50,5 +56,34 @@ export default Model.extend({
         .filter(itemDesire => itemDesire.get("enabled"))
         .forEach(itemDesire => this.store.createRecord("stock-level", {stock, item: itemDesire.get("item")}));
     }
+  },
+
+  async syncDependencies() {
+    const creditNote = await get(this, 'creditNote'),
+          creditNoteItems = await creditNote.get("creditNoteItems"),
+          stockLevels = await get(this, "stock.stockLevels"),
+          location = await get(this, "location"),
+          store = get(this, "store");
+
+    stockLevels.forEach(async sl => {
+      const match = creditNoteItems.find(cni => sl.get("item.id") === cni.get("item.id"));
+
+      if(match) {
+        match.set("quantity", sl.get("returns"));
+      } else {
+        const item = await sl.get("item"),
+              creditRate = await location.creditRateForItem(item),
+              quantity = sl.get("returns");
+
+        await Ember.run(async () => {
+          await store.createRecord('credit-note-item', {
+            creditNote,
+            item,
+            unitPrice: creditRate,
+            quantity
+          });
+        });
+      }
+    });
   }
 });
