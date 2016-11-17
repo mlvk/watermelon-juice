@@ -12,6 +12,10 @@ export default Ember.Component.extend({
   hasSignature:   notEmpty("stashedSignature"),
   readyToSubmit:  and("hasName", "hasSignature"),
 
+  didInsertElement() {
+    this.set("isEditing", false);
+  },
+
   didReceiveAttrs(data) {
     this.set("stashedSignature", data.newAttrs.signature.value);
     this.set("stashedName", data.newAttrs.name.value);
@@ -24,16 +28,19 @@ export default Ember.Component.extend({
 
     requestedSign() {
       this.set("signing", true);
+      this.set("isEditing", true);
     },
 
     cancel() {
       this.set("stashedSignature", this.get("signature"));
       this.set("signing", false);
+      this.set("isEditing", false);
     },
 
     submit() {
       this.attrs.onSignature(this.get("stashedSignature"), this.get("stashedName"), moment().toDate());
       this.set("signing", false);
+      this.set("isEditing", false);
     },
 
     handleNewSignature(data) {

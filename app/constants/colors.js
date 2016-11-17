@@ -9,7 +9,7 @@ const colors = {
   LIGHT_BLUE:"#F3FDFF",
   LIGHT_GREEN: "#DEFFEE",
   DARK_GREEN: "#4ACE86",
-  DARK_ORANGE: "#FFD400",
+  DARK_ORANGE: "#FFEB8A",
   HOT_PINK: "#FF646C",
   DOPE_BLUE: "#4DA6FF",
   TRANSPARENT: "transparent"

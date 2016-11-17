@@ -14,11 +14,15 @@
         oninput={{action "onNameChanged"}}
         onchange={{action "onNameChanged"}}>
     </div>
+    <span class="legal">
+      By signing above, you certify that you are accepting the products listed above.
+    </span>
     <div class="row stretch uiContainer">
       {{ui/icon-button
           class="stretch cancel"
           flat=true
           size=2
+          label="Cancel"
           backgroundColor=colors.HOT_PINK
           icon="clear"
           onClick=(action "cancel")}}
@@ -26,6 +30,7 @@
           class="stretch submit"
           flat=true
           size=2
+          label="Accept"
           icon="done"
           disabled=(not readyToSubmit)
           onClick=(action "submit")}}
@@ -34,10 +39,13 @@
 {{else if hasSignature}}
   <div class="col relative signaturePreview" {{action "requestedSign"}}>
     <img src={{signature}} alt="signature" />
-    <div class="receivedDataContainer col">
-      <span class="title">Received</span>
-      <span class="name">{{name}}</span>
-      <span class="date">{{moment-format signedAt "ddd - MM/DD/YY - h:mm a"}}</span>
+    <div class="row space-between center receivedDataContainer">
+      <div class="col">
+        <span class="title">Received</span>
+        <span class="name">{{name}}</span>
+        <span class="date">{{moment-format signedAt "ddd - MM/DD/YY - h:mm a"}}</span>
+      </div>
+      <i class="editIcon material-icons">edit</i>
     </div>
   </div>
 {{else}}

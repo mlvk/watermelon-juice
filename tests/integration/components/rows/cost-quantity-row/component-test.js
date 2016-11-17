@@ -8,18 +8,21 @@ moduleForComponent("rows/cost-quantity-row", "Integration | Component | rows/cos
 
 test("it shows information when present", function(assert) {
   const name = "item name",
+        code = "code1",
         quantity = 20,
         unitPrice = 10,
-        total = quantity * unitPrice;
+        total = quantity * unitPrice,
+        model = {
+          item: {
+            name,
+            code
+          },
+          quantity, unitPrice, total
+        };
 
-  this.set("name", name);
-  this.set("quantity", quantity);
-  this.set("unitPrice", unitPrice);
-  this.set("total", total);
-  this.render(hbs`{{rows/cost-quantity-row
-                    name=name
-                    quantity=quantity
-                    unitPrice=unitPrice}}`);
+  this.set("model", model);
+
+  this.render(hbs`{{rows/cost-quantity-row model=model}}`);
 
   assert.equal($(".name").text(), name);
   assert.equal($(".unitPriceContainer").text(), currency([unitPrice]));

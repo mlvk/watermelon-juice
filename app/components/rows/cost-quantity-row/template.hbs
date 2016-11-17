@@ -1,32 +1,34 @@
-<div class="col-4 name">{{name}}</div>
-{{#if isEditing}}
-  <div class="col-2">
-    <div class="row">
+<div class="row vcenter baseline col-3">
+  <div class="index">{{formattedIndex}}.</div>
+  <div class="code">{{model.item.code}}</div>
+  <div class="name">{{model.item.name}}</div>
+</div>
+<div class="row space-between col-2 data">
+  {{#if isEditing}}
+    <div class="row col-1 baseline">
       <div class="row baseline editUnitPriceContainer">
         $
-        {{one-way-input unitPrice
-          update=(action (mut unitPrice))
+        {{one-way-input model.unitPrice
+          update=(action (mut model.unitPrice))
           onblur=(action "cleanNumericField" "unitPrice")}}
       </div>
       <div class="row baseline editQuantityContainer">
         <div class="x">x</div>
-        {{one-way-input quantity
+        {{one-way-input model.quantity
           pattern="[0-9]*"
           inputmode="numeric"
-          update=(action (mut quantity))
+          update=(action (mut model.quantity))
           onblur=(action "cleanNumericField" "quantity")}}
       </div>
     </div>
-  </div>
-{{else}}
-  <div class="col-2">
-    <div class="row baseline">
-      <div class="unitPriceContainer currency">{{currency unitPrice}}</div>
+  {{else}}
+    <div class="row col-2 baseline">
+      <div class="unitPriceContainer currency">{{currency model.unitPrice}}</div>
       <div class="row quantityContainer center baseline">
         <div class="x">x</div>
-        <div class="quantity">{{quantity}}</div>
+        <div class="quantity">{{model.quantity}}</div>
       </div>
     </div>
-  </div>
-{{/if}}
-<div class="total col-2 right currency">{{currency total}}</div>
+  {{/if}}
+  <div class="right total currency">{{currency model.total}}</div>
+</div>

@@ -13,6 +13,11 @@ export default Ember.Component.extend({
     return quantity * unitPrice;
   },
 
+  @computed('index')
+  formattedIndex(index) {
+    return S(index + 1).padLeft(2, "0").s;
+  },
+
   actions: {
     cleanNumericField(key, e) {
       const parsed = parseFloat(e.target.value);

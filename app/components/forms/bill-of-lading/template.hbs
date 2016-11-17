@@ -25,25 +25,22 @@
 </div>
 
 <div class="rowContainer">
-  {{#each validOrderitems as |orderItem|}}
+  {{#each validOrderitems as |orderItem index|}}
     {{rows/cost-quantity-row
+        index=index
         isEditing=isEditing
-        name=orderItem.item.name
-        unitPrice=orderItem.unitPrice
-        quantity=orderItem.quantity}}
+        model=orderItem}}
   {{/each}}
-
-  {{#if hasShipping}}
-    {{rows/cost-quantity-row
-        name="Freight"
-        unitPrice=model.shipping
-        quantity=1}}
-  {{/if}}
 </div>
 
 {{rows/total-row
-    name="Total"
-    total=total}}
+    class="freightLineItem"
+    label="Freight"
+    value=model.shipping}}
+
+{{rows/total-row
+    label="Total"
+    value=total}}
 
 {{#if isEditing}}
   {{ui/icon-button

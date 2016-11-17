@@ -13,23 +13,23 @@
 }
 
 .col-2 {
-  @extend .col;
   flex: 2;
 }
 
 .col-3 {
-  @extend .col;
   flex: 3;
 }
 
 .col-4 {
-  @extend .col;
   flex: 4;
 }
 
 .col-5 {
-  @extend .col;
   flex: 5;
+}
+
+.col-6 {
+  flex: 6;
 }
 
 .row {

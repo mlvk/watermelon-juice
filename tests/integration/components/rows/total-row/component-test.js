@@ -7,15 +7,15 @@ moduleForComponent("rows/total-row", "Integration | Component | rows/total row",
 });
 
 test("it shows information when present", function(assert) {
-  const name = "item name",
-        total = 90;
+  const label = "item label",
+        value = 90;
 
-  this.set("name", name);
-  this.set("total", total);
+  this.set("label", label);
+  this.set("value", value);
   this.render(hbs`{{rows/total-row
-                    name=name
-                    total=total}}`);
+                    label=label
+                    value=value}}`);
 
-  assert.equal($(".name").text(), name);
-  assert.equal($(".total").text(), currency([total]));
+  assert.equal($(".label").text(), label);
+  assert.equal($(".value").text(), currency([value]));
 });
