@@ -8,10 +8,12 @@ const ItemTracker = Ember.Component.extend({
   classNames: ['row', 'center', 'space-between'],
 
   didInsertElement() {
-    this.$('input').on('focus', (e) => e.target.select());
+    this.$('input').on('click', (e) => Ember.run.debounce(() => e.target.setSelectionRange(0, 9999), 250));
+    this.$('input').on('focus', (e) => Ember.run.debounce(() => e.target.setSelectionRange(0, 9999), 250));
   },
 
   willDestroyElement() {
+    this.$('input').off('input', 'click');
     this.$('input').off('input', 'focus');
   },
 

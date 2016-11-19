@@ -10,7 +10,7 @@
         $
         {{one-way-input model.unitPrice
           update=(action (mut model.unitPrice))
-          onblur=(action "cleanNumericField" "unitPrice")}}
+          onblur=(action "cleanNumericField" "model.unitPrice")}}
       </div>
       <div class="row baseline editQuantityContainer">
         <div class="x">x</div>
@@ -18,7 +18,7 @@
           pattern="[0-9]*"
           inputmode="numeric"
           update=(action (mut model.quantity))
-          onblur=(action "cleanNumericField" "quantity")}}
+          onblur=(action "cleanNumericField" "model.quantity")}}
       </div>
     </div>
   {{else}}
