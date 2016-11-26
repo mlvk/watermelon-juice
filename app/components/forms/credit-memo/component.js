@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   },
 
   @computed("validCreditNoteItems.@each.{total}")
-  total(creditNoteItems) {
+  total(creditNoteItems = []) {
     return creditNoteItems.reduce((acc, cur) => acc + cur.get("total"), 0);
   }
 

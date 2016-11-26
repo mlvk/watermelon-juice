@@ -16,10 +16,20 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
-  };
+    },
 
-  ENV.apiHost = process.env.DEV_API_HOST;
+    EmberHammertime: {
+      touchActionSelectors: ['button', 'input', 'a', 'textarea'],
+      touchActionProperties: 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'
+    },
+
+    apiHost:process.env.API_HOST,
+
+    firebase: {
+      host: process.env.FIREBASE_URL
+    }
+
+  };
 
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
@@ -56,10 +66,14 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+
+    ENV['firebase'] = {
+      host: "https://watermelon-juice-testing.firebaseio.com"
+    };
   }
 
   if (environment === 'production') {
-    ENV.apiHost = process.env.API_HOST;
+
   }
 
   return ENV;

@@ -2,6 +2,8 @@
   {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
 
+{{passive/fulfillment-documents-info model}}
+
 {{#if model.belongsToSalesOrder}}
   {{ui/drilldown-button
     icon="assignment_turned_in"
@@ -25,7 +27,7 @@
       size="2"
       color=white
       backgroundColor=colors.DARK_GREY
-      disabled=(or (not model.stock.tracked) (not model.pod.isValid))
+      
       onClick=(route-action 'submit' model)}}
   </div>
 </div>

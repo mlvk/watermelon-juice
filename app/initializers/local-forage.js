@@ -5,7 +5,7 @@ export function initialize() {
     version     : 1.0,
     storeName   : 'remote_sync_store', // Should be alphanumeric, with underscores.
     description : 'Route visit queue'
-});
+  });
 }
 
 export default {

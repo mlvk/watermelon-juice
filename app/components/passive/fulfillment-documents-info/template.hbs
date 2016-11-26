@@ -1,0 +1,9 @@
+{{#if isPending}}
+  <span class="title">Processing documents for download...</span>
+  <i class="material-icons icon spinLeft">loop</i>
+{{else}}
+  <span class="title">Download documents at:</span>
+  <span class="content">
+    {{data.pdf_url}}
+  </span>
+{{/if}}

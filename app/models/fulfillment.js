@@ -48,42 +48,37 @@ export default Model.extend({
       missingItemDesires
         .forEach(itemDesire => this.store.createRecord("stock-level", {stock, item:itemDesire.get("item")}));
 
-    } else {
-      const stock = this.store.createRecord("stock", {location});
-      this.set("stock", stock);
-
-      itemDesires
-        .filter(itemDesire => itemDesire.get("enabled"))
-        .forEach(itemDesire => this.store.createRecord("stock-level", {stock, item: itemDesire.get("item")}));
     }
   },
 
   async syncDependencies() {
     const creditNote = await get(this, 'creditNote'),
-          creditNoteItems = await creditNote.get("creditNoteItems"),
+          creditNoteItems = await get(this, "creditNote.creditNoteItems"),
           stockLevels = await get(this, "stock.stockLevels"),
           location = await get(this, "location"),
           store = get(this, "store");
 
-    stockLevels.forEach(async sl => {
-      const match = creditNoteItems.find(cni => sl.get("item.id") === cni.get("item.id"));
+    if(Ember.isPresent(stockLevels)){
+      stockLevels.forEach(async sl => {
+        const match = creditNoteItems.find(cni => sl.get("item.id") === cni.get("item.id"));
 
-      if(match) {
-        match.set("quantity", sl.get("returns"));
-      } else {
-        const item = await sl.get("item"),
-              creditRate = await location.creditRateForItem(item),
-              quantity = sl.get("returns");
+        if(match) {
+          match.set("quantity", sl.get("returns"));
+        } else {
+          const item = await sl.get("item"),
+                creditRate = await location.creditRateForItem(item),
+                quantity = sl.get("returns");
 
-        await Ember.run(async () => {
-          await store.createRecord('credit-note-item', {
-            creditNote,
-            item,
-            unitPrice: creditRate,
-            quantity
+          await Ember.run(async () => {
+            await store.createRecord('credit-note-item', {
+              creditNote,
+              item,
+              unitPrice: creditRate,
+              quantity
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    }
   }
 });

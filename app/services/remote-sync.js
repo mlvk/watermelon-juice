@@ -1,5 +1,5 @@
 import Ember from "ember";
-import config from 'watermelon-juice/config/environment';
+import config from '../config/environment';
 
 const {
   empty
@@ -56,7 +56,8 @@ export default Ember.Service.extend({
         f.get("stock"),
         f.get("stock.stockLevels"),
         f.get("pod")
-      ];
+      ]
+      .filter(model => Ember.isPresent(model));
     });
 
     const relationships = await Promise.all(relationshipPromises);
@@ -64,6 +65,7 @@ export default Ember.Service.extend({
     const included = _.chain(relationships)
       .flattenDeep()
       .map(r => r.content)
+      .filter(r => Ember.isPresent(r))
       .map(r => _.isFunction(r.toArray) ? r.toArray() : r)
       .flattenDeep()
       .map(r => r.serialize({includeId: true}).data)
@@ -89,41 +91,102 @@ export default Ember.Service.extend({
   },
 
   async serializeFulfillment(f) {
-    const order = await f.get("order");
-    const orderItems = await order.get("orderItems");
-    const order_items = orderItems.map(::this.serializeOrderItem);
-
-    const creditNote = await f.get("creditNote");
-    const creditNoteItems = await creditNote.get("creditNoteItems");
-    const credit_note_items = creditNoteItems.map(::this.serializeCreditNoteItem);
-
-    const stock = await f.get("stock");
-    const stockLevels = await stock.get("stockLevels");
-    const stock_levels = stockLevels.map(::this.serializeStockLevel);
-
-    const pod = await f.get("pod");
-
     return {
       id: f.get("id"),
-      order: {
-        id:order.get("id"),
-        order_items
-      },
-      credit_note: {
-        id:creditNote.get("id"),
-        credit_note_items
-      },
-      stock: {
-        id:stock.get("id"),
-        taken_at:moment().toDate(),
-        stock_levels
-      },
-      pod: {
-        id:pod.get("id"),
-        name: pod.get("name"),
-        signature: pod.get("signature"),
-        signed_at: pod.get("signedAt")
+      order: await this.serializeOrder(f),
+      credit_note: await this.serializeCreditNote(f),
+      stock: await this.serializeStock(f),
+      pod: await this.serializePod(f)
+    }
+
+    // const creditNote = await f.get("creditNote");
+    // const creditNoteItems = await f.get("creditNote.creditNoteItems");
+    // const credit_note_items = creditNoteItems.map(::this.serializeCreditNoteItem);
+    //
+    // const stock = await f.get("stock");
+    // const stockLevels = await f.get("stock.stockLevels");
+    // const stock_levels = stockLevels.map(::this.serializeStockLevel);
+    //
+    // const pod = await f.get("pod");
+    //
+    // return {
+    //   id: f.get("id"),
+    //   order: {
+    //     id:order.get("id"),
+    //     order_items
+    //   },
+    //   credit_note: {
+    //     id:creditNote.get("id"),
+    //     credit_note_items
+    //   },
+    //   stock: {
+    //     id:stock.get("id"),
+    //     taken_at:moment().toDate(),
+    //     stock_levels
+    //   },
+    //   pod: {
+    //     id:pod.get("id"),
+    //     name: pod.get("name"),
+    //     signature: pod.get("signature"),
+    //     signed_at: pod.get("signedAt")
+    //   }
+    // }
+  },
+
+  async serializeOrder(f) {
+    const model = await f.get("order"),
+          children = await f.get("order.orderItems");
+
+    if(Ember.isPresent(children)){
+      return {
+        id: model.get("id"),
+        order_items: children.map(::this.serializeOrderItem)
       }
+    } else {
+      return undefined;
+    }
+  },
+
+  async serializeCreditNote(f) {
+    const model = await f.get("creditNote"),
+          children = await f.get("creditNote.creditNoteItems");
+
+    if(Ember.isPresent(children)){
+      return {
+        id: model.get("id"),
+        credit_note_items: children.map(::this.serializeCreditNoteItem)
+      }
+    } else {
+      return undefined;
+    }
+  },
+
+  async serializeStock(f) {
+    const model = await f.get("stock"),
+          children = await f.get("stock.stockLevels");
+
+    if(Ember.isPresent(children)){
+      return {
+        id: model.get("id"),
+        stock_levels: children.map(::this.serializeStockLevel)
+      }
+    } else {
+      return undefined;
+    }
+  },
+
+  async serializePod(f) {
+    const model = await f.get("pod");
+
+    if(Ember.isPresent(model)){
+      return {
+        id:model.get("id"),
+        name: model.get("name"),
+        signature: model.get("signature"),
+        signed_at: model.get("signedAt")
+      }
+    } else {
+      return undefined;
     }
   },
 

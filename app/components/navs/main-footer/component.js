@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import config from 'watermelon-juice/config/environment';
+import config from '../../../config/environment';
 
 export default Ember.Component.extend({
   classNames:         ['row'],
