@@ -18,6 +18,14 @@ FactoryGuy.define("fulfillment", {
       order: FactoryGuy.belongsTo("order", "purchaseOrder")
     },
 
+    tracked: {
+      stock: FactoryGuy.belongsTo("stock", "tracked")
+    },
+
+    signed: {
+      pod: FactoryGuy.belongsTo("pod", "signed")
+    },
+
     withOrderAndCreditNote: {
       order: FactoryGuy.belongsTo("order", "salesOrder"),
       creditNote: FactoryGuy.belongsTo("credit-note")

@@ -2,7 +2,9 @@
   {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
 
-{{lists/stock-levels model.stock.sortedStockLevels}}
+{{lists/stock-levels model.stock.desiredItemStockLevels "Main products"}}
+
+{{lists/stock-levels model.stock.extraItemStockLevels "Other products"}}
 
 <div class="row center">
   <div class="card-1">

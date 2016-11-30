@@ -6,5 +6,11 @@ FactoryGuy.define("stock-level", {
     returns:      0,
 
     item: FactoryGuy.belongsTo("item")
+  },
+
+  traits: {
+    tracked: {
+      trackingState: "processed"
+    }
   }
 });

@@ -5,12 +5,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
 
-    await fulfillment.syncDependencies();
-
-    if(!fulfillment.belongsTo('pod').id()) {
-      const pod = this.store.createRecord('pod');
-      fulfillment.set('pod', pod);
-    }
+    await Ember.run(async () => {
+      await fulfillment.syncDependencies();
+    });
 
     return fulfillment;
   },

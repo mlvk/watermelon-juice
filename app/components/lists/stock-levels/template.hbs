@@ -1,14 +1,19 @@
-<header class="row space-between">
-  <span class="titleLabel">
-    Item Name
+<header class="col">
+  <span class="formTitle">
+    {{title}}
   </span>
-  <div>
-    <span class="startingLabel">
-      Starting
+  <div class="row space-between">
+    <span class="titleLabel">
+      Item Name
     </span>
-    <span class="returnsLabel">
-      Returns
-    </span>
+    <div>
+      <span class="startingLabel">
+        Starting
+      </span>
+      <span class="returnsLabel">
+        Returns
+      </span>
+    </div>
   </div>
 </header>
 {{#each model as |stockLevel index|}}

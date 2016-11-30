@@ -1,6 +1,7 @@
 import Ember from "ember";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
+import computed from 'ember-computed-decorators';
 import { belongsTo } from "ember-data/relationships";
 
 const {
@@ -33,22 +34,9 @@ export default Model.extend({
 
   hasSignature:           alias("pod.isValid"),
 
-  prepareStock() {
-    const location = this.get("order.location");
-    const itemDesires = location.get("itemDesires");
-
-    if(this.belongsTo("stock").id() || this.belongsTo("stock").value()) {
-      const stock = this.get("stock");
-      const missingItemDesires = itemDesires
-        .filter(itemDesire => itemDesire.get("enabled"))
-        .filter(itemDesire =>
-          !stock.get("stockLevels")
-            .find(sl => sl.get("item.id") === itemDesire.get("item.id")));
-
-      missingItemDesires
-        .forEach(itemDesire => this.store.createRecord("stock-level", {stock, item:itemDesire.get("item")}));
-
-    }
+  @computed('pod.isValid', 'stock.tracked', 'order.isPurchaseOrder')
+  isSubmissible(isPodValid, isStockTracked, isPurchaseOrder) {
+    return (isPodValid && isStockTracked) || (isPurchaseOrder && isPodValid);
   },
 
   async syncDependencies() {

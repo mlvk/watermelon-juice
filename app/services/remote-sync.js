@@ -98,39 +98,6 @@ export default Ember.Service.extend({
       stock: await this.serializeStock(f),
       pod: await this.serializePod(f)
     }
-
-    // const creditNote = await f.get("creditNote");
-    // const creditNoteItems = await f.get("creditNote.creditNoteItems");
-    // const credit_note_items = creditNoteItems.map(::this.serializeCreditNoteItem);
-    //
-    // const stock = await f.get("stock");
-    // const stockLevels = await f.get("stock.stockLevels");
-    // const stock_levels = stockLevels.map(::this.serializeStockLevel);
-    //
-    // const pod = await f.get("pod");
-    //
-    // return {
-    //   id: f.get("id"),
-    //   order: {
-    //     id:order.get("id"),
-    //     order_items
-    //   },
-    //   credit_note: {
-    //     id:creditNote.get("id"),
-    //     credit_note_items
-    //   },
-    //   stock: {
-    //     id:stock.get("id"),
-    //     taken_at:moment().toDate(),
-    //     stock_levels
-    //   },
-    //   pod: {
-    //     id:pod.get("id"),
-    //     name: pod.get("name"),
-    //     signature: pod.get("signature"),
-    //     signed_at: pod.get("signedAt")
-    //   }
-    // }
   },
 
   async serializeOrder(f) {

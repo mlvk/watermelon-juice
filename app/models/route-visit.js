@@ -41,5 +41,10 @@ export default Model.extend({
   @computed('position')
   positionFormatted(position) {
     return position + 1;
+  },
+
+  @computed('fulfillments.@each.{isSubmissible}')
+  isSubmissible(fulfillments) {
+    return fulfillments.every(f => f.get("isSubmissible"));
   }
 });

@@ -6,6 +6,11 @@ header {
   padding: 0.5em 1em;
   background-color: $dark-grey;
   color: $off-white;
+
+  .formTitle {
+    font-size: 1.5em;
+    margin: 1em 0;
+  }
 }
 
 .startingLabel, .returnsLabel {

@@ -5,6 +5,8 @@ node_js:
 
 sudo: false
 
+cache: false
+
 before_install:
   - npm config set spin false
   - npm install -g bower

@@ -9,6 +9,10 @@ FactoryGuy.define("stock", {
   traits: {
     withStockLevels: {
       stockLevels: FactoryGuy.hasMany("stock-level", 1)
+    },
+
+    tracked: {
+      stockLevels: FactoryGuy.hasMany("stock-level", 3, "tracked")
     }
   }
 });

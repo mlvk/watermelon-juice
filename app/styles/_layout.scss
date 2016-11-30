@@ -83,7 +83,10 @@
   flex: 1;
 }
 
-
 .toolbarContainer {
   margin: 1em;
+}
+
+&.hidden {
+  display: none;
 }

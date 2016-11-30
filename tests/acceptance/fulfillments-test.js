@@ -100,3 +100,75 @@ test("hides track inventory button if fulfillment is a purchase order", async fu
 
   assert.ok(!showPage.trackInventoryIsVisible)
 });
+
+test("enables complete route visit button when tracked and signed", async function(assert) {
+  const routePlan = make("route-plan");
+  const fulfillment = make("fulfillment", "withOrder", "tracked", "signed");
+  const routeVisit = make("route-visit", {routePlan, fulfillments:[fulfillment]});
+
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
+
+  await showPage.visit({
+    route_plan_id:routePlan.get("id"),
+    route_visit_id:routeVisit.get("id"),
+    fulfillment_id:fulfillment.get("id")
+  });
+
+  assert.ok(showPage.canSubmitRouteVisit)
+});
+
+test("disables complete route visit button when tracked but not signed signed", async function(assert) {
+  const routePlan = make("route-plan");
+  const fulfillment = make("fulfillment", "withOrder", "tracked");
+  const routeVisit = make("route-visit", {routePlan, fulfillments:[fulfillment]});
+
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
+
+  await showPage.visit({
+    route_plan_id:routePlan.get("id"),
+    route_visit_id:routeVisit.get("id"),
+    fulfillment_id:fulfillment.get("id")
+  });
+
+  assert.notOk(showPage.canSubmitRouteVisit)
+});
+
+test("disables complete route visit button when signed but not tracked", async function(assert) {
+  const routePlan = make("route-plan");
+  const fulfillment = make("fulfillment", "withOrder", "signed");
+  const routeVisit = make("route-visit", {routePlan, fulfillments:[fulfillment]});
+
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
+
+  await showPage.visit({
+    route_plan_id:routePlan.get("id"),
+    route_visit_id:routeVisit.get("id"),
+    fulfillment_id:fulfillment.get("id")
+  });
+
+  assert.notOk(showPage.canSubmitRouteVisit)
+});
+
+test("can complete route visit when is purchase order and pod isValid", async function(assert) {
+  const routePlan = make("route-plan");
+  const fulfillment = make("fulfillment", "withPurchaseOrder", "signed");
+  const routeVisit = make("route-visit", {routePlan, fulfillments:[fulfillment]});
+
+  mockFindRecord("route-plan").returns({model: routePlan});
+  mockFindRecord("route-visit").returns({model: routeVisit});
+  mockFindRecord("fulfillment").returns({model: fulfillment});
+
+  await showPage.visit({
+    route_plan_id:routePlan.get("id"),
+    route_visit_id:routeVisit.get("id"),
+    fulfillment_id:fulfillment.get("id")
+  });
+
+  assert.ok(showPage.canSubmitRouteVisit)
+});

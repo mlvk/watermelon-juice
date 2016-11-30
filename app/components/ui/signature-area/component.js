@@ -51,7 +51,7 @@ export default Ember.Component.extend({
 	},
 
   onEndHandler() {
-    this.attrs.drawingEnded(this.signaturePad.toDataURL());
+    this.get("drawingEnded")(this.signaturePad.toDataURL());
   },
 
   actions: {

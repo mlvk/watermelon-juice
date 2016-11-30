@@ -31,7 +31,7 @@ export default Ember.Component.extend({
   _setValue(value) {
     const parsedValue = parseInt(value, 10);
     if(Number.isInteger(parsedValue)) {
-      this.attrs.valueChanged(parsedValue);
+      this.get("valueChanged")(parsedValue);
     }
   },
 

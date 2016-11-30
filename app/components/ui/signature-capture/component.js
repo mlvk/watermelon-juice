@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     },
 
     submit() {
-      this.attrs.onSignature(this.get("stashedSignature"), this.get("stashedName"), moment().toDate());
+      this.get("onSignature")(this.get("stashedSignature"), this.get("stashedName"), moment().toDate());
       this.set("signing", false);
       this.set("isEditing", false);
     },
