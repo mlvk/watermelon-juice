@@ -30,7 +30,6 @@ module.exports = function(defaults) {
   app.import('bower_components/numeral/min/numeral.min.js');
   app.import('bower_components/rxjs/dist/rx.all.min.js');
   app.import('bower_components/immutable/dist/immutable.min.js');
-  app.import('bower_components/firebase/firebase.js');
   app.import('bower_components/lodash/dist/lodash.min.js');
   app.import('bower_components/ramda/dist/ramda.min.js');
   app.import('bower_components/localforage/dist/localforage.min.js');

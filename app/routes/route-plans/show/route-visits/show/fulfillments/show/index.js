@@ -17,8 +17,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       await Ember.run(async () => {
         await fulfillment.syncDependencies();
       });
-      
-      const routeVisit = fulfillment.get("routeVisit");
+
+      const routeVisit = await fulfillment.get("routeVisit");
 
       fulfillment.set("deliveryState", "fulfilled");
 
@@ -28,7 +28,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         routeVisit.set("routeVisitState", "fulfilled");
         routeVisit.set("completedAt", moment().toDate());
 
-        this.get("remoteSync").enqueue(routeVisit);
+        Ember.run(() => {
+          this.get("remoteSync").enqueue(routeVisit);
+        });
+
         this.transitionTo("route-plans.show");
       }
     },

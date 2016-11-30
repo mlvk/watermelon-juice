@@ -5,7 +5,10 @@ node_js:
 
 sudo: false
 
-cache: false
+cache:
+  directories:
+    - $HOME/.npm
+    - $HOME/.cache # includes bowers cache
 
 before_install:
   - npm config set spin false

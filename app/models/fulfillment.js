@@ -57,16 +57,16 @@ export default Model.extend({
                 creditRate = await location.creditRateForItem(item),
                 quantity = sl.get("returns");
 
-          await Ember.run(async () => {
-            await store.createRecord('credit-note-item', {
-              creditNote,
-              item,
-              unitPrice: creditRate,
-              quantity
-            });
+          return await store.createRecord('credit-note-item', {
+            creditNote,
+            item,
+            unitPrice: creditRate,
+            quantity
           });
         }
       });
     }
+
+    return this;
   }
 });

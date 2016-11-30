@@ -16,7 +16,6 @@ import {
 moduleForAcceptance("Acceptance | tracking inventory index", {
   async beforeEach() {
     authenticateSession(this.application);
-
     this.routePlan = buildRoutePlanWithSalesOrder();
     this.routeVisit = this.routePlan.get("routeVisits.firstObject");
     this.fulfillment = this.routeVisit.get("fulfillments.firstObject");

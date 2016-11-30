@@ -17,8 +17,7 @@
     "hammer-time": "1.0.0",
     "ramda": "^0.22.1",
     "localforage": "^1.4.3",
-    "node-uuid": "1.4.1",
-    "firebase": "^3.6.1"
+    "node-uuid": "1.4.1"
   },
   "resolutions": {
     "ember": "~2.9.0",

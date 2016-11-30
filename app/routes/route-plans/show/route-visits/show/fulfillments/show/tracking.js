@@ -5,28 +5,28 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
 
-    await Ember.run(async () => {
-      await this.prepareStock(fulfillment);
-    });
+    await this.prepareStock(fulfillment);
 
     return fulfillment;
   },
 
   async prepareStock(fulfillment) {
-    const items = this.store.peekAll("item");
+    const items = await this.store.peekAll("item");
 
     if(fulfillment.belongsTo("stock").id() || fulfillment.belongsTo("stock").value()) {
       const stock = await fulfillment.get("stock");
       const stockLevels = await stock.get("stockLevels");
+      const stockLevelItems = await Promise.all(stockLevels.map(sl => sl.get("item")));
 
       const missingItems = items
-        .filter(item => {
-          const match = stockLevels.find(sl => sl.get("item.id") === item.get("id"));
-          return Ember.isNone(match);
-        });
+        .filter(item => Ember.isNone(stockLevelItems.find(sli => sli === item)));
 
       missingItems
-        .forEach(item => this.store.createRecord("stock-level", {stock, item}));
+        .forEach(async item => {
+          await Ember.run(async () => {
+            await this.store.createRecord("stock-level", {stock, item});
+          });
+        });
     }
   },
 

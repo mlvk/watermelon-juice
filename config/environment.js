@@ -23,12 +23,7 @@ module.exports = function(environment) {
       touchActionProperties: 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'
     },
 
-    apiHost:process.env.API_HOST,
-
-    firebase: {
-      host: process.env.FIREBASE_URL
-    }
-
+    apiHost:process.env.API_HOST
   };
 
   ENV.contentSecurityPolicy = {
@@ -66,10 +61,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-
-    ENV['firebase'] = {
-      host: "https://watermelon-juice-testing.firebaseio.com"
-    };
   }
 
   if (environment === 'production') {

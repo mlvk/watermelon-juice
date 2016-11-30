@@ -43,7 +43,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   afterModel() {
-    this.get("remoteSync").loadFromLS();
+    return this.get("remoteSync").loadFromLS();
   },
 
   actions: {

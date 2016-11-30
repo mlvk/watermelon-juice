@@ -5,11 +5,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
 
-    await Ember.run(async () => {
-      await fulfillment.syncDependencies();
-    });
-
-    return fulfillment;
+    return await fulfillment.syncDependencies();
   },
 
   actions: {

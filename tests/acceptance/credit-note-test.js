@@ -15,6 +15,13 @@ import {
 
 moduleForAcceptance("Acceptance | credit-note", {
   beforeEach() {
+    // this.application.register('service:remoteSync', Ember.Service.extend({
+    //   start(){
+    //     debugger;
+    //   },
+    //   loadFromLS(){},
+    //   enqueue(){}
+    // }));
     authenticateSession(this.application);
   }
 });

@@ -34,7 +34,6 @@
       "currentPath": true,
       "currentRouteName": true,
       "pauseTest": true,
-      "firebase": true,
       "L": true
     }
 }

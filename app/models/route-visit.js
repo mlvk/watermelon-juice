@@ -17,6 +17,7 @@ export default Model.extend({
   departAt:         attr('number'),
   completedAt:      attr('date'),
   routeVisitState:  attr('string'),
+  date:             alias('routePlan.date'),
 
   fulfillments:   hasMany('fulfillment'),
   routePlan:      belongsTo('route-plan'),

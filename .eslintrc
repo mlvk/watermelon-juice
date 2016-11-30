@@ -21,7 +21,6 @@
       "Linear": true,
       "numeral": true,
       "SignaturePad": true,
-      "firebase": true,
       "R": true,
       "localforage": true
     }
