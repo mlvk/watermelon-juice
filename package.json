@@ -22,7 +22,7 @@
     "babel-eslint": "6.1.2",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
-    "ember-cli": "^2.9.1",
+    "ember-cli": "2.9.1",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-content-security-policy": "0.5.0",
@@ -42,7 +42,7 @@
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-uuid": "0.4.1",
-    "ember-component-css": "ebryn/ember-component-css",
+    "ember-component-css": "0.2.4",
     "ember-composable-helpers": "0.21.1",
     "ember-computed-decorators": "0.2.2",
     "ember-data": "2.9.0",
@@ -60,7 +60,7 @@
     "ember-route-action-helper": "2.0.0",
     "ember-simple-auth": "1.1.0",
     "ember-truth-helpers": "1.2.0",
-    "ember-wormhole": "yapplabs/ember-wormhole",
+    "ember-wormhole": "0.5.1",
     "eslint-config-ember": "0.3.0",
     "loader.js": "^4.0.10"
   }

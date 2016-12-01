@@ -10,9 +10,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     async submitRouteVisit(routeVisit) {
-      const fulfillments = await routeVisit.get("fulfillments");
-      await Promise.all(fulfillments.map(f => f.syncDependencies()));
-
       routeVisit.set("routeVisitState", "fulfilled");
       routeVisit.set("completedAt", moment().toDate());
 

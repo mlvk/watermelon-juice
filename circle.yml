@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 4.6.2
+
+dependencies:
+  pre:
+    - npm install phantomjs-prebuilt
+    - npm install -g bower
+    - npm install
+    - bower install
+    - npm rebuild node-sass

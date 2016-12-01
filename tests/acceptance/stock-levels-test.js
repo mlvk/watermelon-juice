@@ -2,6 +2,7 @@ import { test } from "qunit";
 import moduleForAcceptance from "watermelon-juice/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "watermelon-juice/tests/helpers/ember-simple-auth";
 import trackingPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/tracking";
+import showPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/show";
 import applicationPage from "watermelon-juice/tests/pages/application";
 import TrackingStates from "watermelon-juice/constants/tracking-states";
 
@@ -32,6 +33,12 @@ moduleForAcceptance("Acceptance | tracking inventory index", {
 test("should only show stock levels for products", async function(assert) {
   makeList("item", 10, "ingredient");
   makeList("item", 10, "product");
+
+  await showPage.visit({
+    route_plan_id:this.routePlan.get("id"),
+    route_visit_id:this.routeVisit.get("id"),
+    fulfillment_id:this.fulfillment.get("id")
+  });
 
   await trackingPage.visit({
     route_plan_id:this.routePlan.get("id"),

@@ -3,6 +3,7 @@ import moduleForAcceptance from "watermelon-juice/tests/helpers/module-for-accep
 import { authenticateSession } from "watermelon-juice/tests/helpers/ember-simple-auth";
 import trackingPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/tracking";
 import reviewPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/review";
+import showPage from "watermelon-juice/tests/pages/route-plans/show/route-visits/show/fulfillments/show";
 
 import {
   make,
@@ -41,6 +42,13 @@ test('shows credit note when there are returns and credit rate is greater than 0
     .stockLevels(0)
     .setStarting(1)
     .setReturns(1);
+
+  await showPage
+    .visit({
+      route_plan_id:routePlan.get("id"),
+      route_visit_id:routeVisit.get("id"),
+      fulfillment_id:fulfillment.get("id")
+    });
 
   await reviewPage
     .visit({
