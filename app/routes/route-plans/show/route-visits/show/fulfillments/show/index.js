@@ -45,6 +45,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   async prepareStock(fulfillment) {
     const products = this.store
       .peekAll("item")
+      .filter(item => item.get("isActive"))
       .filter(item => item.get("isProduct"));
 
     if(fulfillment.belongsTo("stock").id() || fulfillment.belongsTo("stock").value()) {

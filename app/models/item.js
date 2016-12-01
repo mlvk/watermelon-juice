@@ -5,7 +5,8 @@ import { hasMany } from "ember-data/relationships";
 import ItemTypes from "watermelon-juice/constants/item-types";
 
 const {
-  equal
+  equal,
+  bool
 } = Ember.computed;
 
 export default Model.extend({
@@ -14,6 +15,7 @@ export default Model.extend({
   description:      attr("string"),
   position:         attr("number"),
   tag:              attr("string", {defaultValue: ItemTypes.INGREDIENT}),
+  active:           attr("boolean", {defaultValue: true}),
 
   itemDesires:      hasMany("item-desire"),
   itemPrices:       hasMany("item-price"),
@@ -22,5 +24,6 @@ export default Model.extend({
   stockLevels:      hasMany("stock-level"),
   creditNoteItems:  hasMany("credit-note-item"),
 
-  isProduct:        equal("tag", ItemTypes.PRODUCT)
+  isProduct:        equal("tag", ItemTypes.PRODUCT),
+  isActive:         bool("active")
 });
