@@ -46,7 +46,7 @@
     "ember-composable-helpers": "0.21.1",
     "ember-computed-decorators": "0.2.2",
     "ember-data": "2.9.0",
-    "ember-data-factory-guy": "2.8.1",
+    "ember-data-factory-guy": "2.9.7",
     "ember-export-application-global": "^1.0.5",
     "ember-git-version": "0.1.1",
     "ember-hammertime": "1.1.2",
@@ -61,10 +61,7 @@
     "ember-simple-auth": "1.1.0",
     "ember-truth-helpers": "1.2.0",
     "ember-wormhole": "yapplabs/ember-wormhole",
-    "eslint-config-ember": "0.3.0"
-  },
-  "dependencies": {
-    "babel-eslint": "^6.1.2",
+    "eslint-config-ember": "0.3.0",
     "loader.js": "^4.0.10"
   }
 }

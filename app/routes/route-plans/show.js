@@ -38,7 +38,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model(params) {
     return this.store
-      .findAll("item")
+      .query("item", {"filter[is_sold]":true})
       .then(() => this.store.findRecord("route-plan", params.route_plan_id, {include:ROUTE_VISIT_INCLUDES.join(","), reload: true}));
   },
 

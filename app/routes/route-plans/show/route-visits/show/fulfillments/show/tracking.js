@@ -11,14 +11,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   async prepareStock(fulfillment) {
-    const items = await this.store.peekAll("item");
+    const products = this.store
+      .peekAll("item")
+      .filter(item => item.get("isProduct"));
 
     if(fulfillment.belongsTo("stock").id() || fulfillment.belongsTo("stock").value()) {
       const stock = await fulfillment.get("stock");
       const stockLevels = await stock.get("stockLevels");
       const stockLevelItems = await Promise.all(stockLevels.map(sl => sl.get("item")));
 
-      const missingItems = items
+      const missingItems = products
         .filter(item => Ember.isNone(stockLevelItems.find(sli => sli === item)));
 
       missingItems

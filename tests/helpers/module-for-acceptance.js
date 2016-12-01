@@ -2,7 +2,11 @@ import { module } from 'qunit';
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
-import { mockSetup, mockTeardown } from 'ember-data-factory-guy';
+import {
+  mockSetup,
+  mockTeardown,
+  mockFindAll
+} from 'ember-data-factory-guy';
 
 const { RSVP: { Promise } } = Ember;
 
@@ -27,6 +31,8 @@ export default function(name, options = {}) {
       this.application.inject('route', 'remoteSync', 'service:test-remote-sync');
       this.application.inject('controller', 'remoteSync', 'service:test-remote-sync');
       this.application.inject('component', 'remoteSync', 'service:test-remote-sync');
+
+      mockFindAll("item");
 
       if (options.beforeEach) {
         return options.beforeEach.apply(this, arguments);
