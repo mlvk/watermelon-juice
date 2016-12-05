@@ -25,17 +25,16 @@ export default Model.extend({
   lng:                  alias('address.lng'),
 
   async priceForItem(item) {
-    const priceTier = await this.get('company.priceTier');
-    const itemPrices = await priceTier.get('itemPrices');
-    const match = itemPrices.find(async ip => await ip.get('item.id') === item.get('id'));
+    const itemPrices = await this.get('company.priceTier.itemPrices');
+    const match = itemPrices.find(ip => ip.belongsTo("item").id() === item.get('id'));
 
-    return Ember.isNone(match) ? 0 : match.get('price');
+    return Ember.isNone(match) ? 0 : match.get("price");
   },
 
   async creditRateForItem(item) {
     const price = await this.priceForItem(item);
-    const itemCreditRate = await this.get('itemCreditRates');
-    const match = itemCreditRate.find(async icr => await icr.get('item.id') === item.get('id'));
+    const itemCreditRates = await this.get('itemCreditRates');
+    const match = itemCreditRates.find(icr => icr.belongsTo("item").id() === item.get('id'));
 
     return Ember.isNone(match) ? 0 : match.get('rate') * price;
   }

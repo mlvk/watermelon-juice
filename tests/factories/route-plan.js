@@ -20,8 +20,8 @@ FactoryGuy.define("route-plan", {
 });
 
 const buildRoutePlanWithSalesOrder = ({ routeVisitCount = 1 } = {}) => {
-  const items = makeList("item", 10),
-        priceTier = buildPriceTier(items, {price:10}),
+  const items = makeList("item", 10, "product"),
+        priceTier = buildPriceTier(items),
         company = make("company", {priceTier}),
         address = make("address"),
         location = make("location", {company, address}),

@@ -2,7 +2,8 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 import Ember from "ember";
 
 const {
-  get
+  get,
+  run
 } = Ember;
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
@@ -14,31 +15,29 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     await this.prepareStock(fulfillment);
     await this.syncDependencies(fulfillment);
 
+    // console.log(what);
+
     return fulfillment;
   },
 
   async syncDependencies(fulfillment) {
     const creditNote = await get(fulfillment, 'creditNote');
-    const creditNoteItems = await get(fulfillment, "creditNote.creditNoteItems") || [];
+    const creditNoteItems = await get(fulfillment, "creditNote.creditNoteItems");
     const stockLevels = await get(fulfillment, "stock.stockLevels");
     const location = await get(fulfillment, "location");
 
     if(Ember.isPresent(stockLevels) && Ember.isPresent(creditNote)){
-      return Promise.all(stockLevels.map(async sl => {
-        const match = creditNoteItems.find(cni => sl.get("item.id") === cni.get("item.id"));
-
-        if(match) {
-          match.set("quantity", sl.get("returns"));
-        } else {
+        return Promise.all(stockLevels.map(async sl => {
           const item = await sl.get("item"),
+                quantity = sl.get("returns"),
                 unitPrice = await location.creditRateForItem(item),
-                quantity = sl.get("returns");
-
-          return await Ember.run(async () => {
-            await this.store.createRecord('credit-note-item', { creditNote, item, unitPrice, quantity});
-          });
-        }
-      }));
+                match = creditNoteItems.find(cni => cni.belongsTo("item").id() === item.get("id"));
+          if(Ember.isNone(match)) {
+            return await run(() => this.store.createRecord('credit-note-item', { creditNote, item, quantity, unitPrice}));
+          } else {
+            return await run(() => match.setProperties({quantity, unitPrice}));
+          }
+        }));
     }
   },
 
@@ -53,14 +52,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       const stockLevels = await stock.get("stockLevels");
 
       const missingItems = products
-        .filter(item => Ember.isNone(stockLevels.find(sl => sl.get("item.id") === item.get("id"))));
+        .filter(item => Ember.isNone(stockLevels.find(sl => sl.belongsTo("item").id() === item.get("id"))));
 
       return Promise.all(missingItems
-        .map(async item => {
-          return await Ember.run(async () => {
-            await this.store.createRecord("stock-level", {stock, item});
-          });
-        }));
+        .map(item => run(() => this.store.createRecord("stock-level", {stock, item}))));
     }
   },
 

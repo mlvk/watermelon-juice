@@ -31,7 +31,7 @@ moduleForAcceptance("Acceptance | tracking inventory index", {
 });
 
 test("should only show stock levels for products", async function(assert) {
-  makeList("item", 10, "ingredient");
+  makeList("item", 30, "ingredient");
   makeList("item", 10, "product");
 
   await showPage.visit({
@@ -46,7 +46,7 @@ test("should only show stock levels for products", async function(assert) {
     fulfillment_id:this.fulfillment.get("id")
   });
 
-  assert.equal(trackingPage.stockLevels().count, 11);
+  assert.equal(trackingPage.stockLevels().count, 21);
 });
 
 test("displays stock levels when present", async function(assert) {

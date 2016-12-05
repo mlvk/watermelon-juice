@@ -33,13 +33,32 @@ test('shows credit note when there are returns and credit rate is greater than 0
 
   mockFindRecord("route-plan").returns({model: routePlan});
 
+  await showPage
+    .visit({
+      route_plan_id:routePlan.get("id"),
+      route_visit_id:routeVisit.get("id"),
+      fulfillment_id:fulfillment.get("id")
+    });
+
   await trackingPage
     .visit({
       route_plan_id:routePlan.get("id"),
       route_visit_id:routeVisit.get("id"),
       fulfillment_id:fulfillment.get("id")
-    })
+    });
+
+  await trackingPage
     .stockLevels(0)
+    .setStarting(1)
+    .setReturns(1);
+
+  await trackingPage
+    .stockLevels(1)
+    .setStarting(1)
+    .setReturns(1);
+
+  await trackingPage
+    .stockLevels(2)
     .setStarting(1)
     .setReturns(1);
 
@@ -57,5 +76,5 @@ test('shows credit note when there are returns and credit rate is greater than 0
       fulfillment_id:fulfillment.get("id")
     });
 
-  assert.equal(reviewPage.creditTotal, "$5.00");
+  assert.equal(reviewPage.creditTotal, "$3.00");
 });

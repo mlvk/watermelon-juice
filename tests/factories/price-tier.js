@@ -11,9 +11,12 @@ FactoryGuy.define('price-tier', {
   }
 });
 
-const buildPriceTier = (items, { price = 10 }) => {
+const buildPriceTier = (items, price) => {
   const priceTier = make("price-tier");
-  items.forEach(item => make("item-price", {item, price, priceTier}));
+  items.forEach((item, index) => {
+    let nextPrice = price || index + 1;
+    make("item-price", {item, price:nextPrice, priceTier});
+  });
 
   return priceTier;
 }
