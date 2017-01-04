@@ -33,6 +33,7 @@ module.exports = function(defaults) {
   app.import('bower_components/lodash/dist/lodash.min.js');
   app.import('bower_components/ramda/dist/ramda.min.js');
   app.import('bower_components/localforage/dist/localforage.min.js');
+  app.import('bower_components/le_js/product/le.min.js');
 
   return app.toTree();
 };

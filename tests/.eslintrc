@@ -34,6 +34,7 @@
       "currentPath": true,
       "currentRouteName": true,
       "pauseTest": true,
-      "L": true
+      "L": true,
+      "LE": true
     }
 }

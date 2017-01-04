@@ -17,7 +17,8 @@
     "ramda": "^0.22.1",
     "localforage": "^1.4.3",
     "node-uuid": "1.4.1",
-    "hammer-time": "^1.1.0"
+    "hammer-time": "^1.1.0",
+    "le_js": "rapid7/le_js#^0.0.3"
   },
   "resolutions": {
     "ember": "~2.9.0",

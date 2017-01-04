@@ -213,7 +213,9 @@ export default Ember.Service.extend({
           };
 
           Ember.$.ajax(options)
-            .fail(() => {
+            .fail(res => {
+              const user = `${this.get("session.data.authenticated.first_name")} ${this.get("session.data.authenticated.last_name")}`;
+              LE.error(`[Remote Sync - ${user}]`, res.status, res.responseJSON);
               this.isProcessing = false;
             })
             .done(async () => {

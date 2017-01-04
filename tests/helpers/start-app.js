@@ -11,6 +11,9 @@ export default function startApp(attrs) {
 
   $.mockjaxSettings.logging = true;
 
+  // Mock the log entried library to prevent testing errors.
+  LE = {init:()=>{}, error:()=>{}, log:()=>{}, warn:()=>{}};
+
   Ember.run(() => {
     decorateComponentClass();
     application = Application.create(attributes);
