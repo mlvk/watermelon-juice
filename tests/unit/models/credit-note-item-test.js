@@ -5,8 +5,9 @@ moduleForModel('credit-note-item', 'Unit | Model | credit note item', {
   needs: ['model:credit-note', 'model:item']
 });
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
+test('totals correctly', function(assert) {
+  let model = this.subject({unitPrice: 3.445, quantity: 2});
+  
+  assert.equal(model.get('total'), 6.9);
   assert.ok(!!model);
 });

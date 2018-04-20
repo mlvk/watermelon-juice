@@ -3,6 +3,7 @@ import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
 import computed from "ember-computed-decorators";
+import { round } from 'watermelon-juice/utils/math';
 
 const {
   alias,
@@ -20,8 +21,13 @@ export default Model.extend({
   hasCredit:    gt("total", 0),
   name:         alias("item.name"),
 
-  @computed("quantity", "unitPrice")
-  total(quantity, unitPrice) {
-    return quantity * unitPrice;
+  @computed("unitPrice")
+  roundedUnitPrice(unitPrice) {
+    return round(unitPrice);
+  },
+
+  @computed("quantity", "roundedUnitPrice")
+  total(quantity, roundedUnitPrice) {
+    return quantity * roundedUnitPrice;
   }
 });
