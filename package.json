@@ -2,27 +2,23 @@
   "name": "watermelon-juice",
   "version": "0.0.0",
   "description": "Small description for watermelon-juice goes here",
-  "private": true,
+  "license": "MIT",
+  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
+  "repository": "",
   "scripts": {
     "build": "ember build -prod",
     "start": "ember server",
     "test": "ember test"
   },
-  "repository": "",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "6.1.2",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
-    "ember-cli": "2.9.1",
+    "ember-cli": "2.10.1",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-content-security-policy": "0.5.0",
@@ -46,7 +42,7 @@
     "ember-component-css": "0.2.4",
     "ember-composable-helpers": "0.21.1",
     "ember-computed-decorators": "0.2.2",
-    "ember-data": "2.9.0",
+    "ember-data": "2.10.0",
     "ember-data-factory-guy": "2.9.7",
     "ember-export-application-global": "^1.0.5",
     "ember-git-version": "0.1.1",
@@ -64,5 +60,9 @@
     "ember-wormhole": "0.5.1",
     "eslint-config-ember": "0.3.0",
     "loader.js": "^4.0.10"
-  }
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "private": true
 }

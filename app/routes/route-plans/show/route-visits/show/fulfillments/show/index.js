@@ -11,11 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
-
-    await this.prepareStock(fulfillment);
     await this.syncDependencies(fulfillment);
-
-    // console.log(what);
 
     return fulfillment;
   },
@@ -38,24 +34,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             return await run(() => match.setProperties({quantity, unitPrice}));
           }
         }));
-    }
-  },
-
-  async prepareStock(fulfillment) {
-    const products = this.store
-      .peekAll("item")
-      .filter(item => item.get("isActive"))
-      .filter(item => item.get("isProduct"));
-
-    if(fulfillment.belongsTo("stock").id() || fulfillment.belongsTo("stock").value()) {
-      const stock = await fulfillment.get("stock");
-      const stockLevels = await stock.get("stockLevels");
-
-      const missingItems = products
-        .filter(item => Ember.isNone(stockLevels.find(sl => sl.belongsTo("item").id() === item.get("id"))));
-
-      return Promise.all(missingItems
-        .map(item => run(() => this.store.createRecord("stock-level", {stock, item}))));
     }
   },
 

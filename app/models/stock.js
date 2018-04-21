@@ -28,7 +28,7 @@ export default Model.extend({
       .filter(sl => {
         const match = itemDesires.find(itemDesire => itemDesire.get("item.id") === sl.get("item.id"));
         return Ember.isPresent(match);
-      })
+      });
   },
 
   @computed("sortedStockLevels.@each.{itemId}", "desiredItemStockLevels")
