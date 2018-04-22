@@ -14,6 +14,7 @@ Router.map(function() {
         this.route('show', {path:':route_visit_id'}, function() {
           this.route('fulfillments', function() {
             this.route('show', {path:':fulfillment_id'}, function() {
+              this.route('notes');
               this.route('review');
               this.route('tracking');
             });

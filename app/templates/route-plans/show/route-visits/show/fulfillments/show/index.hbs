@@ -2,6 +2,13 @@
   {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
 
+{{ui/drilldown-button
+  icon="info"
+  label="Location Notes"
+  completed=false
+  onClick=(route-action "notes")}}
+
+
 {{#if model.belongsToSalesOrder}}
   {{ui/drilldown-button
     icon="assignment_turned_in"

@@ -1,0 +1,26 @@
+{{#ember-wormhole to="navHeaderContainer"}}
+  {{headers/fulfillment-info model=model}}
+{{/ember-wormhole}}
+
+<div class="copy-section">
+  {{#if model.location.hasDeliveryNote}}
+    {{markdown-to-html model.location.deliveryNote}}
+  {{else}}
+    <h4>No notes yet for this location.</h4>
+    <h5>Email <a href="mailto:az@mlvk.org">az@mlvk.org</a> with notes, and we will add them for the next round</h5>
+  {{/if}}
+</div>
+
+<hr>
+
+<div class="row center uiContainer">
+  <div class="card-1">
+    {{ui/icon-button
+      icon="arrow_back"
+      label="Go Back"
+      size="2"
+      color=white
+      backgroundColor=colors.DARK_GREY
+      onClick=(route-action 'goBack')}}
+  </div>
+</div>

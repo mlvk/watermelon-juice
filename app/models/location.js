@@ -3,11 +3,12 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 
-const { alias } = Ember.computed;
+const { alias, notEmpty } = Ember.computed;
 
 export default Model.extend({
   name:                 attr('string'),
   code:                 attr('string'),
+  deliveryNote:         attr('string'),
   deliveryRate:         attr('number',  { defaultValue: 10 }),
   active:               attr('boolean', { defaultValue: true }),
 
@@ -23,6 +24,8 @@ export default Model.extend({
   visitWindows:         alias('address.visitWindows'),
   lat:                  alias('address.lat'),
   lng:                  alias('address.lng'),
+
+  hasDeliveryNote:      notEmpty("deliveryNote"),
 
   async priceForItem(item) {
     const itemPrices = await this.get('company.priceTier.itemPrices');

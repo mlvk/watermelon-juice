@@ -46,6 +46,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       this.transitionTo("route-plans.show.route-visits.show.fulfillments.show.review");
     },
 
+    notes() {
+      this.transitionTo("route-plans.show.route-visits.show.fulfillments.show.notes");
+    },
+
     async submit(fulfillment) {
       const routeVisit = await fulfillment.get("routeVisit");
 

@@ -171,7 +171,7 @@ export default Ember.Service.extend({
       id: cni.get("id"),
       item_id: cni.get("item.id"),
       quantity: cni.get("quantity"),
-      unit_price: cni.get("unitPrice")
+      unit_price: cni.get("roundedUnitPrice")
     }
   },
 
