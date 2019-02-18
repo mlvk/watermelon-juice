@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import { isNone } from '@ember/utils';
+import { notEmpty, alias } from '@ember/object/computed';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
-
-const { alias, notEmpty } = Ember.computed;
 
 export default Model.extend({
   name:                 attr('string'),
@@ -31,7 +30,7 @@ export default Model.extend({
     const itemPrices = await this.get('company.priceTier.itemPrices');
     const match = itemPrices.find(ip => ip.belongsTo("item").id() === item.get('id'));
 
-    return Ember.isNone(match) ? 0 : match.get("price");
+    return isNone(match) ? 0 : match.get("price");
   },
 
   async creditRateForItem(item) {
@@ -39,6 +38,6 @@ export default Model.extend({
     const itemCreditRates = await this.get('itemCreditRates');
     const match = itemCreditRates.find(icr => icr.belongsTo("item").id() === item.get('id'));
 
-    return Ember.isNone(match) ? 0 : match.get('rate') * price;
+    return isNone(match) ? 0 : match.get('rate') * price;
   }
 });

@@ -1,21 +1,19 @@
 {{#ember-wormhole to="navHeaderContainer"}}
   {{headers/route-plan-info model=model}}
 {{/ember-wormhole}}
-
 {{lists/fulfillment-list
   model=model.fulfillments
-  rowSelected=(route-action 'showFulfillment')}}
-
+  rowSelected=(route-action "showFulfillment")}}
 <div class="row center toolbarContainer">
   <div class="card-1">
     {{ui/icon-button
       class="submitRouteVisit"
-      icon='check'
+      icon="check"
       label=(if model.fulfilled "Resubmit Visit" "Complete Visit")
-      size='2'
+      size="2"
       color=white
       backgroundColor=colors.SKY_BLUE
       disabled=(not model.isSubmissible)
-      onClick=(route-action 'submitRouteVisit' model)}}
+      onClick=(route-action "submitRouteVisit" model)}}
   </div>
 </div>

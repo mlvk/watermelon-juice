@@ -1,11 +1,11 @@
-/* jshint node: true */
+'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'watermelon-juice',
-    environment: environment,
-    locationType: 'auto',
+    environment,
     rootURL: '/',
+    locationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -23,8 +23,8 @@ module.exports = function(environment) {
       touchActionProperties: 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;'
     },
 
-    apiHost:process.env.API_HOST,
-    logEntriesKey:process.env.LOG_ENTRIES_KEY
+    apiHost: process.env.API_HOST,
+    logEntriesKey: process.env.LOG_ENTRIES_KEY
   };
 
   ENV.contentSecurityPolicy = {
@@ -62,10 +62,11 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
-
+    // here you can enable a production-specific feature
   }
 
   return ENV;

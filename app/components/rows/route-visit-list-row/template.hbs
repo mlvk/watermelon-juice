@@ -1,7 +1,6 @@
 <span class="col index">
   {{index}}
 </span>
-
 <div class="row stretch outerContainer">
   <div class="content col">
     <span class="companyName">
@@ -11,22 +10,13 @@
       {{cap locationText}}
     </span>
   </div>
-
   <span class="row iconContainer">
     {{#if model.fulfilled}}
       <i class="material-icons">done</i>
     {{/if}}
-
     {{#if model.hasPickups}}
       <i class="material-icons">local_shipping</i>
     {{/if}}
-
     <i class="material-icons">keyboard_arrow_right</i>
   </span>
 </div>
-
-<!-- <div class="arrivalContainer">
-  {{passive/label-icon
-    icon="flight_land"
-    label=(minutes-to-time model.arriveAt)}}
-</div> -->

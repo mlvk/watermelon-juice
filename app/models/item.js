@@ -1,13 +1,8 @@
-import Ember from "ember";
+import { bool, equal } from '@ember/object/computed';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany } from "ember-data/relationships";
 import ItemTypes from "watermelon-juice/constants/item-types";
-
-const {
-  equal,
-  bool
-} = Ember.computed;
 
 export default Model.extend({
   name:             attr("string"),

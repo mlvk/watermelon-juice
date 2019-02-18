@@ -1,13 +1,8 @@
-import Ember from "ember";
+import { gt, lt } from '@ember/object/computed';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany } from "ember-data/relationships";
-import computed from "ember-computed-decorators";
-
-const {
-  lt,
-  gt
-} = Ember.computed;
+import { computed } from '@ember/object';
 
 export default Model.extend({
   date:               attr("string"),
@@ -23,18 +18,18 @@ export default Model.extend({
   hasDeliveries:      gt("dropOffCount", 0),
   isComplete:         lt("pendingRouteVisits.length", 1),
 
-  @computed("date")
-  formattedDate(date) {
+  formattedDate: computed("date", function() {
+    const date = this.get("date");
     return moment(date, "YYYY-MM-DD").format("dddd, MMM Do - YYYY");
-  },
+  }),
 
-  @computed("routeVisits.@each.{position}")
-  sortedRouteVisits(routeVisits) {
+  sortedRouteVisits: computed("routeVisits.@each.{position}", function() {
+    const routeVisits = this.get("routeVisits");
     return routeVisits.sortBy("position");
-  },
+  }),
 
-  @computed("routeVisits.@each.{fulfilled}")
-  pendingRouteVisits(routeVisits) {
+  pendingRouteVisits: computed("routeVisits.@each.{fulfilled}", function() {
+    const routeVisits = this.get("routeVisits");
     return routeVisits.filter(rv => rv.get("pending"));
-  }
+  })
 });

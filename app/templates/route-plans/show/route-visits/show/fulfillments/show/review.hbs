@@ -1,12 +1,10 @@
 {{#ember-wormhole to="navHeaderContainer"}}
   {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
-
 {{forms/route-visit-review
     model=model
     isEditing=isEditingSignature
-    onSignature=(route-action 'onSignature')}}
-
+    onSignature=(route-action "onSignature")}}
 <div class="row center uiContainer">
   <div class="card-1">
     {{ui/icon-button
@@ -16,6 +14,6 @@
       color=white
       backgroundColor=colors.DARK_GREY
       disabled=(not (and model.pod.isValid (not isEditingSignature)))
-      onClick=(route-action 'goBack')}}
+      onClick=(route-action "goBack")}}
   </div>
 </div>

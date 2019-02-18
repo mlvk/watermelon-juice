@@ -1,5 +1,6 @@
+import EmberObject from '@ember/object';
 import { module } from 'qunit';
-import Ember from 'ember';
+import { Promise } from 'rsvp';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
 import {
@@ -8,9 +9,7 @@ import {
   mockFindAll
 } from 'ember-data-factory-guy';
 
-const { RSVP: { Promise } } = Ember;
-
-const MockRemoteSync = Ember.Object.extend({
+const MockRemoteSync = EmberObject.extend({
   start(){},
   loadFromLS(){},
   enqueue(){}
@@ -22,10 +21,6 @@ export default function(name, options = {}) {
       this.application = startApp();
 
       mockSetup();
-
-      // Enable for mockjax logging
-      // $.mockjaxSettings.logging = true;
-      // $.mockjaxSettings.logging = 4;
 
       this.application.register('service:test-remote-sync', MockRemoteSync);
       this.application.inject('route', 'remoteSync', 'service:test-remote-sync');

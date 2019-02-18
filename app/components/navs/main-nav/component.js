@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNameBindings:  ["remoteSync.allSynced::syncing"],
-  remoteSync: Ember.inject.service()
+  remoteSync: service()
 });

@@ -1,4 +1,4 @@
-import PO from 'watermelon-juice/tests/page-object';
+import PO from 'ember-cli-page-object';
 
 const { visitable, collection, clickable } = PO;
 export default PO.create({

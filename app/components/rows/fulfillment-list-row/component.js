@@ -1,12 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { alias, bool } from '@ember/object/computed';
 import Clickable from 'watermelon-juice/mixins/clickable';
 
-const {
-  bool,
-  alias
-} = Ember.computed;
-
-export default Ember.Component.extend(Clickable, {
+export default Component.extend(Clickable, {
   classNames:         ['row', 'card-1'],
   classNameBindings:  ['completed'],
 

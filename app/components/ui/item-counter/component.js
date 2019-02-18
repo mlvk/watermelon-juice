@@ -1,10 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { lt } from '@ember/object/computed';
 
-const {
-  lt
-} = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['col', 'card-2'],
 
   cannotDecrement: lt('value', 1),

@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { alias } from '@ember/object/computed';
 
-const { alias } = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   address: alias('model.visitWindow.location.address'),
   streetAddress: alias('address.street'),
   city: alias('address.city'),

@@ -1,9 +1,7 @@
-import Ember from "ember";
+import { not, equal, alias } from '@ember/object/computed';
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
-
-const { alias, equal, not } = Ember.computed;
 
 export default Model.extend({
   starting:       attr("number", {defaultValue:0}),

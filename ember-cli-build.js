@@ -1,15 +1,20 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+'use strict';
+
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const Funnel = require('broccoli-funnel');
+const MergeTrees = require('broccoli-merge-trees');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+    sassOptions: {implementation: require("node-sass")},
     babel: {
-      optional: ['es7.decorators', 'es7.functionBind'],
-      includePolyfill: true
+      optional: ['es7.decorators', 'es7.functionBind']
     },
     'ember-cli-qunit': {
       useLintTree: false
+    },
+    'ember-cli-babel': {
+      includePolyfill: true
     }
   });
 
@@ -35,5 +40,9 @@ module.exports = function(defaults) {
   app.import('bower_components/localforage/dist/localforage.min.js');
   app.import('bower_components/le_js/product/le.min.js');
 
-  return app.toTree();
+  const netlifyTree = new Funnel('netlify', {
+    files: ['_redirects', '_headers']
+  });
+
+  return MergeTrees([app.toTree(), netlifyTree]);
 };

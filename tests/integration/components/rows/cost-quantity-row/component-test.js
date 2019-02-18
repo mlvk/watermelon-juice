@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from "ember-qunit";
 import hbs from "htmlbars-inline-precompile";
 import { currency } from 'watermelon-juice/helpers/currency';
+import $ from 'jquery';
 
 moduleForComponent("rows/cost-quantity-row", "Integration | Component | rows/cost quantity row", {
   integration: true

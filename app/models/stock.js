@@ -1,8 +1,8 @@
+import { isPresent, isNone } from '@ember/utils';
 import Model from "ember-data/model";
-import Ember from "ember";
 import attr from "ember-data/attr";
 import { belongsTo, hasMany } from "ember-data/relationships";
-import computed from "ember-computed-decorators";
+import { computed } from '@ember/object';
 
 export default Model.extend({
   takenAt:      attr("date"),
@@ -12,32 +12,33 @@ export default Model.extend({
   fulfillment:  belongsTo("fulfillment"),
   stockLevels:  hasMany("stock-level"),
 
-  @computed("stockLevels.@each.{tracked}")
-  tracked(records) {
+  tracked: computed("stockLevels.@each.{tracked}", function() {
+    const records = this.get("stockLevels");
     return records.every(r => r.get("tracked"));
-  },
+  }),
 
-  @computed("stockLevels.@each.{itemPosition}")
-  sortedStockLevels(stockLevels) {
+  sortedStockLevels: computed("stockLevels.@each.{itemPosition}", function() {
+    const stockLevels = this.get("stockLevels");
     return stockLevels.sortBy("itemPosition");
-  },
+  }),
 
-  @computed("sortedStockLevels.@each.{itemId}", "location.itemDesires")
-  desiredItemStockLevels(stockLevels, itemDesires = []) {
+  desiredItemStockLevels: computed("sortedStockLevels.@each.{itemId}", "location.itemDesires", function() {
+    const stockLevels = this.get("sortedStockLevels");
+    const itemDesires = this.get("location.itemDesires") || [];
     return stockLevels
       .filter(sl => {
         const match = itemDesires.find(itemDesire => itemDesire.get("item.id") === sl.get("item.id"));
-        return Ember.isPresent(match);
+        return isPresent(match);
       });
-  },
+  }),
 
-  @computed("sortedStockLevels.@each.{itemId}", "desiredItemStockLevels")
-  extraItemStockLevels(stockLevels, desiredItemStockLevels = []) {
+  extraItemStockLevels: computed("sortedStockLevels.@each.{itemId}", "desiredItemStockLevels", function() {
+    const stockLevels = this.get("sortedStockLevels");
+    const desiredItemStockLevels = this.get("desiredItemStockLevels") || [];
     return stockLevels
       .filter(sl => {
         const match = desiredItemStockLevels.find(desiredItemStockLevel => desiredItemStockLevel.get("item.id") === sl.get("item.id"));
-        return Ember.isNone(match);
+        return isNone(match);
       });
-  }
-
+  })
 });

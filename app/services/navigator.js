@@ -1,17 +1,19 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
+import { isNone } from '@ember/utils';
+import Service, { inject as service } from '@ember/service';
+import { notEmpty } from '@ember/object/computed';
 
-const {
-  notEmpty
-} = Ember.computed;
-
-export default Ember.Service.extend({
-  routing: Ember.inject.service('-routing'),
-  scrollQueue: [],
-  scrollYMap: {},
+export default Service.extend({
+  routing: service('-routing'),
+  router: service(),
   hasRoute: notEmpty('scrollQueue'),
 
   init() {
-    this._super();
+    this._super(...arguments);
+
+    this.scrollQueue = this.scrollQueue || [];
+    this.scrollYMap = this.scrollYMap || {};
+
     this.addListener();
   },
 
@@ -40,27 +42,27 @@ export default Ember.Service.extend({
 
   goBack() {
     const last = this.get("scrollQueue.lastObject");
-    if(!Ember.isNone(last)){
-      this.get('routing').transitionTo(last);
+    if(!isNone(last)){
+      this.get('router').transitionTo(last);
     }
   },
 
   addListener() {
-    this.get('routing.router').on('willTransition', ::this.handleWillTransition);
-    this.get('routing.router').on('didTransition', ::this.handleDidTransition);
+    this.get('routing.router').on('willTransition', this.handleWillTransition.bind(this));
+    this.get('routing.router').on('didTransition', this.handleDidTransition.bind(this));
   },
 
   handleWillTransition() {
-    const key = this.get('routing.currentRouteName');
+    const key = this.get('currentRouteName');
     this.scrollYMap[key] = window.scrollY;
   },
 
   handleDidTransition() {
-    const key = this.get('routing.currentRouteName');
+    const key = this.get('currentRouteName');
     const shouldScrollTo = this.hasStashedRoute(key);
 
     if(shouldScrollTo){
-      Ember.run.later('afterRender', () => window.scrollTo(0, this.scrollYMap[key]));
+      later('afterRender', () => window.scrollTo(0, this.scrollYMap[key]));
       this.clearRight(key);
     }
   }

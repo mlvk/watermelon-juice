@@ -1,11 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
+import { notEmpty, and } from '@ember/object/computed';
 
-const {
-  and,
-  notEmpty
-} = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames:     ["card-2"],
 
   hasName:        notEmpty("stashedName"),
@@ -16,9 +12,9 @@ export default Ember.Component.extend({
     this.set("isEditing", false);
   },
 
-  didReceiveAttrs(data) {
-    this.set("stashedSignature", data.newAttrs.signature.value);
-    this.set("stashedName", data.newAttrs.name.value);
+  didReceiveAttrs() {
+    this.set("stashedSignature", this.get('signature'));
+    this.set("stashedName", this.get('name') );
   },
 
   actions: {

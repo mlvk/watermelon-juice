@@ -1,15 +1,11 @@
-import Ember from "ember";
-import style from "watermelon-juice/utils/styles";
+import Component from '@ember/component';
+import { notEmpty } from '@ember/object/computed';
+import { buildStyles } from "watermelon-juice/utils/styles";
 import colors from "watermelon-juice/constants/colors";
 import Clickable from "watermelon-juice/mixins/clickable";
+import { computed } from '@ember/object';
 
-const {
-  computed: {
-    notEmpty
-  }
-} = Ember;
-
-export default Ember.Component.extend(Clickable, {
+export default Component.extend(Clickable, {
   tagName: "a",
 
   classNames: ["row"],
@@ -18,22 +14,20 @@ export default Ember.Component.extend(Clickable, {
 
   hasLabel: notEmpty("label"),
 
-  @style("size", "padding", "color", "backgroundColor", "borderRadius")
-  componentStyles(
-    size = "1",
-    padding,
-    color = "white",
-    backgroundColor = colors.SKY_BLUE,
-    borderRadius = 0
-  ) {
+  componentStyles: computed("size", "padding", "color", "backgroundColor", "borderRadius", function(){
+    const size = this.get("size") || "1";
+    let padding = this.get("padding");
+    const color = this.get("color") || "white";
+    const backgroundColor = this.get("backgroundColor") || colors.SKY_BLUE;
+    const borderRadius = this.get("borderRadius") || 0;
 
     padding = padding === undefined? size: padding;
-    return {
+    return buildStyles({
       "padding": `${padding}em`,
       "font-size": `${size/2}em`,
       "border-radius": `${borderRadius}px`,
       "color": color,
       "background-color": backgroundColor
-    };
-  }
+    });
+  })
 });

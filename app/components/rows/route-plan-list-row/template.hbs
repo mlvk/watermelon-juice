@@ -12,21 +12,14 @@
       {{date}}
     </span>
   </span>
-
-  <!-- {{passive/label-icon
-    icon="flight_takeoff"
-    label= (concat (minutes-to-time model.startTime) " - " (minutes-to-time model.endTime)) }} -->
-
   {{passive/label-icon
     icon="store"
     label=(pluralize model.dropOffCount "Delivery")}}
-
   {{#if model.hasPickups}}
     {{passive/label-icon
       icon="swap_vertical_circle"
       label=(pluralize model.pickUpCount "Pickup")}}
   {{/if}}
-
 </div>
 <span class="row iconContainer">
   <i class="material-icons">keyboard_arrow_right</i>

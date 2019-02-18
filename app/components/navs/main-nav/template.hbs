@@ -1,9 +1,8 @@
 <div class="row space-between">
   <div class="row baseline stretch">
     <div class="home">
-      {{link-to 'RS' 'route-plans'}}
+      {{link-to "RS" "route-plans"}}
     </div>
-
     <div class="syncInfo row center">
       {{#if remoteSync.allSynced}}
         <span>Synced</span>
@@ -14,7 +13,6 @@
       {{/if}}
     </div>
   </div>
-
   {{#if authenticated}}
     <span class="row vcenter">
       <span class="name">{{name}}</span>

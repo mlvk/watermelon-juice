@@ -1,15 +1,13 @@
-import Ember from 'ember';
+import { debounce } from '@ember/runloop';
+import Component from '@ember/component';
+import { set } from '@ember/object';
 
-const {
-  set
-} = Ember;
-
-const ItemTracker = Ember.Component.extend({
+const ItemTracker = Component.extend({
   classNames: ['row', 'center', 'space-between'],
 
   didInsertElement() {
-    this.$('input').on('click', (e) => Ember.run.debounce(() => e.target.setSelectionRange(0, 9999), 250));
-    this.$('input').on('focus', (e) => Ember.run.debounce(() => e.target.setSelectionRange(0, 9999), 250));
+    this.$('input').on('click', (e) => debounce(() => e.target.setSelectionRange(0, 9999), 250));
+    this.$('input').on('focus', (e) => debounce(() => e.target.setSelectionRange(0, 9999), 250));
   },
 
   willDestroyElement() {

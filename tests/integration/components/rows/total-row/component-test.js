@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from "ember-qunit";
 import hbs from "htmlbars-inline-precompile";
 import { currency } from 'watermelon-juice/helpers/currency';
+import $ from 'jquery';
 
 moduleForComponent("rows/total-row", "Integration | Component | rows/total row", {
   integration: true

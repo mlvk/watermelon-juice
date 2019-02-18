@@ -8,24 +8,23 @@
     </span>
   </div>
   {{ui/icon-button
-    icon='directions'
-    size='2'
+    icon="directions"
+    size="2"
     color=white
     flat=true
     backgroundColor=colors.DARK_GREY
-    onClick=(action attrs.mapLocation)}}
+    onClick=(action mapLocation)}}
 </div>
-
 <div class="row center uiContainer">
   <div class="card-1">
     {{ui/icon-button
-      icon='done'
-      label='Submit'
-      size='2'
+      icon="done"
+      label="Submit"
+      size="2"
       color=white
       backgroundColor=colors.SKY_BLUE
       disabled=pending
-      onClick=(action attrs.submit)
+      onClick=(action submit)
     }}
   </div>
 </div>

@@ -5,14 +5,8 @@
         name=stashedName
         drawingEnded=(action "handleNewSignature")}}
     <div class="row stretch nameContainer">
-      <input
-        type="text"
-        name="name"
-        class="name"
-        placeholder="Received by..."
-        value="{{name}}"
-        oninput={{action "onNameChanged"}}
-        onchange={{action "onNameChanged"}}>
+      <input type="text" name="name" class="name" placeholder="Received by..." value={{name}}
+        oninput={{action "onNameChanged"}} onchange={{action "onNameChanged"}}>
     </div>
     <span class="legal">
       By signing above, you certify that you are accepting the products listed above.
@@ -37,8 +31,8 @@
     </div>
   </div>
 {{else if hasSignature}}
-  <div class="col relative signaturePreview" {{action "requestedSign"}}>
-    <img src={{signature}} alt="signature" />
+  <div role="button" class="col relative signaturePreview" {{action "requestedSign"}}>
+    <img src={{signature}} alt="signature">
     <div class="row space-between center receivedDataContainer">
       <div class="col">
         <span class="title">Received</span>

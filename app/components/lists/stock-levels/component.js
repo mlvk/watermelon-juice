@@ -1,10 +1,7 @@
-import Ember from "ember";
+import Component from '@ember/component';
+import { notEmpty } from '@ember/object/computed';
 
-const {
-  notEmpty
-} = Ember.computed;
-
-const StockLevels = Ember.Component.extend({
+const StockLevels = Component.extend({
   classNames:     ["card-1"],
   classNameBindings:  ["hasStockLevels::hidden"],
 

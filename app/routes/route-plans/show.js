@@ -1,5 +1,6 @@
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 
 const ROUTE_VISIT_INCLUDES = [
   "route-visits",
@@ -33,8 +34,8 @@ const ROUTE_VISIT_INCLUDES = [
   "route-visits.fulfillments.order.location.company.price-tier.item-prices.item"
 ];
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  remoteSync: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, {
+  remoteSync: service(),
 
   model(params) {
     return this.store

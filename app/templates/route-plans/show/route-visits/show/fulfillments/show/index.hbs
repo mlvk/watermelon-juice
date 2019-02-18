@@ -1,14 +1,11 @@
 {{#ember-wormhole to="navHeaderContainer"}}
   {{headers/fulfillment-info model=model}}
 {{/ember-wormhole}}
-
 {{ui/drilldown-button
   icon="info"
   label="Location Notes"
   completed=false
   onClick=(route-action "notes")}}
-
-
 {{#if model.belongsToSalesOrder}}
   {{ui/drilldown-button
     icon="assignment_turned_in"
@@ -17,13 +14,11 @@
     completed=trackingCompleted
     onClick=(route-action "track")}}
 {{/if}}
-
 {{ui/drilldown-button
   icon="touch_app"
   label="Review & Sign"
   completed=model.pod.isValid
   onClick=(route-action "review")}}
-
 <div class="row center">
   <div class="card-1">
     {{ui/icon-button
@@ -34,6 +29,6 @@
       color=white
       backgroundColor=colors.DARK_GREY
       disabled=(not model.isSubmissible)
-      onClick=(route-action 'submit' model)}}
+      onClick=(route-action "submit" model)}}
   </div>
 </div>

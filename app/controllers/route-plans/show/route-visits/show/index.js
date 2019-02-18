@@ -1,15 +1,12 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Controller from '@ember/controller';
+import { notEmpty } from '@ember/object/computed';
+import { computed } from '@ember/object';
 
-const {
-  notEmpty
-} = Ember.computed;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   hasTempSignature: notEmpty("tempSignature"),
 
-  @computed("model.fulfillments.@each.fulfilled")
-  canSubmit(fulfillments) {
+  canSubmit: computed("model.fulfillments.@each.fulfilled", function() {
+    const fulfillments = this.get("model.fulfillments");
     return fulfillments.every(f => f.get("fulfilled"));
-  }
+  })
 });

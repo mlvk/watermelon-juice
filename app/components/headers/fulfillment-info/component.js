@@ -1,11 +1,11 @@
-import Ember from 'ember';
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row", "space-between"],
 
-  @computed("model.routeVisit.address.full")
-  directionsLink(fullAddress) {
+  directionsLink: computed("model.routeVisit.address.full", function(){
+    const fullAddress = this.get("model.routeVisit.address.full");
     return `http://maps.apple.com/?daddr=${fullAddress}`
-  }
+  })
 });

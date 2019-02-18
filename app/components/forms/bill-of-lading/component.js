@@ -1,35 +1,34 @@
-import Ember from "ember";
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { gt } from '@ember/object/computed';
 import moment from "moment";
+import { computed } from '@ember/object';
 
-const {
-  gt
-} = Ember.computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["col", "stretch", "card-1"],
   isEditing: false,
 
-  @computed("model.orderItems")
-  validOrderitems(orderItems) {
+  validOrderitems: computed("model.orderItems", function(){
+    const orderItems = this.get("model.orderItems");
     return orderItems
       .filter(orderItem => orderItem.get("quantity") > 0);
-  },
+  }),
 
-  @computed("validOrderitems.@each.{total}", "model.shipping")
-  total(orderItems, shipping = 0) {
+  total: computed("validOrderitems.@each.{total}", "model.shipping", function(){
+    const orderItems = this.get("validOrderitems");
+    const shipping = this.get("model.shipping") || 0;
+
     return orderItems.reduce((acc, cur) => acc + cur.get("total"), shipping);
-  },
+  }),
 
-  @computed("model.deliveryDate")
-  date(deliveryDate) {
+  date: computed("model.deliveryDate", function(){
+    const deliveryDate = this.get("model.deliveryDate");
     return moment(deliveryDate, "YYYY-MM-DD").format("MM/DD/YYYY");
-  },
+  }),
 
-  @computed("model.isSalesOrder")
-  title(isSalesOrder) {
+  title: computed("model.isSalesOrder", function(){
+    const isSalesOrder = this.get("model.isSalesOrder");
     return isSalesOrder? "Invoice": "Purchase Order";
-  },
+  }),
 
   hasShipping: gt("model.shipping", 0)
 });

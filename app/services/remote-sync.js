@@ -1,18 +1,22 @@
-import Ember from "ember";
-import config from '../config/environment';
+import $ from 'jquery';
+import { isPresent, isNone } from '@ember/utils';
+import Service, { inject as service } from '@ember/service';
+import { empty } from '@ember/object/computed';
+import config from 'watermelon-juice/config/environment';
 
-const {
-  empty
-} = Ember.computed;
-
-export default Ember.Service.extend({
-  store: Ember.inject.service(),
-  session: Ember.inject.service(),
-  remainingKeys: [],
+export default Service.extend({
+  store: service(),
+  session: service(),
   allSynced: empty("remainingKeys"),
 
+  init() {
+    this._super(...arguments);
+
+    this.remainingKeys = this.remainingKeys || [];
+  },
+
   start() {
-    setInterval(::this.processQueue, 5000);
+    setInterval(this.processQueue.bind(this), 5000);
   },
 
   async loadFromLS(){
@@ -57,7 +61,7 @@ export default Ember.Service.extend({
         f.get("stock.stockLevels"),
         f.get("pod")
       ]
-      .filter(model => Ember.isPresent(model));
+      .filter(model => isPresent(model));
     });
 
     const relationships = await Promise.all(relationshipPromises);
@@ -65,7 +69,7 @@ export default Ember.Service.extend({
     const included = _.chain(relationships)
       .flattenDeep()
       .map(r => r.content)
-      .filter(r => Ember.isPresent(r))
+      .filter(r => isPresent(r))
       .map(r => _.isFunction(r.toArray) ? r.toArray() : r)
       .flattenDeep()
       .map(r => r.serialize({includeId: true}).data)
@@ -79,7 +83,7 @@ export default Ember.Service.extend({
 
   async serializeForApi(routeVisit) {
     const fulfillments = await routeVisit.get("fulfillments");
-    const fulfillmentsData = await Promise.all(fulfillments.map(::this.serializeFulfillment));
+    const fulfillmentsData = await Promise.all(fulfillments.map(this.serializeFulfillment.bind(this)));
 
     return {
       id: routeVisit.get("id"),
@@ -104,10 +108,10 @@ export default Ember.Service.extend({
     const model = await f.get("order"),
           children = await f.get("order.orderItems");
 
-    if(Ember.isPresent(children)){
+    if(isPresent(children)){
       return {
         id: model.get("id"),
-        order_items: children.map(::this.serializeOrderItem)
+        order_items: children.map(this.serializeOrderItem.bind(this))
       }
     } else {
       return undefined;
@@ -118,10 +122,10 @@ export default Ember.Service.extend({
     const model = await f.get("creditNote"),
           children = await f.get("creditNote.creditNoteItems");
 
-    if(Ember.isPresent(children)){
+    if(isPresent(children)){
       return {
         id: model.get("id"),
-        credit_note_items: children.map(::this.serializeCreditNoteItem)
+        credit_note_items: children.map(this.serializeCreditNoteItem.bind(this))
       }
     } else {
       return undefined;
@@ -132,10 +136,10 @@ export default Ember.Service.extend({
     const model = await f.get("stock"),
           children = await f.get("stock.stockLevels");
 
-    if(Ember.isPresent(children)){
+    if(isPresent(children)){
       return {
         id: model.get("id"),
-        stock_levels: children.map(::this.serializeStockLevel)
+        stock_levels: children.map(this.serializeStockLevel.bind(this))
       }
     } else {
       return undefined;
@@ -145,7 +149,7 @@ export default Ember.Service.extend({
   async serializePod(f) {
     const model = await f.get("pod");
 
-    if(Ember.isPresent(model)){
+    if(isPresent(model)){
       return {
         id:model.get("id"),
         name: model.get("name"),
@@ -192,7 +196,7 @@ export default Ember.Service.extend({
       this.set("remainingKeys", keys);
       const nextKey = keys[0];
 
-      if(Ember.isNone(nextKey)){
+      if(isNone(nextKey)){
         this.isProcessing = false;
         return;
       }
@@ -212,7 +216,7 @@ export default Ember.Service.extend({
             type: "POST"
           };
 
-          Ember.$.ajax(options)
+          $.ajax(options)
             .fail(res => {
               const user = `${this.get("session.data.authenticated.first_name")} ${this.get("session.data.authenticated.last_name")}`;
               LE.error(`[Remote Sync - ${user}]`, res.status, res.responseJSON);

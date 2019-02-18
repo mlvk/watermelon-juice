@@ -1,16 +1,8 @@
-import Ember from "ember";
+import Component from '@ember/component';
+import { bool, alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 
-const {
-  computed: {
-    alias,
-    bool
-  },
-  inject: {
-    service
-  }
-} = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ["row"],
   classNameBindings: ["shouldDisplay::hidden"],
 

@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "4"
+  - "8"
 
 sudo: false
 
@@ -21,9 +21,11 @@ install:
   - bower install
 
 script:
+  - npm run lint:hbs
+  - npm run lint:js
   - npm test
 
 after_success:
   if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ -n "${TRAVIS_TAG}" ]; then
-    npm install -g netlify-cli && npm run build && netlify deploy -e production -t ${PRODUCTION_NETLIFY_TOKEN} -s ${PRODUCTION_NETLIFY_SITE_ID} -p dist;
+    npm install -g netlify-cli typescript && npm run build && netlify deploy --prod --dir=dist;
   fi

@@ -1,13 +1,12 @@
+import { isPresent, isNone } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { run } from '@ember/runloop';
 import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-route-mixin";
-import Ember from "ember";
 
-const {
-  get,
-  run
-} = Ember;
-
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  remoteSync: Ember.inject.service(),
+export default Route.extend(AuthenticatedRouteMixin, {
+  remoteSync: service(),
 
   async model() {
     const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');
@@ -22,13 +21,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     const stockLevels = await get(fulfillment, "stock.stockLevels");
     const location = await get(fulfillment, "location");
 
-    if(Ember.isPresent(stockLevels) && Ember.isPresent(creditNote)){
+    if(isPresent(stockLevels) && isPresent(creditNote)){
         return Promise.all(stockLevels.map(async sl => {
           const item = await sl.get("item"),
                 quantity = sl.get("returns"),
                 unitPrice = await location.creditRateForItem(item),
                 match = creditNoteItems.find(cni => cni.belongsTo("item").id() === item.get("id"));
-          if(Ember.isNone(match)) {
+          if(isNone(match)) {
             return await run(() => this.store.createRecord('credit-note-item', { creditNote, item, quantity, unitPrice}));
           } else {
             return await run(() => match.setProperties({quantity, unitPrice}));
@@ -61,7 +60,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         routeVisit.set("routeVisitState", "fulfilled");
         routeVisit.set("completedAt", moment().toDate());
 
-        Ember.run(() => {
+        run(() => {
           this.get("remoteSync").enqueue(routeVisit);
         });
 

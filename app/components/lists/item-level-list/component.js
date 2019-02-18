@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import computed from "ember-computed-decorators";
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 
-export default Ember.Component.extend({
-  @computed("model.@each.{itemPosition}")
-  sortedStockLevels(stockLevels) {
+export default Component.extend({
+  sortedStockLevels: computed("model.@each.{itemPosition}", function() {
+    const stockLevels = this.get("model");
     return stockLevels.sortBy("itemPosition");
-  }
+  })
 });

@@ -1,4 +1,4 @@
-import config from '../config/environment';
+import config from 'watermelon-juice/config/environment';
 
 export function initialize() {
   LE.init({token:config.logEntriesKey, catchall: true});

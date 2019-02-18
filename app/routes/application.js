@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-export default Ember.Route.extend(ApplicationRouteMixin, {
-  remoteSync: Ember.inject.service('remote-sync'),
+export default Route.extend(ApplicationRouteMixin, {
+  remoteSync: service('remote-sync'),
 
   activate() {
     this.get('remoteSync').start();

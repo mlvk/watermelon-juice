@@ -1,7 +1,7 @@
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import Ember from 'ember';
 
-export default Ember.Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
   actions: {
     onSignature(signature, name, signedAt) {
       const fulfillment = this.modelFor('route-plans.show.route-visits.show.fulfillments.show');

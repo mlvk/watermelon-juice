@@ -1,4 +1,3 @@
-import Ember from "ember";
 import { test } from "qunit";
 import moduleForAcceptance from "watermelon-juice/tests/helpers/module-for-acceptance";
 import { authenticateSession } from "watermelon-juice/tests/helpers/ember-simple-auth";
@@ -6,7 +5,8 @@ import loginPage from "watermelon-juice/tests/pages/login";
 import routePlansPage from "watermelon-juice/tests/pages/route-plans/index";
 
 import {
-  mockFindAll
+  mockFindAll,
+  getPretender
 } from "ember-data-factory-guy";
 
 const successfulResponse = {"id":1,"token":"admin_token","first_name":"Tony","last_name":"Starks","email":"admin@wutang.com","role":"driver"};
@@ -32,7 +32,7 @@ test("redirects to login when not authenticated", async function(assert) {
 });
 
 test("successful login redirects to to default landing area", async function(assert) {
-  Ember.$.mockjax({ url: `/users/sign_in`, responseText:successfulResponse , type: "POST" });
+  getPretender().post('/users/sign_in', () => [200, {}, JSON.stringify(successfulResponse)]);
 
   mockFindAll("route-plan");
 
@@ -43,7 +43,7 @@ test("successful login redirects to to default landing area", async function(ass
 });
 
 test("displays errors when unauthorized", async function(assert) {
-  Ember.$.mockjax({ url: `/users/sign_in`, responseText:unauthorizedResponse, status:401, type: "POST"});
+  getPretender().post('/users/sign_in', () => [401, {}, JSON.stringify(unauthorizedResponse)]);
 
   mockFindAll("route-plan");
 
@@ -55,7 +55,7 @@ test("displays errors when unauthorized", async function(assert) {
 });
 
 test("displays errors when failed with 500", async function(assert) {
-  Ember.$.mockjax({ url: `/users/sign_in`, responseText:failedResponse, status:500, type: "POST"});
+  getPretender().post('/users/sign_in', () => [500, {}, JSON.stringify(failedResponse)]);
 
   mockFindAll("route-plan");
 
